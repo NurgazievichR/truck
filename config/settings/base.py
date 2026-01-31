@@ -40,11 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     # Local apps
-    'main',
-    'services',
-    'contacts',
-    'accounts',
-    'deadlines',
+    'apps.main',
+    'apps.services',
+    'apps.contacts',
+    'apps.accounts',
+    'apps.deadlines',
 ]
 
 MIDDLEWARE = [

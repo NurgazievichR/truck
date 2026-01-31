@@ -8,22 +8,13 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="logo">TRUCKING COMPLIANCE</div>
-            <nav>
-                <a href="/">SERVICES</a>
-                <a href="/">PRICING</a>
-                <a href="/">HOW WE WORK</a>
-                <a href="/">DEADLINES</a>
-                <a href="/">CONTACT</a>
-            </nav>
-        </div>
-    </header>
+    {% include 'main/header.html' %}
 
     <main>
         {% block content %}{% endblock %}
     </main>
+
+    {% include 'main/footer.html' %}
 
     <script src="{% static 'js/main.js' %}"></script>
 </body>
