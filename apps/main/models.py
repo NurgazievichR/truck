@@ -97,6 +97,9 @@ class Contact(models.Model):
         verbose_name = 'Контакт'
         verbose_name_plural = 'Контакты'
         ordering = ['order', 'type']
+        constraints = [
+            models.UniqueConstraint(fields=['type'], name='unique_contact_type')
+        ]
     
     def __str__(self):
         return f"{self.get_type_display()}: {self.value}"
