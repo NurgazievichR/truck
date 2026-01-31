@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Преимущества - Trucking Compliance{% endblock %}
+
+{% block content %}
+<section class="advantages">
+    <div class="container">
+        <h1>Преимущества компании</h1>
+        <div class="advantages-list">
+            {% for advantage in advantages %}
+            <div class="advantage-item">
+                {% if advantage.icon %}
+                <div class="advantage-icon">{{ advantage.icon }}</div>
+                {% endif %}
+                <h3>{{ advantage.title }}</h3>
+                <p>{{ advantage.description }}</p>
+            </div>
+            {% empty %}
+            <p>Преимущества пока не добавлены.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+

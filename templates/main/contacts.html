@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Контакты - Trucking Compliance{% endblock %}
+
+{% block content %}
+<section class="contacts">
+    <div class="container">
+        <h1>Контакты</h1>
+        <div class="contacts-list">
+            {% for contact in contacts %}
+            <div class="contact-item">
+                <strong>{{ contact.get_type_display }}:</strong>
+                <span>{{ contact.value }}</span>
+            </div>
+            {% empty %}
+            <p>Контакты пока не добавлены.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+

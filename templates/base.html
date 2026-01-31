@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    {% include 'main/header.html' %}
+    {% include 'includes/header.html' %}
 
     <main>
         {% block content %}{% endblock %}
     </main>
 
-    {% include 'main/footer.html' %}
+    {% include 'includes/footer.html' %}
 
     <script src="{% static 'js/main.js' %}"></script>
 </body>
