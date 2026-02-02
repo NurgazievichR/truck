@@ -1951,3 +1951,277 @@ footer .container {
     }
 }
 
+/* ============================================
+   REQUEST A QUOTE PAGE
+   ============================================ */
+
+.quote-page {
+    padding: 100px 0 80px;
+    background: white;
+}
+
+.quote-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.quote-header h1 {
+    font-size: 48px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    display: inline-block;
+    position: relative;
+}
+
+.quote-underline {
+    position: relative;
+    display: inline-block;
+}
+
+.quote-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #3b82f6;
+}
+
+.quote-intro {
+    font-size: 16px;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.quote-content {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    align-items: start;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Quote Form */
+.quote-form-wrapper {
+    background: #f9fafb;
+    padding: 40px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+}
+
+.quote-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.quote-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.quote-form .form-label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.quote-form input[type="text"],
+.quote-form input[type="email"],
+.quote-form input[type="tel"],
+.quote-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background: white;
+}
+
+.quote-form input[type="text"]:focus,
+.quote-form input[type="email"]:focus,
+.quote-form input[type="tel"]:focus,
+.quote-form textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.quote-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Services Checkboxes */
+.services-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    padding: 12px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    transition: all 0.3s;
+}
+
+.checkbox-label:hover {
+    border-color: #3b82f6;
+    background: #f0f7ff;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #3b82f6;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.checkbox-label span {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+}
+
+.no-services {
+    color: #666;
+    font-size: 14px;
+    font-style: italic;
+}
+
+/* Quote Benefits */
+.quote-benefits {
+    background: #f9fafb;
+    padding: 40px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+}
+
+.quote-benefits h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.benefits-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.benefit-icon {
+    width: 24px;
+    height: 24px;
+    background: #10b981;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.benefit-content {
+    flex: 1;
+}
+
+.benefit-content h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.benefit-content p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.quote-form .btn-primary {
+    background: #3b82f6;
+    color: white;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    align-self: flex-start;
+    margin-top: 10px;
+}
+
+.quote-form .btn-primary:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .quote-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .services-checkboxes {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .quote-page {
+        padding: 80px 0 60px;
+    }
+    
+    .quote-header h1 {
+        font-size: 36px;
+    }
+    
+    .quote-intro {
+        font-size: 15px;
+        padding: 0 20px;
+    }
+    
+    .quote-form-wrapper,
+    .quote-benefits {
+        padding: 25px;
+    }
+    
+    .quote-form .btn-primary {
+        width: 100%;
+    }
+}
+
