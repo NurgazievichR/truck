@@ -42,36 +42,10 @@ class Page(models.Model):
         super().save(*args, **kwargs)
 
 
-class Advantage(models.Model):
-    """Модель для преимуществ компании"""
-    title = models.CharField(max_length=100, verbose_name='Заголовок')
-    description = models.TextField(verbose_name='Описание')
-    icon = models.CharField(
-        max_length=50, 
-        blank=True, 
-        verbose_name='Иконка',
-        help_text='Название иконки (например: check, star, shield)'
-    )
-    order = models.PositiveIntegerField(default=0, verbose_name='Порядок сортировки')
-    is_active = models.BooleanField(default=True, verbose_name='Активно')
-    
-    # Даты
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
-    updated_at = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
-    
-    class Meta:
-        verbose_name = 'Преимущество'
-        verbose_name_plural = 'Преимущества'
-        ordering = ['order', 'title']
-    
-    def __str__(self):
-        return self.title
-
-
 class Contact(models.Model):
-    """Модель для контактной информации"""
+    """Contact information model"""
     TYPE_CHOICES = [
-        ('phone', 'Телефон'),
+        ('phone', 'Phone'),
         ('email', 'Email'),
         ('telegram', 'Telegram'),
         ('instagram', 'Instagram'),
@@ -83,23 +57,22 @@ class Contact(models.Model):
     type = models.CharField(
         max_length=20, 
         choices=TYPE_CHOICES, 
-        verbose_name='Тип контакта'
+        verbose_name='Contact Type'
     )
-    value = models.CharField(max_length=255, verbose_name='Значение')
-    order = models.PositiveIntegerField(default=0, verbose_name='Порядок сортировки')
-    is_active = models.BooleanField(default=True, verbose_name='Активно')
+    value = models.CharField(max_length=255, verbose_name='Value', blank=True, null=True)
     
-    # Даты
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
-    updated_at = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
+    # Dates
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created at')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Updated at')
     
     class Meta:
-        verbose_name = 'Контакт'
-        verbose_name_plural = 'Контакты'
-        ordering = ['order', 'type']
+        verbose_name = 'Contact'
+        verbose_name_plural = 'Contacts'
+        ordering = ['type']
         constraints = [
             models.UniqueConstraint(fields=['type'], name='unique_contact_type')
         ]
     
     def __str__(self):
-        return f"{self.get_type_display()}: {self.value}"
+        value_display = self.value if self.value else "(empty)"
+        return f"{self.get_type_display()}: {value_display}"

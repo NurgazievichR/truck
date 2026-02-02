@@ -1,22 +1,106 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Контакты - Trucking Compliance{% endblock %}
+{% block title %}Contact - Trucking Compliance{% endblock %}
 
 {% block content %}
-<section class="contacts">
+<section class="contact-page">
     <div class="container">
-        <h1>Контакты</h1>
-        <div class="contacts-list">
-            {% for contact in contacts %}
-            <div class="contact-item">
-                <strong>{{ contact.get_type_display }}:</strong>
-                <span>{{ contact.value }}</span>
+        <div class="contact-content">
+            <!-- Left Column: Static Information -->
+            <div class="contact-info">
+                <div class="info-block">
+                    <div class="info-icon">📍</div>
+                    <h3>OFFICE LOCATION</h3>
+                    <p>520 Country Drive, Fernley, NV 89408</p>
+                </div>
+                
+                <div class="info-block">
+                    <div class="info-icon">📞</div>
+                    <h3>CONTACT DETAILS</h3>
+                    {% for contact in contacts %}
+                        {% if contact.type == 'phone' %}
+                            <p>{{ contact.value }}</p>
+                        {% endif %}
+                    {% empty %}
+                        <p>Wes Curtis: 541-761-8619 (Direct, 24/7)</p>
+                        <p>Tim Huegel: 530-917-4280</p>
+                    {% endfor %}
+                </div>
+                
+                <div class="info-block">
+                    <div class="info-icon">🕐</div>
+                    <h3>WORKING HOURS</h3>
+                    <p>We are available 24/7 to serve your trucking needs!</p>
+                </div>
             </div>
-            {% empty %}
-            <p>Контакты пока не добавлены.</p>
-            {% endfor %}
+            
+            <!-- Right Column: Contact Form -->
+            <div class="contact-form-wrapper">
+                <h2>READY TO GET STARTED?</h2>
+                <p class="form-note">"*" indicates required fields</p>
+                
+                {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                
+                <form class="contact-form" method="post">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label class="form-label">I would like to send an email to:*</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="email_to" value="wes" checked>
+                                <span>Only Wes</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="email_to" value="tim">
+                                <span>Only Tim</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="email_to" value="both">
+                                <span>Both Wes & Tim</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Name*</label>
+                        <div class="name-fields">
+                            <input type="text" name="first_name" placeholder="First" required>
+                            <input type="text" name="last_name" placeholder="Last" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label class="form-label">Email *</label>
+                                <input type="email" name="email" required>
+                            </div>
+                            <div class="form-field">
+                                <label class="form-label">Phone</label>
+                                <input type="tel" name="phone">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">How can we help? *</label>
+                        <textarea name="message" rows="6" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">SEND MESSAGE</button>
+                </form>
+            </div>
         </div>
     </div>
 </section>
 {% endblock %}
-

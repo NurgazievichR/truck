@@ -1,0 +1,62 @@
+{% extends "admin/change_list.html" %}
+{% load static %}
+
+{% block extrahead %}
+{{ block.super }}
+<style>
+    #changelist table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    #changelist table thead {
+        display: none;
+    }
+    
+    #changelist table tbody tr {
+        border-bottom: 1px solid #e0e0e0;
+    }
+    
+    #changelist table tbody tr:last-child {
+        border-bottom: none;
+    }
+    
+    #changelist table tbody td {
+        padding: 15px 10px;
+        border: none;
+        vertical-align: middle;
+    }
+    
+    #changelist table tbody td:first-child {
+        width: 150px;
+        font-weight: 500;
+        color: #333;
+        font-size: 14px;
+    }
+    
+    #changelist table tbody td:last-child {
+        padding-left: 0;
+    }
+    
+    #changelist table tbody td input[type="checkbox"] {
+        display: none;
+    }
+    
+    #changelist table tbody td input[type="text"] {
+        width: 100%;
+        padding: 10px 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        transition: all 0.2s ease;
+        background: white;
+    }
+    
+    #changelist table tbody td input[type="text"]:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+    }
+</style>
+{% endblock %}
+

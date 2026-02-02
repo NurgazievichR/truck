@@ -1,19 +1,222 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<section class="hero">
+<!-- Hero Section -->
+<section class="hero-section">
     <div class="container">
-        <h1>Safety & Compliance Management for Trucking Companies</h1>
-        <p>Reduce risk, stay audit-ready, and hit critical deadlines. Trusted by fleets nationwide for IFTA, IRP, UCR, and FMCSA compliance.</p>
-        <a href="/" class="btn">REQUEST A QUOTE</a>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Safety & Compliance Management for Trucking Companies</h1>
+                <p>Reduce risk, stay audit-ready, and hit critical deadlines. Trusted by fleets nationwide for IFTA, IRP, UCR, and FMCSA compliance.</p>
+                <div class="hero-buttons">
+                    <a href="{% url 'main:contacts' %}" class="btn btn-primary">REQUEST A QUOTE</a>
+                    <a href="{% url 'main:index' %}#services" class="btn btn-outline">OUR SERVICES</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="truck-illustration">
+                    <img src="{% static 'images/truck.png' %}" alt="Truck" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div style="display:none; width: 400px; height: 300px; background: rgba(255,255,255,0.1); border: 2px dashed rgba(255,255,255,0.3); border-radius: 10px;"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
-<section class="services">
+<!-- Statistics Section -->
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">ACTIVE CLIENTS</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">YEARS EXPERIENCE</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">99.8%</div>
+                <div class="stat-label">ON-TIME FILING</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">SUPPORT AVAILABLE</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="about-section">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-image">
+                <div class="chart-illustration">
+                    <svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="300" height="200" fill="#f3f4f6" rx="10"/>
+                        <line x1="30" y1="170" x2="270" y2="170" stroke="#d1d5db" stroke-width="2"/>
+                        <line x1="30" y1="170" x2="30" y2="30" stroke="#d1d5db" stroke-width="2"/>
+                        <rect x="50" y="100" width="40" height="70" fill="#10b981"/>
+                        <rect x="110" y="130" width="40" height="40" fill="#ef4444"/>
+                        <rect x="170" y="50" width="40" height="120" fill="#3b82f6"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="about-text">
+                <h2>About Trucking Compliance</h2>
+                <div class="underline"></div>
+                <p>We are the leading provider of safety and compliance management solutions for trucking companies across the United States.</p>
+                <p>With over 15 years of experience, we've helped hundreds of fleets navigate the complex world of transportation compliance. Our team of certified experts ensures your company stays compliant with IFTA, IRP, UCR, and FMCSA regulations.</p>
+                <p>We understand that compliance isn't just about avoiding penalties—it's about running a safe, efficient, and profitable operation. That's why we offer comprehensive solutions tailored to your fleet size and needs.</p>
+                <ul class="features-list">
+                    <li>✓ Certified compliance specialists</li>
+                    <li>✓ Industry-leading technology platform</li>
+                    <li>✓ 24/7 support and monitoring</li>
+                    <li>✓ Proven track record of success</li>
+                </ul>
+                <a href="{% url 'main:about' %}" class="btn btn-primary">LEARN MORE ABOUT US</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How We Work Section -->
+<section id="how-we-work" class="how-we-work-section">
+    <div class="container">
+        <h2>How We Work</h2>
+        <p class="section-subtitle">Our proven 5-step process ensures seamless compliance management</p>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">01</div>
+                <div class="step-icon">📞</div>
+                <h3>Initial Consultation</h3>
+                <p>We assess your fleet size, operations, and compliance needs through a comprehensive consultation.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">02</div>
+                <div class="step-icon">📋</div>
+                <h3>Custom Plan</h3>
+                <p>We create a tailored compliance plan that fits your specific requirements and budget.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">03</div>
+                <div class="step-icon">⚙️</div>
+                <h3>Setup & Integration</h3>
+                <p>Our team sets up your account, integrates with your systems, and migrates existing data.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">04</div>
+                <div class="step-icon">📊</div>
+                <h3>Ongoing Management</h3>
+                <p>We handle all filings, renewals, and compliance tasks on your behalf with regular updates.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">05</div>
+                <div class="step-icon">✓</div>
+                <h3>Monitoring & Support</h3>
+                <p>24/7 monitoring ensures deadlines are met, and our support team is always available.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">06</div>
+                <div class="step-icon">📈</div>
+                <h3>Continuous Improvement</h3>
+                <p>Regular reviews and optimizations help improve your compliance efficiency over time.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="services-section">
     <div class="container">
         <h2>Our Core Services</h2>
         <div class="underline"></div>
+        <p class="section-subtitle">Comprehensive compliance solutions for every aspect of your operation</p>
+        <div class="services-grid">
+            {% for service in services %}
+            <div class="service-item">
+                <div class="service-icon">
+                    {% if service.image %}
+                        <img src="{{ service.image.url }}" alt="{{ service.title }}">
+                    {% else %}
+                        <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="60" height="60" fill="#d97706" rx="5"/>
+                            <rect x="10" y="15" width="40" height="30" fill="#fff" rx="2"/>
+                            <line x1="15" y1="25" x2="45" y2="25" stroke="#d97706" stroke-width="2"/>
+                            <line x1="15" y1="35" x2="40" y2="35" stroke="#d97706" stroke-width="2"/>
+                        </svg>
+                    {% endif %}
+                </div>
+                <h3>{{ service.title }}</h3>
+                <p>{{ service.description|truncatewords:15 }}</p>
+            </div>
+            {% empty %}
+            <p>No services available yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+<!-- Testimonials Section -->
+<section class="testimonials-section">
+    <div class="container">
+        <h2>What Our Clients Say</h2>
+        <div class="underline"></div>
+        <p class="section-subtitle">Trusted by hundreds of trucking companies nationwide</p>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p>"Trucking Compliance has transformed how we handle our IFTA and IRP filings. Their team is professional, responsive, and always ahead of deadlines. Highly recommended!"</p>
+                <div class="testimonial-author">
+                    <strong>John Smith</strong>
+                    <span>CEO, Smith Transport LLC</span>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p>"We've been using their services for 5 years and never missed a deadline. The peace of mind is worth every penny. Their support team is exceptional."</p>
+                <div class="testimonial-author">
+                    <strong>Maria Rodriguez</strong>
+                    <span>Operations Manager, Rodriguez Fleet</span>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p>"The best investment we made for our compliance needs. They saved us thousands in penalties and countless hours of administrative work. Outstanding service!"</p>
+                <div class="testimonial-author">
+                    <strong>David Chen</strong>
+                    <span>Owner, Chen Logistics</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Partners & Certifications Section -->
+<section class="partners-section">
+    <div class="container">
+        <h2>Trusted Partners & Certifications</h2>
+        <div class="underline"></div>
+        <p class="section-subtitle">We work with industry leaders and maintain the highest standards</p>
+        <div class="partners-grid">
+            <div class="partner-card">IFTA</div>
+            <div class="partner-card">IRP</div>
+            <div class="partner-card">FMCSA</div>
+            <div class="partner-card">UCR</div>
+        </div>
+        <p class="partners-footer">Certified by industry standards • Licensed in all 50 states • BBB A+ Rating</p>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <h2>Ready to Simplify Your Compliance?</h2>
+        <p>Join hundreds of satisfied clients who trust us with their compliance needs.</p>
+        <a href="{% url 'main:contacts' %}" class="btn btn-white">GET STARTED TODAY</a>
     </div>
 </section>
 {% endblock %}
-

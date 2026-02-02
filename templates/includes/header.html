@@ -3,11 +3,10 @@
     <div class="container">
         <a href="{% url 'main:index' %}" class="logo">TRUCKING COMPLIANCE</a>
         <nav>
-            <a href="{% url 'main:index' %}">SERVICES</a>
-            <a href="{% url 'main:index' %}">PRICING</a>
-            <a href="{% url 'main:how-we-work' %}">HOW WE WORK</a>
-            <a href="{% url 'main:index' %}">DEADLINES</a>
-            <a href="{% url 'main:contacts' %}">CONTACT</a>
+            <a href="{% url 'main:index' %}#services">SERVICES</a>
+            <a href="{% url 'main:index' %}#how-we-work">HOW WE WORK</a>
+            <a href="{% url 'deadlines:calendar' %}">DEADLINES</a>
+            <a href="{% url 'main:contacts' %}">CONTACT US</a>
         </nav>
     </div>
 </header>
