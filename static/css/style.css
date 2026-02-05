@@ -6,18 +6,42 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
 }
 
 body {
     font-family: Arial, sans-serif;
     color: #333;
     padding-top: 80px; /* Отступ для фиксированного хедера */
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+}
+
+main {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    position: relative;
+}
+
+section {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 header {
@@ -28,31 +52,78 @@ header {
     left: 0;
     right: 0;
     width: 100%;
+    max-width: 100%;
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
 header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .logo {
     font-weight: bold;
     font-size: 20px;
     color: #1e3a8a;
+    text-decoration: none;
+    z-index: 1001;
 }
 
-nav a {
+.main-nav {
+    display: flex;
+    align-items: center;
+}
+
+.main-nav a {
     margin-left: 30px;
     text-decoration: none;
     color: #555;
     font-size: 14px;
+    transition: color 0.3s;
 }
 
-nav a:hover {
+.main-nav a:hover {
     color: #1e3a8a;
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+}
+
+.mobile-menu-toggle span {
+    width: 100%;
+    height: 3px;
+    background: #1e3a8a;
+    border-radius: 3px;
+    transition: all 0.3s;
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(8px, -8px);
 }
 
 .hero {
@@ -153,18 +224,52 @@ nav a:hover {
     color: #333;
 }
 
+/* Mobile Menu Styles */
 @media (max-width: 768px) {
-    header .container {
+    .mobile-menu-toggle {
+        display: flex;
+    }
+
+    .main-nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        max-width: 80vw;
+        height: 100vh;
+        background: white;
         flex-direction: column;
+        align-items: flex-start;
+        padding: 80px 30px 30px;
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease;
+        z-index: 1000;
+        box-sizing: border-box;
+        overflow-y: auto;
     }
 
-    nav {
-        margin-top: 20px;
+    .main-nav.active {
+        right: 0;
     }
 
-    nav a {
-        margin: 0 10px;
-        display: inline-block;
+    .main-nav a {
+        margin: 0 0 20px 0;
+        font-size: 16px;
+        width: 100%;
+        padding: 10px 0;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .main-nav a:last-child {
+        border-bottom: none;
+    }
+
+    body.menu-open {
+        overflow: hidden;
+    }
+
+    header .container {
+        position: relative;
     }
 
     .hero h1 {
@@ -318,6 +423,16 @@ nav a:hover {
     grid-template-columns: 1fr 1fr;
     gap: 60px;
     align-items: center;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.hero-text {
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .hero-text h1 {
@@ -325,6 +440,8 @@ nav a:hover {
     font-weight: bold;
     margin-bottom: 25px;
     line-height: 1.2;
+    max-width: 100%;
+    word-wrap: break-word;
 }
 
 .hero-text p {
@@ -332,11 +449,15 @@ nav a:hover {
     line-height: 1.8;
     margin-bottom: 35px;
     opacity: 0.95;
+    max-width: 100%;
+    word-wrap: break-word;
 }
 
 .hero-buttons {
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
+    max-width: 100%;
 }
 
 .btn-primary {
@@ -348,6 +469,10 @@ nav a:hover {
     font-weight: bold;
     font-size: 14px;
     transition: background 0.3s;
+    display: inline-block;
+    white-space: nowrap;
+    box-sizing: border-box;
+    max-width: 100%;
 }
 
 .btn-primary:hover {
@@ -364,6 +489,10 @@ nav a:hover {
     font-weight: bold;
     font-size: 14px;
     transition: all 0.3s;
+    display: inline-block;
+    white-space: nowrap;
+    box-sizing: border-box;
+    max-width: 100%;
 }
 
 .btn-outline:hover {
@@ -375,18 +504,30 @@ nav a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .truck-illustration {
     width: 100%;
-    max-width: 500px;
+    max-width: 100%;
     height: auto;
+    box-sizing: border-box;
 }
 
 .truck-illustration img {
     width: 100%;
+    max-width: 100%;
     height: auto;
     object-fit: contain;
+    display: block;
+}
+
+.truck-illustration > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
 }
 
 /* Statistics Section */
@@ -399,6 +540,9 @@ nav a:hover {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .stat-card {
@@ -434,17 +578,31 @@ nav a:hover {
     grid-template-columns: 1fr 1.5fr;
     gap: 60px;
     align-items: center;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .about-image {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .chart-illustration {
     width: 100%;
-    max-width: 400px;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.chart-illustration svg {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 .about-text h2 {
@@ -510,6 +668,9 @@ nav a:hover {
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     margin-top: 50px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .step-card {
@@ -586,6 +747,9 @@ nav a:hover {
     gap: 40px;
     margin-top: 50px;
     text-align: left;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .service-item {
@@ -737,6 +901,9 @@ nav a:hover {
     gap: 30px;
     margin-top: 50px;
     text-align: left;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .testimonial-card {
@@ -799,6 +966,9 @@ nav a:hover {
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     margin-top: 50px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .partner-card {
@@ -853,6 +1023,10 @@ nav a:hover {
     font-size: 14px;
     transition: all 0.3s;
     border: 2px solid white;
+    display: inline-block;
+    white-space: nowrap;
+    box-sizing: border-box;
+    max-width: 100%;
 }
 
 .btn-white:hover {
@@ -865,6 +1039,10 @@ footer {
     background: #374151;
     color: white;
     padding: 60px 0 20px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 footer .container {
@@ -872,6 +1050,9 @@ footer .container {
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
     margin-bottom: 40px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .footer-column h3 {
@@ -919,28 +1100,40 @@ footer .container {
     color: white;
 }
 
-/* Responsive */
+/* Responsive - Tablet */
 @media (max-width: 1024px) {
+    .container {
+        padding: 0 15px;
+    }
+
     .hero-content {
         grid-template-columns: 1fr;
+        gap: 40px;
     }
     
     .hero-image {
         order: -1;
     }
+
+    .hero-text h1 {
+        font-size: 40px;
+    }
     
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
     }
     
     .about-content {
         grid-template-columns: 1fr;
+        gap: 40px;
     }
     
     .steps-grid,
     .advantages-grid,
     .testimonials-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
     }
     
     .partners-grid {
@@ -948,6 +1141,11 @@ footer .container {
     }
     
     footer .container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+
+    .services-section .services-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
@@ -1153,17 +1351,86 @@ footer .container {
     }
 }
 
+/* Responsive - Mobile */
 @media (max-width: 768px) {
+    body {
+        padding-top: 70px;
+    }
+
+    .container {
+        padding: 0 15px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    header {
+        padding: 15px 0;
+    }
+
+    .logo {
+        font-size: 16px;
+    }
+
+    .hero-section {
+        padding: 60px 0;
+    }
+
     .hero-text h1 {
-        font-size: 32px;
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    .hero-text p {
+        font-size: 16px;
+        margin-bottom: 25px;
     }
     
     .hero-buttons {
         flex-direction: column;
+        gap: 15px;
+        width: 100%;
+    }
+
+    .btn-primary,
+    .btn-outline {
+        width: 100%;
+        max-width: 100%;
+        text-align: center;
+        padding: 15px 20px;
+        box-sizing: border-box;
     }
     
+    .stats-section {
+        padding: 40px 0;
+    }
+
     .stats-grid {
         grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .stat-card {
+        padding: 20px;
+    }
+
+    .stat-number {
+        font-size: 36px;
+    }
+    
+    .about-section {
+        padding: 60px 0;
+    }
+
+    .about-text h2 {
+        font-size: 28px;
+    }
+
+    .about-text p {
+        font-size: 15px;
     }
     
     .steps-grid,
@@ -1172,10 +1439,58 @@ footer .container {
     .partners-grid,
     .services-section .services-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .how-we-work-section,
+    .services-section,
+    .why-choose-section,
+    .testimonials-section,
+    .partners-section {
+        padding: 60px 0;
+    }
+
+    .how-we-work-section h2,
+    .services-section h2,
+    .why-choose-section h2,
+    .testimonials-section h2,
+    .partners-section h2 {
+        font-size: 28px;
+    }
+
+    .section-subtitle {
+        font-size: 14px;
+    }
+
+    .step-card,
+    .advantage-card,
+    .testimonial-card {
+        padding: 25px 20px;
     }
     
+    footer {
+        padding: 40px 0 15px;
+    }
+
     footer .container {
         grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .footer-column {
+        text-align: center;
+    }
+
+    .cta-section {
+        padding: 60px 0;
+    }
+
+    .cta-section h2 {
+        font-size: 32px;
+    }
+
+    .cta-section p {
+        font-size: 16px;
     }
     
     .name-fields,
@@ -1551,43 +1866,150 @@ footer .container {
     font-size: 16px;
 }
 
-/* Responsive */
+/* Responsive - Deadlines Page */
 @media (max-width: 1024px) {
+    .deadlines-page {
+        padding: 80px 0 60px;
+    }
+
     .deadlines-stats {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
     }
     
     .deadlines-list {
         grid-template-columns: 1fr;
     }
+
+    .calendar-wrapper {
+        padding: 20px;
+        overflow-x: auto;
+    }
+
+    .calendar-wrapper {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .calendar-table {
+        min-width: 700px;
+        width: 100%;
+    }
 }
 
 @media (max-width: 768px) {
+    .deadlines-page {
+        padding: 70px 0 50px;
+    }
+
     .deadlines-page h1 {
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+
+    .page-subtitle {
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+
+    .deadlines-stats {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    .stat-item {
+        padding: 20px;
+    }
+
+    .stat-number {
         font-size: 32px;
     }
+
+    .stat-label {
+        font-size: 12px;
+    }
     
+    .deadlines-filters {
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+
     .filters-form {
         flex-direction: column;
         align-items: stretch;
+        gap: 15px;
     }
     
+    .filter-group {
+        width: 100%;
+    }
+
     .filter-group select,
     .filter-group input {
         width: 100%;
+        min-width: auto;
+    }
+
+    .btn-filter,
+    .btn-reset {
+        width: 100%;
     }
     
+    .calendar-wrapper {
+        padding: 15px;
+        margin-bottom: 30px;
+    }
+
+    .calendar-header h2 {
+        font-size: 24px;
+    }
+
+    .calendar-wrapper {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        margin-left: -15px;
+        margin-right: -15px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
     .calendar-table {
-        font-size: 12px;
+        font-size: 11px;
+        min-width: 600px;
+        width: 100%;
     }
     
     .calendar-day {
         padding: 5px;
-        min-height: 80px;
+        min-height: 70px;
+    }
+
+    .day-number {
+        font-size: 14px;
     }
     
     .deadline-item {
-        font-size: 10px;
+        font-size: 9px;
+        padding: 3px 5px;
+    }
+
+    .deadlines-list-section h2 {
+        font-size: 24px;
+    }
+
+    .deadline-card {
+        padding: 20px;
+    }
+
+    .deadline-header h3 {
+        font-size: 18px;
+    }
+
+    .deadline-body p {
+        font-size: 13px;
     }
 }
 
@@ -1927,27 +2349,88 @@ footer .container {
     }
 }
 
+/* Responsive - About Page */
+@media (max-width: 1024px) {
+    .about-page {
+        padding: 80px 0 60px;
+    }
+
+    .about-section-block {
+        gap: 40px;
+    }
+
+    .about-text-block h2 {
+        font-size: 28px;
+    }
+}
+
 @media (max-width: 768px) {
+    .about-page {
+        padding: 70px 0 50px;
+    }
+
+    .about-hero {
+        margin-bottom: 40px;
+    }
+
     .about-hero h1 {
-        font-size: 32px;
+        font-size: 28px;
+        margin-bottom: 10px;
     }
     
     .about-subtitle {
-        font-size: 18px;
+        font-size: 16px;
+    }
+
+    .about-section-block {
+        margin-bottom: 50px;
+    }
+
+    .about-text-block h2 {
+        font-size: 24px;
+    }
+
+    .about-text-block p {
+        font-size: 15px;
+    }
+    
+    .about-values,
+    .about-stats-section,
+    .about-team {
+        margin: 50px 0;
+        padding: 40px 20px;
+    }
+
+    .about-values h2,
+    .about-stats-section h2,
+    .about-team h2 {
+        font-size: 28px;
     }
     
     .values-grid,
     .team-features,
     .stats-grid-about {
         grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .value-card,
+    .team-feature,
+    .stat-item-about {
+        padding: 25px 20px;
     }
     
     .about-cta {
         padding: 40px 20px;
+        margin: 50px 0;
     }
     
     .about-cta h2 {
-        font-size: 28px;
+        font-size: 24px;
+    }
+
+    .about-cta p {
+        font-size: 16px;
     }
 }
 
@@ -2190,7 +2673,12 @@ footer .container {
 }
 
 /* Responsive */
+/* Responsive - Quote Page */
 @media (max-width: 1024px) {
+    .quote-page {
+        padding: 80px 0 60px;
+    }
+
     .quote-content {
         grid-template-columns: 1fr;
         gap: 30px;
@@ -2199,29 +2687,158 @@ footer .container {
     .services-checkboxes {
         grid-template-columns: 1fr;
     }
+
+    .quote-header h1 {
+        font-size: 40px;
+    }
 }
 
 @media (max-width: 768px) {
     .quote-page {
-        padding: 80px 0 60px;
+        padding: 70px 0 50px;
     }
     
+    .quote-header {
+        margin-bottom: 30px;
+    }
+
     .quote-header h1 {
-        font-size: 36px;
+        font-size: 32px;
+        margin-bottom: 15px;
     }
     
     .quote-intro {
-        font-size: 15px;
-        padding: 0 20px;
+        font-size: 14px;
+        padding: 0 15px;
     }
     
+    .quote-content {
+        gap: 25px;
+    }
+
     .quote-form-wrapper,
     .quote-benefits {
-        padding: 25px;
+        padding: 20px;
+    }
+
+    .quote-benefits h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .benefits-list {
+        gap: 20px;
+    }
+
+    .benefit-item {
+        gap: 12px;
+    }
+
+    .benefit-content h3 {
+        font-size: 16px;
+    }
+
+    .benefit-content p {
+        font-size: 13px;
     }
     
     .quote-form .btn-primary {
         width: 100%;
+        padding: 15px;
+    }
+
+    .quote-form input[type="text"],
+    .quote-form input[type="email"],
+    .quote-form input[type="tel"],
+    .quote-form textarea {
+        font-size: 16px; /* Предотвращает zoom на iOS */
+    }
+}
+
+/* Extra Small Devices */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .logo {
+        font-size: 14px;
+    }
+
+    .hero-text {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .hero-text h1 {
+        font-size: 24px;
+        max-width: 100%;
+        word-wrap: break-word;
+    }
+
+    .hero-text p {
+        font-size: 14px;
+        max-width: 100%;
+        word-wrap: break-word;
+    }
+
+    .hero-buttons {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .btn-primary,
+    .btn-outline,
+    .btn-white {
+        width: 100%;
+        max-width: 100%;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+
+    .quote-header h1 {
+        font-size: 28px;
+    }
+
+    .quote-form-wrapper,
+    .quote-benefits {
+        padding: 15px;
+    }
+
+    .deadlines-page h1 {
+        font-size: 24px;
+    }
+
+    .about-hero h1 {
+        font-size: 24px;
+    }
+
+    .step-card,
+    .advantage-card,
+    .testimonial-card {
+        padding: 20px 15px;
+    }
+
+    .step-number {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+        top: -12px;
+    }
+
+    .cta-section h2 {
+        font-size: 28px;
+    }
+
+    footer {
+        padding: 30px 0 15px;
+    }
+
+    .footer-bottom {
+        font-size: 11px;
+        padding-top: 15px;
     }
 }
 

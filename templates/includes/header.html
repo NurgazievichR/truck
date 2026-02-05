@@ -2,7 +2,12 @@
 <header>
     <div class="container">
         <a href="{% url 'main:index' %}" class="logo">TRUCKING COMPLIANCE</a>
-        <nav>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="main-nav">
             <a href="{% url 'main:index' %}#services">SERVICES</a>
             <a href="{% url 'main:index' %}#how-we-work">HOW WE WORK</a>
             <a href="{% url 'deadlines:calendar' %}">DEADLINES</a>
