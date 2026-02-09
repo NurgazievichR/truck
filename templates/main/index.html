@@ -10,8 +10,13 @@
                 <h1>Safety & Compliance Management for Trucking Companies</h1>
                 <p>Reduce risk, stay audit-ready, and hit critical deadlines. Trusted by fleets nationwide for IFTA, IRP, UCR, and FMCSA compliance.</p>
                 <div class="hero-buttons">
-                    <a href="{% url 'main:contacts' %}" class="btn btn-primary">REQUEST A QUOTE</a>
+                    <a href="{% url 'main:contacts' %}" class="btn btn-outline">REQUEST A QUOTE</a>
                     <a href="{% url 'main:index' %}#services" class="btn btn-outline">OUR SERVICES</a>
+                    {% if phone_contact and phone_contact.value %}
+                        <a href="tel:{{ phone_contact.get_phone_for_tel }}" class="btn btn-call">CALL US</a>
+                    {% else %}
+                        <a href="tel:+15551234567" class="btn btn-call">CALL US</a>
+                    {% endif %}
                 </div>
             </div>
             <div class="hero-image">

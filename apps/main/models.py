@@ -76,3 +76,12 @@ class Contact(models.Model):
     def __str__(self):
         value_display = self.value if self.value else "(empty)"
         return f"{self.get_type_display()}: {value_display}"
+    
+    def get_phone_for_tel(self):
+        """Возвращает телефон в формате для tel: ссылки (только цифры и +)"""
+        if self.type == 'phone' and self.value:
+            # Убираем все символы кроме цифр и +
+            import re
+            phone = re.sub(r'[^\d+]', '', self.value)
+            return phone
+        return ''

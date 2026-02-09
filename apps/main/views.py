@@ -13,9 +13,11 @@ def index(request):
     """Главная страница"""
     services = Service.objects.all()[:6]  # Первые 6 услуг для главной
     contacts = Contact.objects.all()
+    phone_contact = Contact.objects.filter(type='phone').first()
     return render(request, 'main/index.html', {
         'services': services,
-        'contacts': contacts
+        'contacts': contacts,
+        'phone_contact': phone_contact
     })
 
 
