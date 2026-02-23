@@ -1,12 +1,42 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.core.mail import send_mail
 from django.conf import settings
 import logging
+import requests
 from .models import Contact
 from apps.services.models import Service
 
 logger = logging.getLogger(__name__)
+
+
+def send_telegram_message(chat_id, message_text):
+    """Отправляет сообщение в Telegram через Bot API"""
+    bot_token = settings.TELEGRAM_BOT_TOKEN
+    if not bot_token:
+        logger.warning('TELEGRAM_BOT_TOKEN not configured')
+        return False
+    
+    if not chat_id:
+        logger.warning('Telegram chat_id not provided')
+        return False
+    
+    url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+    
+    try:
+        response = requests.post(
+            url,
+            json={
+                'chat_id': chat_id,
+                'text': message_text,
+                'parse_mode': 'HTML'
+            },
+            timeout=10
+        )
+        response.raise_for_status()
+        return True
+    except requests.exceptions.RequestException as e:
+        logger.error(f'Telegram send error: {str(e)}', exc_info=True)
+        return False
 
 
 def index(request):
@@ -58,66 +88,49 @@ def contacts(request):
                 'services': services
             })
         
-        # Получаем email получателя из контактов
-        recipient_email = Contact.objects.filter(type='email').first()
-        if not recipient_email or not recipient_email.value:
-            print("ERROR: No recipient email configured")
-            messages.error(request, 'Contact email not configured. Please contact administrator.')
-            return render(request, 'main/contacts.html', {
-                'services': services
-            })
-        
-        recipient = recipient_email.value
-        print(f"Recipient: {recipient}")
-        
         # Получаем названия выбранных услуг
         services_list = []
         if selected_services:
             service_objects = Service.objects.filter(id__in=selected_services)
             services_list = [service.title for service in service_objects]
         
-        # Формируем тему и тело письма
-        subject = f'New Quote Request from {name}'
-        
-        email_body = f"""
-New quote request submission:
+        # Отправляем сообщение в Telegram
+        telegram_contact = Contact.objects.filter(type='telegram').first()
+        if telegram_contact and telegram_contact.value:
+            print("Attempting to send Telegram message...")
+            telegram_message = f"""
+<b>Новая заявка с формы Contact Us</b>
 
-Name: {name}
-Email: {email}
-Phone: {phone if phone else 'Not provided'}
-Company: {company if company else 'Not provided'}
+<b>Имя:</b> {name}
+<b>Email:</b> {email}
+<b>Телефон:</b> {phone if phone else 'Не указан'}
+<b>Компания:</b> {company if company else 'Не указана'}
 
-Selected Services:
-{', '.join(services_list) if services_list else 'None selected'}
+<b>Выбранные услуги:</b>
+{', '.join(services_list) if services_list else 'Не выбраны'}
 
-Description:
-{description if description else 'No description provided'}
+<b>Описание:</b>
+{description if description else 'Не указано'}
 
 ---
-This message was sent from the quote request form on the website.
+Сообщение отправлено с формы запроса на сайте.
 """
-        
-        try:
-            print("Attempting to send email...")
-            print(f"From: {settings.DEFAULT_FROM_EMAIL}")
-            print(f"To: {recipient}")
-            print(f"Subject: {subject}")
-            
-            # Отправляем письмо
-            send_mail(
-                subject=subject,
-                message=email_body,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[recipient],
-                fail_silently=False,
-            )
-            print("SUCCESS: Email sent successfully!")
-            messages.success(request, 'Thank you! Your quote request has been sent successfully. We will get back to you within 24 hours.')
-        except Exception as e:
-            print(f"ERROR: Failed to send email - {str(e)}")
-            print(f"Error type: {type(e).__name__}")
-            logger.error(f'Email send error: {str(e)}', exc_info=True)
-            messages.error(request, f'Sorry, there was an error sending your request. Please try again later or contact us directly.')
+            try:
+                telegram_sent = send_telegram_message(telegram_contact.value, telegram_message)
+                if telegram_sent:
+                    print("SUCCESS: Telegram message sent successfully!")
+                    messages.success(request, 'Thank you! Your quote request has been sent successfully. We will get back to you within 24 hours.')
+                else:
+                    print("ERROR: Failed to send Telegram message")
+                    messages.error(request, 'Sorry, there was an error sending your request. Please try again later or contact us directly.')
+            except Exception as e:
+                print(f"ERROR: Failed to send Telegram message - {str(e)}")
+                print(f"Error type: {type(e).__name__}")
+                logger.error(f'Telegram send error: {str(e)}', exc_info=True)
+                messages.error(request, 'Sorry, there was an error sending your request. Please try again later or contact us directly.')
+        else:
+            print("ERROR: Telegram contact not configured")
+            messages.error(request, 'Telegram contact not configured. Please contact administrator.')
         
         print("=" * 50)
         return redirect('main:contacts')

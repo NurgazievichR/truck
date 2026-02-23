@@ -21,9 +21,9 @@ JAZZMIN_SETTINGS = {
     ],
     "show_sidebar": True,
     "navigation_expanded": True,
-    "hide_apps": ["services", "deadlines"],  # Скрываем отдельные приложения
+    "hide_apps": ["services"],  # Скрываем отдельные приложения
     "hide_models": [],
-    "order_with_respect_to": ["main", "services", "contacts", "accounts", "deadlines"],
+    "order_with_respect_to": ["main", "services", "contacts", "accounts"],
     "custom_links": {
         "main": [  # Добавляем кастомные ссылки в категорию main
             {
@@ -31,12 +31,6 @@ JAZZMIN_SETTINGS = {
                 "url": "admin:services_service_changelist",
                 "icon": "fas fa-briefcase",
                 "permissions": ["services.view_service"]
-            },
-            {
-                "name": "Deadlines",
-                "url": "admin:deadlines_deadline_changelist",
-                "icon": "fas fa-calendar",
-                "permissions": ["deadlines.view_deadline"]
             },
         ]
     },

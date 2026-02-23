@@ -27,10 +27,9 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
-CSRF_TRUSTED_ORIGINS=['http://165.22.166.47']
 
 # CSRF settings
-CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', cast=Csv(), default='http://localhost,http://127.0.0.1')
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', cast=Csv(), default='http://localhost,http://127.0.0.1,http://165.22.166.47')
 
 # Для HTTPS в продакшене (раскомментируйте если используете HTTPS)
 # CSRF_COOKIE_SECURE = True
@@ -54,7 +53,6 @@ INSTALLED_APPS = [
     'apps.services',
     'apps.contacts',
     'apps.accounts',
-    'apps.deadlines',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -142,16 +140,8 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'  # Куда collectstatic собирае�
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# Email configuration
-EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
-EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
-EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
-EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
-EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default=EMAIL_HOST_USER)
-
-EMAIL_TIMEOUT = 15
+# Telegram configuration
+TELEGRAM_BOT_TOKEN = config('TELEGRAM_BOT_TOKEN', default='')
 
 # Jazzmin configuration
 from .jazzmin import JAZZMIN_SETTINGS, JAZZMIN_UI_TWEAKS
