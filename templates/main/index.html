@@ -1,88 +1,85 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block body_class %}page-index{% endblock %}
+
 {% block content %}
-<!-- Hero Section -->
-<section class="hero-section">
-    <div class="container">
+<!-- Hero Section: natural gradient overlay, brighter image -->
+<section class="hero-section hero-with-photo" aria-labelledby="hero-heading">
+    <div class="hero-bg" style="background-image: url('{% static 'images/truck.jpg' %}');" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="container hero-container">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>Safety & Compliance Management for Trucking Companies</h1>
-                <p>Reduce risk, stay audit-ready, and hit critical deadlines. Trusted by fleets nationwide for IFTA, IRP, UCR, and FMCSA compliance.</p>
-                <div class="hero-buttons">
-                    <a href="{% url 'main:contacts' %}" class="btn btn-outline">REQUEST A QUOTE</a>
-                    <a href="{% url 'main:index' %}#services" class="btn btn-outline">OUR SERVICES</a>
+                <h1 id="hero-heading">Stay compliant. Stay on the road.</h1>
+                <p class="hero-subtitle">IFTA, IRP, UCR & FMCSA compliance management for trucking companies. Reduce risk and hit every deadline.</p>
+                <a href="{% url 'main:contacts' %}" class="btn btn-hero-primary">Get a free consultation</a>
+                <div class="hero-trust">
+                    <span class="hero-trust-item">500+ fleets</span>
+                    <span class="hero-trust-dot" aria-hidden="true"></span>
+                    <span class="hero-trust-item">15+ years</span>
+                    <span class="hero-trust-dot" aria-hidden="true"></span>
+                    <span class="hero-trust-item">99.8% on-time</span>
+                </div>
+                <p class="hero-secondary-links">
+                    <a href="{% url 'main:index' %}#services">View services</a>
                     {% if phone_contact and phone_contact.value %}
-                        <a href="tel:{{ phone_contact.get_phone_for_tel }}" class="btn btn-call">CALL US</a>
+                        <a href="tel:{{ phone_contact.get_phone_for_tel }}">Call us</a>
                     {% else %}
-                        <a href="tel:+15551234567" class="btn btn-call">CALL US</a>
+                        <a href="tel:+15551234567">Call us</a>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section (4 cards) — сразу после hero -->
+<section id="services" class="services-section" aria-labelledby="services-heading">
+    <div class="container">
+        <h2 id="services-heading">Our Core Services</h2>
+        <div class="underline"></div>
+        <p class="section-subtitle">Comprehensive compliance solutions for every aspect of your operation</p>
+        <div class="services-grid services-grid-4">
+            {% for service in services|slice:":4" %}
+            <article class="service-card">
+                <div class="service-card-icon">
+                    {% if service.image %}
+                        <img src="{{ service.image.url }}" alt="" width="56" height="56">
+                    {% else %}
+                        <span class="service-card-icon-placeholder" aria-hidden="true"></span>
                     {% endif %}
                 </div>
-            </div>
-            <div class="hero-image">
-                <div class="truck-illustration">
-                    <img src="{% static 'images/truck.jpg' %}" alt="Truck" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <div style="display:none; width: 400px; height: 300px; background: rgba(255,255,255,0.1); border: 2px dashed rgba(255,255,255,0.3); border-radius: 10px;"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Statistics Section -->
-<section class="stats-section">
-    <div class="container">
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">500+</div>
-                <div class="stat-label">ACTIVE CLIENTS</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">15+</div>
-                <div class="stat-label">YEARS EXPERIENCE</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">99.8%</div>
-                <div class="stat-label">ON-TIME FILING</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">24/7</div>
-                <div class="stat-label">SUPPORT AVAILABLE</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- About Section -->
-<section class="about-section">
-    <div class="container">
-        <div class="about-content">
-            <div class="about-image">
-                <div class="chart-illustration">
-                    <svg width="100%" height="auto" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;">
-                        <rect width="300" height="200" fill="#f3f4f6" rx="10"/>
-                        <line x1="30" y1="170" x2="270" y2="170" stroke="#d1d5db" stroke-width="2"/>
-                        <line x1="30" y1="170" x2="30" y2="30" stroke="#d1d5db" stroke-width="2"/>
-                        <rect x="50" y="100" width="40" height="70" fill="#10b981"/>
-                        <rect x="110" y="130" width="40" height="40" fill="#ef4444"/>
-                        <rect x="170" y="50" width="40" height="120" fill="#3b82f6"/>
-                    </svg>
-                </div>
-            </div>
-            <div class="about-text">
-                <h2>About Trucking Compliance</h2>
-                <div class="underline"></div>
-                <p>We are the leading provider of safety and compliance management solutions for trucking companies across the United States.</p>
-                <p>With over 15 years of experience, we've helped hundreds of fleets navigate the complex world of transportation compliance. Our team of certified experts ensures your company stays compliant with IFTA, IRP, UCR, and FMCSA regulations.</p>
-                <p>We understand that compliance isn't just about avoiding penalties—it's about running a safe, efficient, and profitable operation. That's why we offer comprehensive solutions tailored to your fleet size and needs.</p>
-                <ul class="features-list">
-                    <li>✓ Certified compliance specialists</li>
-                    <li>✓ Industry-leading technology platform</li>
-                    <li>✓ 24/7 support and monitoring</li>
-                    <li>✓ Proven track record of success</li>
-                </ul>
-                <a href="{% url 'main:about' %}" class="btn btn-primary">LEARN MORE ABOUT US</a>
-            </div>
+                <h3>{{ service.title }}</h3>
+                <p>{{ service.description|truncatewords:18 }}</p>
+                <a href="{% url 'main:contacts' %}?service={{ service.id }}" class="service-card-link">Learn more</a>
+            </article>
+            {% empty %}
+            <article class="service-card">
+                <div class="service-card-icon"><span class="service-card-icon-placeholder" aria-hidden="true"></span></div>
+                <h3>IFTA & Fuel Tax</h3>
+                <p>Registration, quarterly filings, and fuel tax compliance across all jurisdictions.</p>
+                <a href="{% url 'main:contacts' %}" class="service-card-link">Learn more</a>
+            </article>
+            <article class="service-card">
+                <div class="service-card-icon"><span class="service-card-icon-placeholder" aria-hidden="true"></span></div>
+                <h3>IRP & Registration</h3>
+                <p>Apportioned registration, renewals, and trailer titling for interstate operations.</p>
+                <a href="{% url 'main:contacts' %}" class="service-card-link">Learn more</a>
+            </article>
+            <article class="service-card">
+                <div class="service-card-icon"><span class="service-card-icon-placeholder" aria-hidden="true"></span></div>
+                <h3>UCR & Permits</h3>
+                <p>Unified Carrier Registration and state permit filings, on time every time.</p>
+                <a href="{% url 'main:contacts' %}" class="service-card-link">Learn more</a>
+            </article>
+            <article class="service-card">
+                <div class="service-card-icon"><span class="service-card-icon-placeholder" aria-hidden="true"></span></div>
+                <h3>FMCSA & Safety</h3>
+                <p>Safety compliance, CSA support, and audit readiness for DOT requirements.</p>
+                <a href="{% url 'main:contacts' %}" class="service-card-link">Learn more</a>
+            </article>
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -133,38 +130,6 @@
     </div>
 </section>
 
-<!-- Services Section -->
-<section id="services" class="services-section">
-    <div class="container">
-        <h2>Our Core Services</h2>
-        <div class="underline"></div>
-        <p class="section-subtitle">Comprehensive compliance solutions for every aspect of your operation</p>
-        <div class="services-grid">
-            {% for service in services %}
-            <div class="service-item">
-                <div class="service-icon">
-                    {% if service.image %}
-                        <img src="{{ service.image.url }}" alt="{{ service.title }}">
-                    {% else %}
-                        <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="60" height="60" fill="#d97706" rx="5"/>
-                            <rect x="10" y="15" width="40" height="30" fill="#fff" rx="2"/>
-                            <line x1="15" y1="25" x2="45" y2="25" stroke="#d97706" stroke-width="2"/>
-                            <line x1="15" y1="35" x2="40" y2="35" stroke="#d97706" stroke-width="2"/>
-                        </svg>
-                    {% endif %}
-                </div>
-                <h3>{{ service.title }}</h3>
-                <p>{{ service.description|truncatewords:15 }}</p>
-            </div>
-            {% empty %}
-            <p>No services available yet.</p>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-
-
 <!-- Testimonials Section -->
 <section class="testimonials-section">
     <div class="container">
@@ -174,7 +139,7 @@
         <div class="testimonials-grid">
             <div class="testimonial-card">
                 <div class="stars">★★★★★</div>
-                <p>"Trucking Compliance has transformed how we handle our IFTA and IRP filings. Their team is professional, responsive, and always ahead of deadlines. Highly recommended!"</p>
+                <p>"Safety-Lab has transformed how we handle our IFTA and IRP filings. Their team is professional, responsive, and always ahead of deadlines. Highly recommended!"</p>
                 <div class="testimonial-author">
                     <strong>John Smith</strong>
                     <span>CEO, Smith Transport LLC</span>
@@ -200,28 +165,77 @@
     </div>
 </section>
 
-<!-- Partners & Certifications Section -->
-<section class="partners-section">
+<!-- Logo strip -->
+<section class="logo-strip" aria-label="Trusted by">
     <div class="container">
-        <h2>Trusted Partners & Certifications</h2>
-        <div class="underline"></div>
-        <p class="section-subtitle">We work with industry leaders and maintain the highest standards</p>
-        <div class="partners-grid">
-            <div class="partner-card">IFTA</div>
-            <div class="partner-card">IRP</div>
-            <div class="partner-card">FMCSA</div>
-            <div class="partner-card">UCR</div>
+        <p class="logo-strip-label">Trusted by fleets nationwide</p>
+        <div class="logo-strip-inner">
+            <span class="logo-strip-item">IFTA</span>
+            <span class="logo-strip-item">IRP</span>
+            <span class="logo-strip-item">FMCSA</span>
+            <span class="logo-strip-item">UCR</span>
         </div>
-        <p class="partners-footer">Certified by industry standards • Licensed in all 50 states • BBB A+ Rating</p>
+    </div>
+</section>
+
+<!-- Trust / Credibility block -->
+<section class="trust-section" aria-labelledby="trust-heading">
+    <div class="container">
+        <h2 id="trust-heading" class="visually-hidden">Why choose Safety Lab</h2>
+        <div class="trust-grid">
+            <div class="trust-card">
+                <span class="trust-number">500+</span>
+                <p class="trust-label">Active clients</p>
+            </div>
+            <div class="trust-card">
+                <span class="trust-number">15+</span>
+                <p class="trust-label">Years experience</p>
+            </div>
+            <div class="trust-card">
+                <span class="trust-number">99.8%</span>
+                <p class="trust-label">On-time filing</p>
+            </div>
+            <div class="trust-card">
+                <span class="trust-number">50</span>
+                <p class="trust-label">States covered</p>
+            </div>
+        </div>
+        <p class="trust-footer">Certified • Licensed in all 50 states • BBB A+ Rating</p>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section id="faq" class="faq-section" aria-labelledby="faq-heading">
+    <div class="container">
+        <h2 id="faq-heading">Frequently asked questions</h2>
+        <div class="underline"></div>
+        <dl class="faq-list">
+            <div class="faq-item">
+                <dt><button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-1" id="faq-q1" data-faq-toggle>What does Safety Lab do?</button></dt>
+                <dd id="faq-1" class="faq-answer" aria-labelledby="faq-q1" hidden>We handle IFTA, IRP, UCR, and FMCSA compliance for trucking companies—registrations, quarterly filings, permits, and safety support so you stay audit-ready and on the road.</dd>
+            </div>
+            <div class="faq-item">
+                <dt><button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-2" id="faq-q2" data-faq-toggle>How quickly can you get started?</button></dt>
+                <dd id="faq-2" class="faq-answer" aria-labelledby="faq-q2" hidden>Most fleets are set up within 1–2 business days. We’ll review your needs in a free consultation and tailor a plan to your deadlines.</dd>
+            </div>
+            <div class="faq-item">
+                <dt><button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-3" id="faq-q3" data-faq-toggle>Do you support all 50 states?</button></dt>
+                <dd id="faq-3" class="faq-answer" aria-labelledby="faq-q3" hidden>Yes. We’re licensed and experienced in every state for IFTA, IRP, UCR, and state-specific permits and filings.</dd>
+            </div>
+            <div class="faq-item">
+                <dt><button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-4" id="faq-q4" data-faq-toggle>What if I miss a deadline?</button></dt>
+                <dd id="faq-4" class="faq-answer" aria-labelledby="faq-q4" hidden>Our process includes reminders and 24/7 monitoring. We’ve maintained a 99.8% on-time filing rate—so you’re in safe hands.</dd>
+            </div>
+        </dl>
     </div>
 </section>
 
 <!-- CTA Section -->
-<section class="cta-section">
+<section class="cta-section" aria-labelledby="cta-heading">
     <div class="container">
-        <h2>Ready to Simplify Your Compliance?</h2>
-        <p>Join hundreds of satisfied clients who trust us with their compliance needs.</p>
-        <a href="{% url 'main:contacts' %}" class="btn btn-white">GET STARTED TODAY</a>
+        <h2 id="cta-heading">Ready to simplify your compliance?</h2>
+        <p>Join hundreds of fleets who trust Safety Lab with IFTA, IRP, UCR, and FMCSA.</p>
+        <a href="{% url 'main:contacts' %}" class="btn btn-white">Get started today</a>
     </div>
 </section>
 {% endblock %}

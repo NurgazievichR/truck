@@ -19,19 +19,46 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (mobileMenuToggle && mainNav) {
         mobileMenuToggle.addEventListener('click', function() {
-            mainNav.classList.toggle('active');
-            mobileMenuToggle.classList.toggle('active');
-            body.classList.toggle('menu-open');
+            const isOpen = mainNav.classList.toggle('active');
+            mobileMenuToggle.classList.toggle('active', isOpen);
+            mobileMenuToggle.setAttribute('aria-expanded', isOpen);
+            body.classList.toggle('menu-open', isOpen);
         });
 
-        // Close menu when clicking on a link
         mainNav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', function() {
                 mainNav.classList.remove('active');
                 mobileMenuToggle.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
                 body.classList.remove('menu-open');
             });
         });
+    }
+
+    // FAQ accordion
+    document.querySelectorAll('[data-faq-toggle]').forEach(button => {
+        button.addEventListener('click', function() {
+            const expanded = this.getAttribute('aria-expanded') === 'true';
+            const targetId = this.getAttribute('aria-controls');
+            const target = targetId ? document.getElementById(targetId) : null;
+            this.setAttribute('aria-expanded', !expanded);
+            if (target) target.hidden = expanded;
+        });
+    });
+
+    // На главной: при прокрутке вниз хедер плавно становится белым
+    const header = document.querySelector('header');
+    if (header && body.classList.contains('page-index')) {
+        const scrollThreshold = 50;
+        function updateHeaderScroll() {
+            if (window.scrollY > scrollThreshold) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        }
+        window.addEventListener('scroll', updateHeaderScroll, { passive: true });
+        updateHeaderScroll();
     }
 });
 

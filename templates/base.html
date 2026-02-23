@@ -3,20 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Trucking Compliance{% endblock %}</title>
+    <title>{% block title %}Safety Lab — Compliance Management for Trucking{% endblock %}</title>
+    {% block meta %}{% endblock %}
+    <meta name="description" content="{% block meta_description %}Safety Lab helps trucking companies stay compliant with IFTA, IRP, UCR, and FMCSA. Trusted by 500+ fleets nationwide.{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}Safety Lab — Compliance Management for Trucking{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Stay audit-ready. Reduce risk. Trusted compliance management for trucking companies.{% endblock %}">
+    <meta property="og:type" content="website">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allura&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=3">
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     {% include 'includes/header.html' %}
 
-    <main>
+    <main id="main-content" role="main">
         {% block content %}{% endblock %}
     </main>
 
     {% include 'includes/footer.html' %}
 
-    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/main.js' %}?v=3"></script>
 </body>
 </html>
 
