@@ -8,11 +8,15 @@
             <span></span>
         </button>
         <nav id="main-nav" class="main-nav" role="navigation" aria-label="Main navigation">
-            <a href="{% url 'main:index' %}#services">SERVICES</a>
-            <a href="{% url 'main:index' %}#how-we-work">HOW WE WORK</a>
-            <a href="{% url 'main:about' %}">ABOUT US</a>
-            <a href="{% url 'main:contacts' %}">CONTACT US</a>
-            <a href="{% url 'main:contacts' %}" class="btn-nav-cta">Get Started</a>
+            <a href="{% url 'main:index' %}#services" data-i18n="nav.services">УСЛУГИ</a>
+            <a href="{% url 'main:index' %}#how-we-work" data-i18n="nav.howWeWork">КАК МЫ РАБОТАЕМ</a>
+            <a href="{% url 'main:about' %}" data-i18n="nav.aboutUs">О НАС</a>
+            <a href="{% url 'main:contacts' %}" class="btn-nav-cta" data-i18n="nav.contactUs">СВЯЗАТЬСЯ</a>
+            <div class="lang-toggle" role="group" aria-label="Language">
+                <button type="button" class="lang-btn lang-btn--ru" data-lang="ru" aria-pressed="true">RU</button>
+                <span class="lang-toggle-sep">/</span>
+                <button type="button" class="lang-btn lang-btn--en" data-lang="en" aria-pressed="false">EN</button>
+            </div>
         </nav>
     </div>
 </header>

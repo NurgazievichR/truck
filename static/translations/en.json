@@ -1,0 +1,106 @@
+{
+  "nav": {
+    "services": "SERVICES",
+    "howWeWork": "HOW WE WORK",
+    "aboutUs": "ABOUT US",
+    "contactUs": "CONTACT US"
+  },
+  "hero": {
+    "title": "Stay compliant. Stay on the road.",
+    "subtitle": "IFTA, IRP, UCR & FMCSA compliance management for trucking companies. Reduce risk and hit every deadline.",
+    "cta": "Get a free consultation",
+    "trust1": "500+ fleets",
+    "trust2": "15+ years",
+    "trust3": "99.8% on-time",
+    "viewServices": "View services",
+    "callUs": "Call us"
+  },
+  "services": {
+    "heading": "Our Core Services",
+    "subtitle": "Comprehensive compliance solutions for every aspect of your operation"
+  },
+  "service": {
+    "learnMore": "Learn more",
+    "iftaTitle": "IFTA & Fuel Tax",
+    "iftaDesc": "Registration, quarterly filings, and fuel tax compliance across all jurisdictions.",
+    "irpTitle": "IRP & Registration",
+    "irpDesc": "Apportioned registration, renewals, and trailer titling for interstate operations.",
+    "ucrTitle": "UCR & Permits",
+    "ucrDesc": "Unified Carrier Registration and state permit filings, on time every time.",
+    "fmcsaTitle": "FMCSA & Safety",
+    "fmcsaDesc": "Safety compliance, CSA support, and audit readiness for DOT requirements."
+  },
+  "howWeWork": {
+    "heading": "How We Work",
+    "subtitle": "Our proven 5-step process ensures seamless compliance management"
+  },
+  "step1": { "title": "Initial Consultation", "desc": "We assess your fleet size, operations, and compliance needs through a comprehensive consultation." },
+  "step2": { "title": "Custom Plan", "desc": "We create a tailored compliance plan that fits your specific requirements and budget." },
+  "step3": { "title": "Setup & Integration", "desc": "Our team sets up your account, integrates with your systems, and migrates existing data." },
+  "step4": { "title": "Ongoing Management", "desc": "We handle all filings, renewals, and compliance tasks on your behalf with regular updates." },
+  "step5": { "title": "Monitoring & Support", "desc": "24/7 monitoring ensures deadlines are met, and our support team is always available." },
+  "step6": { "title": "Continuous Improvement", "desc": "Regular reviews and optimizations help improve your compliance efficiency over time." },
+  "testimonials": {
+    "heading": "What Our Clients Say",
+    "subtitle": "Trusted by hundreds of trucking companies nationwide"
+  },
+  "test1": {
+    "quote": "Safety-Lab has transformed how we handle our IFTA and IRP filings. Their team is professional, responsive, and always ahead of deadlines. Highly recommended!",
+    "name": "John Smith",
+    "role": "CEO, Smith Transport LLC"
+  },
+  "test2": {
+    "quote": "We've been using their services for 5 years and never missed a deadline. The peace of mind is worth every penny. Their support team is exceptional.",
+    "name": "Maria Rodriguez",
+    "role": "Operations Manager, Rodriguez Fleet"
+  },
+  "test3": {
+    "quote": "The best investment we made for our compliance needs. They saved us thousands in penalties and countless hours of administrative work. Outstanding service!",
+    "name": "David Chen",
+    "role": "Owner, Chen Logistics"
+  },
+  "logoStrip": {
+    "label": "Trusted by fleets nationwide",
+    "ifta": "IFTA",
+    "irp": "IRP",
+    "fmcsa": "FMCSA",
+    "ucr": "UCR"
+  },
+  "trust": {
+    "activeClients": "Active clients",
+    "yearsExp": "Years experience",
+    "ontimeFiling": "On-time filing",
+    "statesCovered": "States covered",
+    "footer": "Certified • Licensed in all 50 states • BBB A+ Rating"
+  },
+  "faq": {
+    "heading": "Frequently asked questions",
+    "q1": "What does Safety Lab do?",
+    "a1": "We handle IFTA, IRP, UCR, and FMCSA compliance for trucking companies—registrations, quarterly filings, permits, and safety support so you stay audit-ready and on the road.",
+    "q2": "How quickly can you get started?",
+    "a2": "Most fleets are set up within 1–2 business days. We'll review your needs in a free consultation and tailor a plan to your deadlines.",
+    "q3": "Do you support all 50 states?",
+    "a3": "Yes. We're licensed and experienced in every state for IFTA, IRP, UCR, and state-specific permits and filings.",
+    "q4": "What if I miss a deadline?",
+    "a4": "Our process includes reminders and 24/7 monitoring. We've maintained a 99.8% on-time filing rate—so you're in safe hands."
+  },
+  "cta": {
+    "heading": "Ready to simplify your compliance?",
+    "subtitle": "Join hundreds of fleets who trust Safety Lab with IFTA, IRP, UCR, and FMCSA.",
+    "button": "Get started today"
+  },
+  "footer": {
+    "tagline": "Leading provider of safety and compliance management solutions for trucking companies nationwide.",
+    "quickLinks": "QUICK LINKS",
+    "services": "Services",
+    "howWeWork": "How We Work",
+    "contact": "Contact",
+    "contactHeading": "CONTACT",
+    "emailLabel": "Email:",
+    "phoneLabel": "Phone:",
+    "support": "24/7 Support Available",
+    "copyright": "© 2026 Safety-Lab. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  }
+}

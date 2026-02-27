@@ -222,6 +222,66 @@ body.page-index header.header-scrolled .btn-nav-cta {
     color: #fff !important;
 }
 
+/* Кнопка переключения языка RU / EN */
+.lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex-shrink: 0;
+}
+
+.lang-toggle-sep {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    font-weight: 600;
+    user-select: none;
+}
+
+body.page-index header.header-scrolled .lang-toggle-sep,
+body:not(.page-index) header .lang-toggle-sep {
+    color: #94a3b8;
+}
+
+.lang-btn {
+    padding: 6px 10px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.8);
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+}
+
+body.page-index header.header-scrolled .lang-btn,
+body:not(.page-index) header .lang-btn {
+    color: #64748b;
+}
+
+.lang-btn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+body.page-index header.header-scrolled .lang-btn:hover,
+body:not(.page-index) header .lang-btn:hover {
+    color: #1d4072;
+    background: rgba(29, 64, 114, 0.08);
+}
+
+.lang-btn[aria-pressed="true"] {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.25);
+}
+
+body.page-index header.header-scrolled .lang-btn[aria-pressed="true"],
+body:not(.page-index) header .lang-btn[aria-pressed="true"] {
+    color: #1d4072;
+    background: rgba(29, 64, 114, 0.12);
+}
+
 .skip-link {
     position: absolute;
     top: -100%;
@@ -617,15 +677,16 @@ body.page-index header.header-scrolled .btn-nav-cta {
 }
 
 /* Градиент как на референсе: сильнее сверху (под навбар), в середине светлее — видно небо и горы */
+/* Оверлей: затемнение в зоне текста — надпись читается на любом фото */
 .hero-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(
         180deg,
-        rgba(0, 0, 0, 0.38) 0%,
-        rgba(0, 0, 0, 0.14) 35%,
-        rgba(0, 0, 0, 0.2) 65%,
-        rgba(0, 0, 0, 0.4) 100%
+        rgba(0, 0, 0, 0.28) 0%,
+        rgba(0, 0, 0, 0.42) 35%,
+        rgba(0, 0, 0, 0.52) 65%,
+        rgba(0, 0, 0, 0.58) 100%
     );
     z-index: 1;
 }
@@ -682,8 +743,8 @@ body.page-index header.header-scrolled .btn-nav-cta {
 }
 
 .hero-section.hero-with-photo .hero-text h1 {
-    font-size: clamp(32px, 5vw, 52px);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.2);
+    font-size: clamp(40px, 5.5vw, 64px);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6), 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .hero-text p {
@@ -697,11 +758,11 @@ body.page-index header.header-scrolled .btn-nav-cta {
 
 .hero-section.hero-with-photo .hero-text p,
 .hero-subtitle {
-    font-size: var(--text-lg);
+    font-size: 1.25rem;
     line-height: 1.6;
     margin-bottom: var(--space-4);
-    opacity: 0.98;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(0, 0, 0, 0.15);
+    opacity: 1;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
 .hero-trust {
@@ -711,8 +772,9 @@ body.page-index header.header-scrolled .btn-nav-cta {
     flex-wrap: wrap;
     margin-top: var(--space-4);
     margin-bottom: var(--space-3);
-    font-size: var(--text-sm);
-    opacity: 0.95;
+    font-size: 1rem;
+    opacity: 1;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .hero-trust-dot {
@@ -722,15 +784,24 @@ body.page-index header.header-scrolled .btn-nav-cta {
     background: rgba(255, 255, 255, 0.7);
 }
 
+.hero-secondary-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+}
+
 .hero-secondary-links {
     margin-top: var(--space-2);
-    font-size: var(--text-sm);
+    font-size: 1rem;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .hero-secondary-links a {
-    color: rgba(255, 255, 255, 0.9);
+    color: #fff;
     text-decoration: underline;
     margin-right: var(--space-3);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .hero-secondary-links a:hover {
@@ -753,7 +824,7 @@ body.page-index header.header-scrolled .btn-nav-cta {
     text-decoration: none;
     border-radius: var(--radius-md);
     font-weight: 600;
-    font-size: var(--text-base);
+    font-size: 1.125rem;
     transition: background 0.25s, transform 0.2s, box-shadow 0.2s;
     display: inline-block;
     border: none;
@@ -779,7 +850,7 @@ body.page-index header.header-scrolled .btn-nav-cta {
     border: 2px solid rgba(255, 255, 255, 0.95);
     border-radius: var(--radius-md);
     font-weight: 600;
-    font-size: var(--text-base);
+    font-size: 1.125rem;
     transition: all 0.25s;
     display: inline-block;
 }

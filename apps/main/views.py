@@ -2,7 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.conf import settings
 import logging
-import requests
+
+try:
+    import requests
+except ImportError:
+    requests = None  # pip install requests — для отправки в Telegram
+
 from .models import Contact
 from apps.services.models import Service
 
@@ -11,6 +16,8 @@ logger = logging.getLogger(__name__)
 
 def get_telegram_chat_id_from_username(username):
     """Получает числовой chat_id из обновлений бота по username"""
+    if requests is None:
+        return None
     bot_token = settings.TELEGRAM_BOT_TOKEN
     if not bot_token:
         return None
@@ -50,6 +57,9 @@ def get_telegram_chat_id_from_username(username):
 
 def send_telegram_message(chat_id, message_text):
     """Отправляет сообщение в Telegram через Bot API"""
+    if requests is None:
+        logger.warning('requests не установлен; для Telegram: pip install requests')
+        return False
     bot_token = settings.TELEGRAM_BOT_TOKEN
     if not bot_token:
         logger.warning('TELEGRAM_BOT_TOKEN not configured')

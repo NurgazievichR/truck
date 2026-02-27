@@ -3,31 +3,31 @@
     <div class="container">
         <div class="footer-column">
             <h3>Safety-Lab</h3>
-            <p>Leading provider of safety and compliance management solutions for trucking companies nationwide.</p>
+            <p data-i18n="footer.tagline">Ведущий поставщик решений по безопасности и соответствию для автопредприятий по всей стране.</p>
         </div>
         <div class="footer-column">
-            <h3>QUICK LINKS</h3>
-            <a href="{% url 'main:index' %}#services">Services</a>
-            <a href="{% url 'main:index' %}#how-we-work">How We Work</a>
-            <a href="{% url 'main:contacts' %}">Contact</a>
+            <h3 data-i18n="footer.quickLinks">Быстрые ссылки</h3>
+            <a href="{% url 'main:index' %}#services" data-i18n="footer.services">Услуги</a>
+            <a href="{% url 'main:index' %}#how-we-work" data-i18n="footer.howWeWork">Как мы работаем</a>
+            <a href="{% url 'main:contacts' %}" data-i18n="footer.contact">Контакты</a>
         </div>
         <div class="footer-column">
-            <h3>CONTACT</h3>
+            <h3 data-i18n="footer.contactHeading">Контакты</h3>
             {% for contact in contacts %}
                 {% if contact.type == 'email' %}
-                    <p>Email: {{ contact.value }}</p>
+                    <p><span data-i18n="footer.emailLabel">Email:</span> {{ contact.value }}</p>
                 {% elif contact.type == 'phone' %}
-                    <p>Phone: {{ contact.value }}</p>
+                    <p><span data-i18n="footer.phoneLabel">Телефон:</span> {{ contact.value }}</p>
                 {% endif %}
             {% empty %}
-                <p>Email: info@truckingcompliance.com</p>
-                <p>Phone: 1-800-COMPLIANCE</p>
+                <p><span data-i18n="footer.emailLabel">Email:</span> info@truckingcompliance.com</p>
+                <p><span data-i18n="footer.phoneLabel">Телефон:</span> 1-800-COMPLIANCE</p>
             {% endfor %}
-            <p>24/7 Support Available</p>
+            <p data-i18n="footer.support">Поддержка 24/7</p>
         </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; 2026 Safety-Lab. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        <p><span data-i18n="footer.copyright">© 2026 Safety-Lab. Все права защищены.</span> | <a href="#" data-i18n="footer.privacy">Политика конфиденциальности</a> | <a href="#" data-i18n="footer.terms">Условия использования</a></p>
     </div>
 </footer>
 
