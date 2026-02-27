@@ -7,8 +7,8 @@
 <section class="quote-page">
     <div class="container">
         <div class="quote-header">
-            <h1>Request a <span class="quote-underline">Quote</span></h1>
-            <p class="quote-intro">Fill out the form below and we'll get back to you with a customized quote for your compliance needs.</p>
+            <h1><span data-i18n="quote.title">Request a </span><span class="quote-underline" data-i18n="quote.titleHighlight">Quote</span></h1>
+            <p class="quote-intro" data-i18n="quote.intro">Fill out the form below and we'll get back to you with a customized quote for your compliance needs.</p>
         </div>
         
         {% if messages %}
@@ -28,27 +28,27 @@
                     {% csrf_token %}
                     
                     <div class="form-group">
-                        <label class="form-label">NAME*</label>
-                        <input type="text" name="name" placeholder="Your full name" required>
+                        <label class="form-label" data-i18n="quote.nameLabel">NAME*</label>
+                        <input type="text" name="name" data-i18n-placeholder="quote.namePlaceholder" placeholder="Your full name" required>
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label">EMAIL*</label>
-                        <input type="email" name="email" placeholder="your.email@example.com" required>
+                        <label class="form-label" data-i18n="quote.emailLabel">EMAIL*</label>
+                        <input type="email" name="email" data-i18n-placeholder="quote.emailPlaceholder" placeholder="your.email@example.com" required>
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label">PHONE</label>
-                        <input type="tel" name="phone" placeholder="+1 (555) 123-4567">
+                        <label class="form-label" data-i18n="quote.phoneLabel">PHONE</label>
+                        <input type="tel" name="phone" data-i18n-placeholder="quote.phonePlaceholder" placeholder="+1 (555) 123-4567">
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label">COMPANY</label>
-                        <input type="text" name="company" placeholder="Your company name">
+                        <label class="form-label" data-i18n="quote.companyLabel">COMPANY</label>
+                        <input type="text" name="company" data-i18n-placeholder="quote.companyPlaceholder" placeholder="Your company name">
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label">SELECT SERVICES (SELECT ALL THAT APPLY)</label>
+                        <label class="form-label" data-i18n="quote.servicesLabel">SELECT SERVICES (SELECT ALL THAT APPLY)</label>
                         <div class="services-checkboxes">
                             {% for service in services %}
                                 <label class="checkbox-label">
@@ -56,50 +56,50 @@
                                     <span>{{ service.title }}</span>
                                 </label>
                             {% empty %}
-                                <p class="no-services">No services available</p>
+                                <p class="no-services" data-i18n="quote.noServices">No services available</p>
                             {% endfor %}
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label">DESCRIPTION</label>
-                        <textarea name="description" rows="6" placeholder="Tell us about your fleet size, specific needs, or any questions you have..."></textarea>
+                        <label class="form-label" data-i18n="quote.descriptionLabel">DESCRIPTION</label>
+                        <textarea name="description" rows="6" data-i18n-placeholder="quote.descriptionPlaceholder" placeholder="Tell us about your fleet size, specific needs, or any questions you have..."></textarea>
                     </div>
                     
-                    <button type="submit" class="btn btn-primary">SEND REQUEST</button>
+                    <button type="submit" class="btn btn-primary" data-i18n="quote.submitButton">SEND REQUEST</button>
                 </form>
             </div>
             
             <!-- Right Column: Why Request a Quote -->
             <div class="quote-benefits">
-                <h2>Why Request a Quote?</h2>
+                <h2 data-i18n="quote.whyTitle">Why Request a Quote?</h2>
                 <ul class="benefits-list">
                     <li class="benefit-item">
                         <span class="benefit-icon">✓</span>
                         <div class="benefit-content">
-                            <h3>Customized Pricing</h3>
-                            <p>Get pricing tailored to your fleet size and needs</p>
+                            <h3 data-i18n="quote.benefit1Title">Customized Pricing</h3>
+                            <p data-i18n="quote.benefit1Desc">Get pricing tailored to your fleet size and needs</p>
                         </div>
                     </li>
                     <li class="benefit-item">
                         <span class="benefit-icon">✓</span>
                         <div class="benefit-content">
-                            <h3>Expert Consultation</h3>
-                            <p>Our team will review your requirements and provide recommendations</p>
+                            <h3 data-i18n="quote.benefit2Title">Expert Consultation</h3>
+                            <p data-i18n="quote.benefit2Desc">Our team will review your requirements and provide recommendations</p>
                         </div>
                     </li>
                     <li class="benefit-item">
                         <span class="benefit-icon">✓</span>
                         <div class="benefit-content">
-                            <h3>Quick Response</h3>
-                            <p>We typically respond within 24 hours</p>
+                            <h3 data-i18n="quote.benefit3Title">Quick Response</h3>
+                            <p data-i18n="quote.benefit3Desc">We typically respond within 24 hours</p>
                         </div>
                     </li>
                     <li class="benefit-item">
                         <span class="benefit-icon">✓</span>
                         <div class="benefit-content">
-                            <h3>No Obligation</h3>
-                            <p>Requesting a quote is free and comes with no commitment</p>
+                            <h3 data-i18n="quote.benefit4Title">No Obligation</h3>
+                            <p data-i18n="quote.benefit4Desc">Requesting a quote is free and comes with no commitment</p>
                         </div>
                     </li>
                 </ul>

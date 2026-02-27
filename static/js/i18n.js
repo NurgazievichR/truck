@@ -45,6 +45,11 @@
             var value = getNested(t, key);
             if (value != null && typeof value === 'string') el.textContent = value;
         });
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+            var key = el.getAttribute('data-i18n-placeholder');
+            var value = getNested(t, key);
+            if (value != null && typeof value === 'string') el.placeholder = value;
+        });
     }
 
     function updateLangButtons(lang) {
