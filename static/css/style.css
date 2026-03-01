@@ -438,6 +438,32 @@ body:not(.page-index) header .lang-btn[aria-pressed="true"] {
         display: flex;
     }
 
+    /* На мобильной на главной сразу синий навбар — видно и в шапке, и в открытом меню */
+    html body.page-index header .logo,
+    html body.page-index header .main-nav a,
+    html body.page-index header .lang-btn,
+    html body.page-index header .lang-toggle-sep {
+        color: #1d4072 !important;
+    }
+    html body.page-index header .main-nav a:hover,
+    html body.page-index header .lang-btn:hover {
+        color: #254a7a !important;
+    }
+    html body.page-index header .mobile-menu-toggle span {
+        background: #1d4072 !important;
+    }
+    html body.page-index header .btn-nav-cta {
+        color: #fff !important;
+    }
+    /* Открытая панель меню — текст всегда тёмный на белом фоне */
+    .main-nav.active a,
+    .main-nav.active .lang-btn {
+        color: #1d4072 !important;
+    }
+    .main-nav.active .lang-toggle-sep {
+        color: #94a3b8 !important;
+    }
+
     .main-nav {
         position: fixed;
         left: auto;
