@@ -82,9 +82,15 @@
     }
 
     function getTgUrl() {
-        var handle = (document.body || document.documentElement).getAttribute('data-tg-handle') || 'SafetyHazel';
-        handle = handle.replace(/^@/, '');
-        return 'https://t.me/' + handle;
+        var handle = (document.body || document.documentElement).getAttribute('data-tg-handle') || '';
+        if (!handle) return 'https://t.me/+13123889569';
+        handle = handle.trim();
+        // Phone number format: starts with + or digits only
+        if (/^\+?\d+$/.test(handle)) {
+            return 'https://t.me/' + (handle.startsWith('+') ? handle : '+' + handle);
+        }
+        // Username format
+        return 'https://t.me/' + handle.replace(/^@/, '');
     }
 
     function getCsrfToken() {
