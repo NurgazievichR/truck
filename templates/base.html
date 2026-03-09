@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}?v=5">
     <link rel="stylesheet" href="{% static 'css/chatbot.css' %}?v=1">
 </head>
-<body class="{% block body_class %}{% endblock %}" data-static-url="{% static '' %}">
+<body class="{% block body_class %}{% endblock %}" data-static-url="{% static '' %}" data-tg-handle="{{ tg_handle }}">
     <a href="#main-content" class="skip-link">Skip to main content</a>
     {% include 'includes/header.html' %}
 

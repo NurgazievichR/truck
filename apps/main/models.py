@@ -42,6 +42,31 @@ class Page(models.Model):
         super().save(*args, **kwargs)
 
 
+class Lead(models.Model):
+    """Заявки, оставленные через чат-бот"""
+    SOURCE_CHATBOT = 'chatbot'
+    SOURCE_FORM = 'form'
+    SOURCE_CHOICES = [
+        (SOURCE_CHATBOT, 'Chatbot'),
+        (SOURCE_FORM, 'Contact Form'),
+    ]
+
+    name = models.CharField(max_length=255, verbose_name='Name')
+    email = models.CharField(max_length=255, verbose_name='Email')
+    phone = models.CharField(max_length=64, blank=True, default='', verbose_name='Phone')
+    message = models.TextField(blank=True, default='', verbose_name='Message')
+    source = models.CharField(max_length=20, choices=SOURCE_CHOICES, default=SOURCE_CHATBOT, verbose_name='Source')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Received at')
+
+    class Meta:
+        verbose_name = 'Lead'
+        verbose_name_plural = 'Leads'
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f'{self.name} <{self.email}> [{self.get_source_display()}]'
+
+
 class Contact(models.Model):
     """Contact information model"""
     TYPE_CHOICES = [

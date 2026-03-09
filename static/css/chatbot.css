@@ -222,6 +222,20 @@
     outline: none;
 }
 
+.chatbot-qr-btn--link {
+    display: inline-block;
+    text-decoration: none;
+    border-color: #229ED9;
+    color: #229ED9;
+}
+
+.chatbot-qr-btn--link:hover,
+.chatbot-qr-btn--link:focus-visible {
+    background: #229ED9;
+    color: #fff;
+    border-color: #229ED9;
+}
+
 /* ---------- Typing indicator ---------- */
 .chatbot-typing {
     display: flex;

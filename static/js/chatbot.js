@@ -35,6 +35,7 @@
             faqQ2: 'Как быстро начнёте работу?', faqA2: 'Большинство клиентов подключаются за 1–2 рабочих дня после консультации.',
             faqQ3: 'Работаете во всех 50 штатах?', faqA3: 'Да, лицензированы в каждом штате по IFTA, IRP, UCR и разрешениям.',
             faqQ4: 'Что если пропущу дедлайн?', faqA4: 'Напоминания и мониторинг 24/7 — 99,8% заявок сданы в срок.',
+            btnTelegram: '💬 Написать в Telegram',
             minimize: 'Свернуть'
         },
         en: {
@@ -61,6 +62,7 @@
             faqQ2: 'How quickly can you start?', faqA2: 'Most clients are onboarded within 1–2 business days after consultation.',
             faqQ3: 'Do you work in all 50 states?', faqA3: 'Yes, licensed in every state for IFTA, IRP, UCR, and permits.',
             faqQ4: 'What if I miss a deadline?', faqA4: 'Reminders and 24/7 monitoring — 99.8% of filings are on time.',
+            btnTelegram: '💬 Write on Telegram',
             minimize: 'Minimize'
         }
     };
@@ -77,6 +79,12 @@
         var base = el.getAttribute('data-static-url') || '';
         if (base.length && base[base.length - 1] !== '/') base += '/';
         return base;
+    }
+
+    function getTgUrl() {
+        var handle = (document.body || document.documentElement).getAttribute('data-tg-handle') || 'SafetyHazel';
+        handle = handle.replace(/^@/, '');
+        return 'https://t.me/' + handle;
     }
 
     function getCsrfToken() {
@@ -204,14 +212,25 @@
     function showReplies(buttons) {
         clearReplies();
         buttons.forEach(function (btn) {
-            var el = document.createElement('button');
-            el.className = 'chatbot-qr-btn';
-            el.textContent = btn.label;
-            el.addEventListener('click', function () {
-                addMsg(btn.label, 'user');
-                clearReplies();
-                showTyping(btn.action);
-            });
+            var el;
+            if (btn.href) {
+                // External link button (e.g. Telegram)
+                el = document.createElement('a');
+                el.className = 'chatbot-qr-btn chatbot-qr-btn--link';
+                el.href = btn.href;
+                el.target = '_blank';
+                el.rel = 'noopener noreferrer';
+                el.textContent = btn.label;
+            } else {
+                el = document.createElement('button');
+                el.className = 'chatbot-qr-btn';
+                el.textContent = btn.label;
+                el.addEventListener('click', function () {
+                    addMsg(btn.label, 'user');
+                    clearReplies();
+                    showTyping(btn.action);
+                });
+            }
             quickRepliesEl.appendChild(el);
         });
     }
@@ -232,6 +251,7 @@
                 { label: t('btnServices'), action: showServicesMenu },
                 { label: t('btnConsult'),  action: showConsultForm  },
                 { label: t('btnFaq'),      action: showFaqMenu      },
+                { label: t('btnTelegram'), href: getTgUrl()         },
             ]);
         });
     }
@@ -324,19 +344,22 @@
             ? 'Заявка через чат-бот'
             : 'Request via chatbot');
 
-        // Get the contacts URL from the page's origin
-        var contactsUrl = window.location.origin + '/contacts/';
+        var leadUrl = window.location.origin + '/chatbot-lead/';
 
-        fetch(contactsUrl, {
+        fetch(leadUrl, {
             method: 'POST',
             headers: { 'X-CSRFToken': getCsrfToken() },
-            body: formData,
-            redirect: 'manual'
+            body: formData
         })
-        .then(function () {
-            clearReplies();
-            addMsg(t('successMsg'), 'bot');
-            showReplies([{ label: t('btnBack'), action: showMainMenu }]);
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+            if (data.ok) {
+                clearReplies();
+                addMsg(t('successMsg'), 'bot');
+                showReplies([{ label: t('btnBack'), action: showMainMenu }]);
+            } else {
+                throw new Error(data.error || 'server error');
+            }
         })
         .catch(function () {
             submitBtn.disabled = false;

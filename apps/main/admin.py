@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import User, Group
-from .models import Contact
+from .models import Contact, Lead
 
 # Unregister User and Group
 admin.site.unregister(User)
@@ -45,3 +45,22 @@ class ContactAdmin(admin.ModelAdmin):
     def has_change_permission(self, request, obj=None):
         """Allow editing only through list_editable"""
         return True
+
+
+@admin.register(Lead)
+class LeadAdmin(admin.ModelAdmin):
+    list_display = ['created_at', 'name', 'email', 'phone', 'source', 'message_preview']
+    list_filter = ['source', 'created_at']
+    readonly_fields = ['name', 'email', 'phone', 'message', 'source', 'created_at']
+    ordering = ['-created_at']
+    date_hierarchy = 'created_at'
+
+    def message_preview(self, obj):
+        return obj.message[:60] + '…' if len(obj.message) > 60 else obj.message
+    message_preview.short_description = 'Message'
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False

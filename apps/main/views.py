@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 from django.conf import settings
 import logging
 
@@ -8,7 +10,7 @@ try:
 except ImportError:
     requests = None  # pip install requests — для отправки в Telegram
 
-from .models import Contact
+from .models import Contact, Lead
 from apps.services.models import Service
 
 logger = logging.getLogger(__name__)
@@ -290,3 +292,45 @@ def contacts(request):
     return render(request, 'main/contacts.html', {
         'services': services
     })
+
+
+@require_POST
+def chatbot_lead(request):
+    """AJAX endpoint for chatbot lead form — saves to DB and sends Telegram"""
+    name = request.POST.get('name', '').strip()
+    email = request.POST.get('email', '').strip()
+    phone = request.POST.get('phone', '').strip()
+    message = request.POST.get('description', '').strip()
+
+    if not name or not email:
+        return JsonResponse({'ok': False, 'error': 'name and email required'}, status=400)
+
+    # Save lead to DB
+    lead = Lead.objects.create(name=name, email=email, phone=phone, message=message, source=Lead.SOURCE_CHATBOT)
+
+    # Send Telegram notification
+    telegram_contact = Contact.objects.filter(type='telegram').first()
+    if telegram_contact and telegram_contact.value:
+        chat_id_value = str(telegram_contact.value).strip()
+        is_username = not chat_id_value.replace('@', '').replace('t.me/', '').replace('https://t.me/', '').replace('http://t.me/', '').isdigit()
+        if is_username:
+            numeric_chat_id = get_telegram_chat_id_from_username(telegram_contact.value)
+            if numeric_chat_id:
+                telegram_contact.value = numeric_chat_id
+                telegram_contact.save()
+                chat_id_to_use = numeric_chat_id
+            else:
+                chat_id_to_use = telegram_contact.value
+        else:
+            chat_id_to_use = telegram_contact.value
+
+        tg_message = (
+            f"<b>Новая заявка с чат-бота</b>\n\n"
+            f"<b>Имя:</b> {name}\n"
+            f"<b>Email:</b> {email}\n"
+            f"<b>Телефон:</b> {phone if phone else 'не указан'}\n"
+            f"<b>Сообщение:</b> {message if message else '—'}"
+        )
+        send_telegram_message(chat_id_to_use, tg_message)
+
+    return JsonResponse({'ok': True, 'id': lead.id})
