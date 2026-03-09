@@ -304,6 +304,35 @@
     gap: 3px;
 }
 
+.chatbot-phone-row {
+    display: flex;
+    gap: 6px;
+    align-items: stretch;
+}
+
+.chatbot-phone-code {
+    flex: 0 0 auto;
+    padding: 9px 6px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 13px;
+    outline: none;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.15s;
+    min-width: 0;
+    max-width: 110px;
+}
+
+.chatbot-phone-code:focus {
+    border-color: #1d4072;
+}
+
+.chatbot-phone-row input[type="tel"] {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
 .chatbot-form-submit {
     padding: 10px;
     background: #1d4072;

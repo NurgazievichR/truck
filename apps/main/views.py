@@ -240,16 +240,10 @@ def contacts(request):
                 print(f"Detected username format, trying to get chat_id...")
                 numeric_chat_id = get_telegram_chat_id_from_username(telegram_contact.value)
                 if numeric_chat_id:
-                    # Сохраняем числовой chat_id в базу для будущих использований
-                    telegram_contact.value = numeric_chat_id
-                    telegram_contact.save()
-                    print(f"Saved numeric chat_id {numeric_chat_id} to database")
                     chat_id_to_use = numeric_chat_id
                 else:
-                    print("WARNING: Could not find chat_id for username, trying to use username directly...")
                     chat_id_to_use = telegram_contact.value
             else:
-                # Уже числовой ID
                 chat_id_to_use = telegram_contact.value
             
             telegram_message = f"""
@@ -315,12 +309,7 @@ def chatbot_lead(request):
         is_username = not chat_id_value.replace('@', '').replace('t.me/', '').replace('https://t.me/', '').replace('http://t.me/', '').isdigit()
         if is_username:
             numeric_chat_id = get_telegram_chat_id_from_username(telegram_contact.value)
-            if numeric_chat_id:
-                telegram_contact.value = numeric_chat_id
-                telegram_contact.save()
-                chat_id_to_use = numeric_chat_id
-            else:
-                chat_id_to_use = telegram_contact.value
+            chat_id_to_use = numeric_chat_id if numeric_chat_id else telegram_contact.value
         else:
             chat_id_to_use = telegram_contact.value
 

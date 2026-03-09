@@ -24,8 +24,8 @@
             ucr: 'UCR & Permits', ucrDesc: 'Единая регистрация перевозчиков (UCR) и разрешения штатов — всегда в срок.',
             fmcsa: 'FMCSA & Safety', fmcsaDesc: 'Соответствие по безопасности, поддержка CSA и готовность к аудиту DOT.',
             consultPrompt: 'Оставьте контакты — мы свяжемся в течение 24 часов.',
-            labelName: 'Ваше имя *', labelEmail: 'Email *',
-            placeholderName: 'Иван Иванов', placeholderEmail: 'ivan@company.com',
+            labelName: 'Ваше имя *', labelEmail: 'Email *', labelPhone: 'Телефон',
+            placeholderName: 'Иван Иванов', placeholderEmail: 'ivan@company.com', placeholderPhone: '(312) 000-0000',
             btnSend: 'Отправить', sending: 'Отправляем…',
             successMsg: 'Спасибо! Мы скоро свяжемся с вами. ✅',
             errorMsg: 'Ошибка. Напишите на SafetyHazel@gmail.com',
@@ -51,8 +51,8 @@
             ucr: 'UCR & Permits', ucrDesc: 'Unified Carrier Registration and state permit filings, on time every time.',
             fmcsa: 'FMCSA & Safety', fmcsaDesc: 'Safety compliance, CSA support, and audit readiness for DOT requirements.',
             consultPrompt: 'Leave your details and we\'ll reach out within 24 hours.',
-            labelName: 'Your name *', labelEmail: 'Email *',
-            placeholderName: 'John Smith', placeholderEmail: 'john@company.com',
+            labelName: 'Your name *', labelEmail: 'Email *', labelPhone: 'Phone',
+            placeholderName: 'John Smith', placeholderEmail: 'john@company.com', placeholderPhone: '(312) 000-0000',
             btnSend: 'Send', sending: 'Sending…',
             successMsg: 'Thank you! We\'ll be in touch soon. ✅',
             errorMsg: 'Error. Please email SafetyHazel@gmail.com',
@@ -302,6 +302,28 @@
         ]);
     }
 
+    var PHONE_CODES = [
+        { code: '+1',   flag: '🇺🇸', label: 'US +1'   },
+        { code: '+1',   flag: '🇨🇦', label: 'CA +1'   },
+        { code: '+52',  flag: '🇲🇽', label: 'MX +52'  },
+        { code: '+7',   flag: '🇷🇺', label: 'RU +7'   },
+        { code: '+7',   flag: '🇰🇿', label: 'KZ +7'   },
+        { code: '+380', flag: '🇺🇦', label: 'UA +380' },
+        { code: '+998', flag: '🇺🇿', label: 'UZ +998' },
+        { code: '+994', flag: '🇦🇿', label: 'AZ +994' },
+        { code: '+374', flag: '🇦🇲', label: 'AM +374' },
+        { code: '+995', flag: '🇬🇪', label: 'GE +995' },
+        { code: '+49',  flag: '🇩🇪', label: 'DE +49'  },
+        { code: '+44',  flag: '🇬🇧', label: 'GB +44'  },
+        { code: '+48',  flag: '🇵🇱', label: 'PL +48'  },
+    ];
+
+    function buildPhoneOptions() {
+        return PHONE_CODES.map(function (c) {
+            return '<option value="' + c.code + '">' + c.flag + ' ' + c.label + '</option>';
+        }).join('');
+    }
+
     /* Consultation lead form */
     function showConsultForm() {
         addMsg(t('consultPrompt'), 'bot');
@@ -318,6 +340,13 @@
             '  <label>' + t('labelEmail') + '</label>' +
             '  <input type="email" name="cb-email" placeholder="' + t('placeholderEmail') + '" autocomplete="email">' +
             '</div>' +
+            '<div class="chatbot-form-row">' +
+            '  <label>' + t('labelPhone') + '</label>' +
+            '  <div class="chatbot-phone-row">' +
+            '    <select name="cb-phone-code" class="chatbot-phone-code">' + buildPhoneOptions() + '</select>' +
+            '    <input type="tel" name="cb-phone-num" placeholder="' + t('placeholderPhone') + '" autocomplete="tel-national">' +
+            '  </div>' +
+            '</div>' +
             '<button class="chatbot-form-submit" type="button">' + t('btnSend') + '</button>';
 
         window_.appendChild(formEl);
@@ -328,12 +357,17 @@
     }
 
     function submitLead() {
-        var nameInput  = formEl.querySelector('[name="cb-name"]');
-        var emailInput = formEl.querySelector('[name="cb-email"]');
-        var submitBtn  = formEl.querySelector('.chatbot-form-submit');
+        var nameInput      = formEl.querySelector('[name="cb-name"]');
+        var emailInput     = formEl.querySelector('[name="cb-email"]');
+        var phoneCodeInput = formEl.querySelector('[name="cb-phone-code"]');
+        var phoneNumInput  = formEl.querySelector('[name="cb-phone-num"]');
+        var submitBtn      = formEl.querySelector('.chatbot-form-submit');
 
-        var name  = nameInput.value.trim();
-        var email = emailInput.value.trim();
+        var name      = nameInput.value.trim();
+        var email     = emailInput.value.trim();
+        var phoneNum  = phoneNumInput ? phoneNumInput.value.trim() : '';
+        var phoneCode = phoneCodeInput ? phoneCodeInput.value : '';
+        var phone     = phoneNum ? phoneCode + phoneNum : '';
 
         if (!name || !email) {
             addMsg(t('errorFill'), 'bot');
@@ -346,6 +380,7 @@
         var formData = new FormData();
         formData.append('name', name);
         formData.append('email', email);
+        formData.append('phone', phone);
         formData.append('description', getLang() === 'ru'
             ? 'Заявка через чат-бот'
             : 'Request via chatbot');
