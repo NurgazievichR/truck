@@ -9,6 +9,62 @@
     var LANG_KEY = 'safety-lab-lang';
     var T = {};  // filled after translation file loads
 
+    /* ── Built-in fallback translations (used if JSON fetch fails / cached) ── */
+    var FALLBACK = {
+        ru: {
+            toggleTitle: 'Чат с нами', headerTitle: 'Safety Lab',
+            headerSubtitle: 'Обычно отвечаем сразу',
+            welcome: 'Здравствуйте! 👋 Я помогу узнать о наших услугах или записаться на консультацию.',
+            menuPrompt: 'Выберите, что вас интересует:',
+            btnServices: 'Узнать про услуги', btnConsult: 'Получить консультацию',
+            btnFaq: 'Частые вопросы', btnBack: '← Назад', btnContact: 'Связаться',
+            servicesPrompt: 'Выберите услугу:',
+            ifta: 'IFTA & Fuel Tax', iftaDesc: 'Квартальные отчёты по топливному налогу (IFTA), регистрация и соответствие во всех юрисдикциях.',
+            irp: 'IRP & Registration', irpDesc: 'Пропорциональная регистрация, продления и оформление прицепов для межштатных перевозок.',
+            ucr: 'UCR & Permits', ucrDesc: 'Единая регистрация перевозчиков (UCR) и разрешения штатов — всегда в срок.',
+            fmcsa: 'FMCSA & Safety', fmcsaDesc: 'Соответствие по безопасности, поддержка CSA и готовность к аудиту DOT.',
+            consultPrompt: 'Оставьте контакты — мы свяжемся в течение 24 часов.',
+            labelName: 'Ваше имя *', labelEmail: 'Email *',
+            placeholderName: 'Иван Иванов', placeholderEmail: 'ivan@company.com',
+            btnSend: 'Отправить', sending: 'Отправляем…',
+            successMsg: 'Спасибо! Мы скоро свяжемся с вами. ✅',
+            errorMsg: 'Ошибка. Напишите на SafetyHazel@gmail.com',
+            errorFill: 'Пожалуйста, заполните имя и email.',
+            faqPrompt: 'Выберите вопрос:',
+            faqQ1: 'Сколько стоят услуги?', faqA1: 'Стоимость зависит от размера парка. Оставьте заявку — подготовим индивидуальное предложение.',
+            faqQ2: 'Как быстро начнёте работу?', faqA2: 'Большинство клиентов подключаются за 1–2 рабочих дня после консультации.',
+            faqQ3: 'Работаете во всех 50 штатах?', faqA3: 'Да, лицензированы в каждом штате по IFTA, IRP, UCR и разрешениям.',
+            faqQ4: 'Что если пропущу дедлайн?', faqA4: 'Напоминания и мониторинг 24/7 — 99,8% заявок сданы в срок.',
+            minimize: 'Свернуть'
+        },
+        en: {
+            toggleTitle: 'Chat with us', headerTitle: 'Safety Lab',
+            headerSubtitle: 'We usually reply instantly',
+            welcome: 'Hello! 👋 I can help you learn about our services or schedule a consultation.',
+            menuPrompt: 'What would you like to do?',
+            btnServices: 'Learn about services', btnConsult: 'Get a consultation',
+            btnFaq: 'FAQ', btnBack: '← Back', btnContact: 'Contact us',
+            servicesPrompt: 'Choose a service:',
+            ifta: 'IFTA & Fuel Tax', iftaDesc: 'Quarterly IFTA fuel tax reporting, registration and compliance across all jurisdictions.',
+            irp: 'IRP & Registration', irpDesc: 'Apportioned registration, renewals, and trailer titling for interstate operations.',
+            ucr: 'UCR & Permits', ucrDesc: 'Unified Carrier Registration and state permit filings, on time every time.',
+            fmcsa: 'FMCSA & Safety', fmcsaDesc: 'Safety compliance, CSA support, and audit readiness for DOT requirements.',
+            consultPrompt: 'Leave your details and we\'ll reach out within 24 hours.',
+            labelName: 'Your name *', labelEmail: 'Email *',
+            placeholderName: 'John Smith', placeholderEmail: 'john@company.com',
+            btnSend: 'Send', sending: 'Sending…',
+            successMsg: 'Thank you! We\'ll be in touch soon. ✅',
+            errorMsg: 'Error. Please email SafetyHazel@gmail.com',
+            errorFill: 'Please fill in your name and email.',
+            faqPrompt: 'Choose a question:',
+            faqQ1: 'How much do services cost?', faqA1: 'Pricing depends on fleet size. Submit a request and we\'ll prepare a custom quote.',
+            faqQ2: 'How quickly can you start?', faqA2: 'Most clients are onboarded within 1–2 business days after consultation.',
+            faqQ3: 'Do you work in all 50 states?', faqA3: 'Yes, licensed in every state for IFTA, IRP, UCR, and permits.',
+            faqQ4: 'What if I miss a deadline?', faqA4: 'Reminders and 24/7 monitoring — 99.8% of filings are on time.',
+            minimize: 'Minimize'
+        }
+    };
+
     /* ── Helpers ─────────────────────────────────────────── */
 
     function getLang() {
@@ -30,22 +86,28 @@
 
     /* ── Load translations ───────────────────────────────── */
 
+    function applyFallback(lang) {
+        T = FALLBACK[lang] || FALLBACK['ru'];
+    }
+
     function loadTranslations(lang, cb) {
-        var url = getStaticBase() + 'translations/' + lang + '.json';
+        applyFallback(lang);  // always set fallback first so t() never returns a key
+        var url = getStaticBase() + 'translations/' + lang + '.json?v=6';
         fetch(url)
             .then(function (r) { return r.json(); })
             .then(function (data) {
-                T = data.chatbot || {};
+                if (data.chatbot && Object.keys(data.chatbot).length > 0) {
+                    T = data.chatbot;
+                }
                 cb();
             })
             .catch(function () {
-                T = {};
                 cb();
             });
     }
 
     function t(key) {
-        return T[key] || key;
+        return T[key] || (FALLBACK[getLang()] || FALLBACK['ru'])[key] || key;
     }
 
     /* ── Build DOM ───────────────────────────────────────── */
