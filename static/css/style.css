@@ -153,6 +153,13 @@ header .container {
     padding-right: 20px;
 }
 
+/* Шире контейнер только у хедера (навбар в одну строку при 100%) */
+@media (min-width: 769px) {
+    header .container {
+        max-width: 1600px;
+    }
+}
+
 .logo {
     font-family: 'Allura', cursive;
     font-weight: normal;
@@ -171,6 +178,7 @@ header .container {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    flex-wrap: nowrap;
 }
 
 .main-nav a {
@@ -180,6 +188,8 @@ header .container {
     font-weight: 500;
     padding: 8px 4px;
     transition: color 0.3s;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .main-nav a:hover {
@@ -228,6 +238,7 @@ body.page-index header.header-scrolled .btn-nav-cta {
     align-items: center;
     gap: 2px;
     flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .lang-toggle-sep {
@@ -430,6 +441,19 @@ body:not(.page-index) header .lang-btn[aria-pressed="true"] {
 
 .contact-item span {
     color: #333;
+}
+
+/* На средних и десктопных экранах — навбар в одну строку без переноса */
+@media (min-width: 769px) and (max-width: 1400px) {
+    .main-nav {
+        gap: 16px;
+    }
+    .main-nav a {
+        font-size: 14px;
+    }
+    .main-nav .nav-email {
+        font-size: 13px;
+    }
 }
 
 /* Mobile Menu Styles */
