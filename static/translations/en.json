@@ -6,7 +6,7 @@
     "contactUs": "CONTACT US"
   },
   "hero": {
-    "title": "Keep your fleet compliant. We handle the paperwork.",
+    "title": "You drive. We comply.",
     "subtitle": "IFTA, IRP, UCR & FMCSA compliance management for trucking companies. Reduce risk and hit every deadline.",
     "cta": "Get a free consultation",
     "trust1": "500+ fleets",
@@ -136,9 +136,9 @@
     "emailInfoLabel": "Email",
     "telegramLink": "Message us on Telegram",
     "hoursTitle": "Business Hours",
-    "hoursWeekday": "Monday – Friday: 8:00 AM – 6:00 PM CST",
+    "hoursWeekday": "Monday – Friday: 9:00 AM – 5:00 PM CST",
     "hoursWeekend": "Saturday – Sunday: Closed",
-    "hoursNote": "24/7 support available for active clients"
+    "hoursNote": "Support available for active clients"
   },
   "about": {
     "title": "About Safety-Lab",

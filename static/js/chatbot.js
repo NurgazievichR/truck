@@ -83,7 +83,7 @@
 
     function getTgUrl() {
         var handle = (document.body || document.documentElement).getAttribute('data-tg-handle') || '';
-        if (!handle) return 'https://t.me/+13123889569';
+        if (!handle) return 'https://t.me/+13058508306';
         handle = handle.trim();
         // Phone number format: starts with + or digits only
         if (/^\+?\d+$/.test(handle)) {

@@ -12,4 +12,4 @@ def telegram_contact(request):
         if raw.isdigit():
             raw = ''
         handle = raw
-    return {'tg_handle': handle or '+13123889569'}
+    return {'tg_handle': handle or '+13058508306'}
