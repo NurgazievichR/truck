@@ -6,11 +6,11 @@
     "contactUs": "CONTACT US"
   },
   "hero": {
-    "title": "Stay compliant. Stay on the road.",
+    "title": "Keep your fleet compliant. We handle the paperwork.",
     "subtitle": "IFTA, IRP, UCR & FMCSA compliance management for trucking companies. Reduce risk and hit every deadline.",
     "cta": "Get a free consultation",
     "trust1": "500+ fleets",
-    "trust2": "15+ years",
+    "trust2": "All 50 states",
     "trust3": "99.8% on-time",
     "viewServices": "View services",
     "callUs": "Call us"
@@ -96,6 +96,7 @@
     "howWeWork": "How We Work",
     "contact": "Contact",
     "contactHeading": "CONTACT",
+    "addressLabel": "Address:",
     "emailLabel": "Email:",
     "phoneLabel": "Phone:",
     "support": "24/7 Support Available",
@@ -104,8 +105,8 @@
     "terms": "Terms of Service"
   },
   "quote": {
-    "title": "Request a ",
-    "titleHighlight": "Quote",
+    "title": "Contact ",
+    "titleHighlight": "Us",
     "intro": "Fill out the form below and we'll get back to you with a customized quote for your compliance needs.",
     "nameLabel": "NAME*",
     "emailLabel": "EMAIL*",
@@ -128,7 +129,16 @@
     "benefit3Title": "Quick Response",
     "benefit3Desc": "We typically respond within 24 hours",
     "benefit4Title": "No Obligation",
-    "benefit4Desc": "Requesting a quote is free and comes with no commitment"
+    "benefit4Desc": "Requesting a quote is free and comes with no commitment",
+    "contactInfoTitle": "Get in Touch",
+    "addressLabel": "Office Address",
+    "phonesLabel": "Phone",
+    "emailInfoLabel": "Email",
+    "telegramLink": "Message us on Telegram",
+    "hoursTitle": "Business Hours",
+    "hoursWeekday": "Monday – Friday: 8:00 AM – 6:00 PM CST",
+    "hoursWeekend": "Saturday – Sunday: Closed",
+    "hoursNote": "24/7 support available for active clients"
   },
   "about": {
     "title": "About Safety-Lab",

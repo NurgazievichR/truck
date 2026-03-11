@@ -4,7 +4,7 @@
  */
 (function() {
     var STORAGE_KEY = 'safety-lab-lang';
-    var DEFAULT_LANG = 'ru';
+    var DEFAULT_LANG = 'en';
 
     function getLang() {
         var stored = localStorage.getItem(STORAGE_KEY);

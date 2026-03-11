@@ -6,7 +6,7 @@
 .chatbot-toggle {
     position: fixed;
     bottom: 28px;
-    right: 28px;
+    left: 28px;
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -69,7 +69,7 @@
 .chatbot-window {
     position: fixed;
     bottom: 100px;
-    right: 28px;
+    left: 28px;
     width: 360px;
     max-width: calc(100vw - 40px);
     max-height: 560px;
@@ -81,7 +81,7 @@
     z-index: 8999;
     overflow: hidden;
     transform: scale(0.85) translateY(20px);
-    transform-origin: bottom right;
+    transform-origin: bottom left;
     opacity: 0;
     pointer-events: none;
     transition: transform 0.25s ease, opacity 0.25s ease;
@@ -359,7 +359,8 @@
 @media (max-width: 480px) {
     .chatbot-window {
         bottom: 0;
-        right: 0;
+        left: 0;
+        right: auto;
         width: 100vw;
         max-width: 100vw;
         max-height: 80dvh;
@@ -368,6 +369,6 @@
 
     .chatbot-toggle {
         bottom: 20px;
-        right: 20px;
+        left: 20px;
     }
 }
