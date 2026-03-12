@@ -92,6 +92,7 @@ header {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     transition: background 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 /* Главная: хедер поверх фото героя — без отступа, как на референсе */
@@ -190,6 +191,7 @@ header .container {
     transition: color 0.3s;
     white-space: nowrap;
     flex-shrink: 0;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .main-nav a:hover {
@@ -275,6 +277,20 @@ body.page-index header.header-scrolled .btn-nav-cta {
 }
 
 body.page-index header.header-scrolled .lang-toggle-sep,
+/* На страницах без hero (Contact Us, About и т.д.) — навбар сразу синий, как на главной после скролла */
+body:not(.page-index) header .logo,
+body:not(.page-index) header .main-nav a {
+    color: #1d4072;
+}
+
+body:not(.page-index) header .main-nav a:hover {
+    color: #254a7a;
+}
+
+body:not(.page-index) header .mobile-menu-toggle span {
+    background: #1d4072;
+}
+
 body:not(.page-index) header .lang-toggle-sep {
     color: #94a3b8;
 }

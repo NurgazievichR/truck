@@ -11,22 +11,22 @@
     <div class="container hero-container">
         <div class="hero-content">
             <div class="hero-text">
-                <h1 id="hero-heading" data-i18n="hero.title">Соответствие нормам. Вы на маршруте.</h1>
-                <p class="hero-subtitle" data-i18n="hero.subtitle">Управление соответствием IFTA, IRP, UCR и FMCSA для автопредприятий. Снижаем риски и соблюдаем сроки.</p>
-                <a href="{% url 'main:contacts' %}" class="btn btn-hero-primary" data-i18n="hero.cta">Получить бесплатную консультацию</a>
+                <h1 id="hero-heading" data-i18n="hero.title">You drive. We comply.</h1>
+                <p class="hero-subtitle" data-i18n="hero.subtitle">IFTA, IRP, UCR &amp; FMCSA compliance management for trucking companies. Reduce risk and hit every deadline.</p>
+                <a href="{% url 'main:contacts' %}" class="btn btn-hero-primary" data-i18n="hero.cta">Get a free consultation</a>
                 <div class="hero-trust">
-                    <span class="hero-trust-item" data-i18n="hero.trust1">500+ автопарков</span>
+                    <span class="hero-trust-item" data-i18n="hero.trust1">500+ fleets</span>
                     <span class="hero-trust-dot" aria-hidden="true"></span>
-                    <span class="hero-trust-item" data-i18n="hero.trust2">15+ лет</span>
+                    <span class="hero-trust-item" data-i18n="hero.trust2">All 50 states</span>
                     <span class="hero-trust-dot" aria-hidden="true"></span>
-                    <span class="hero-trust-item" data-i18n="hero.trust3">99,8% в срок</span>
+                    <span class="hero-trust-item" data-i18n="hero.trust3">99.8% on-time</span>
                 </div>
                 <div class="hero-secondary-buttons">
-                    <a href="{% url 'main:index' %}#services" class="btn btn-hero-outline" data-i18n="hero.viewServices">Услуги</a>
+                    <a href="{% url 'main:index' %}#services" class="btn btn-hero-outline" data-i18n="hero.viewServices">View services</a>
                     {% if phone_contact and phone_contact.value %}
-                        <a href="tel:{{ phone_contact.get_phone_for_tel }}" class="btn btn-hero-outline" data-i18n="hero.callUs">Позвонить</a>
+                        <a href="tel:{{ phone_contact.get_phone_for_tel }}" class="btn btn-hero-outline" data-i18n="hero.callUs">Call us</a>
                     {% else %}
-                        <a href="tel:+13058508306" class="btn btn-hero-outline" data-i18n="hero.callUs">Позвонить</a>
+                        <a href="tel:+13058508306" class="btn btn-hero-outline" data-i18n="hero.callUs">Call us</a>
                     {% endif %}
                 </div>
             </div>
@@ -37,9 +37,9 @@
 <!-- Services Section (4 cards) — сразу после hero -->
 <section id="services" class="services-section" aria-labelledby="services-heading">
     <div class="container">
-        <h2 id="services-heading" data-i18n="services.heading">Наши основные услуги</h2>
+        <h2 id="services-heading" data-i18n="services.heading">Our Core Services</h2>
         <div class="underline"></div>
-        <p class="section-subtitle" data-i18n="services.subtitle">Комплексные решения по соответствию для всех аспектов вашей работы</p>
+        <p class="section-subtitle" data-i18n="services.subtitle">Comprehensive compliance solutions for every aspect of your operation</p>
         <div class="services-grid services-grid-4">
             {% for service in services|slice:":4" %}
             <article class="service-card">
@@ -52,32 +52,32 @@
                 </div>
                 <h3>{{ service.title }}</h3>
                 <p>{{ service.description|truncatewords:18 }}</p>
-                <a href="{% url 'main:contacts' %}?service={{ service.id }}" class="service-card-link" data-i18n="service.learnMore">Подробнее</a>
+                <a href="{% url 'main:contacts' %}?service={{ service.id }}" class="service-card-link" data-i18n="service.learnMore">Learn more</a>
             </article>
             {% empty %}
             <article class="service-card">
                 <div class="service-card-icon"><span class="service-card-icon-placeholder" aria-hidden="true"></span></div>
-                <h3 data-i18n="service.iftaTitle">IFTA и топливный налог</h3>
-                <p data-i18n="service.iftaDesc">Регистрация, квартальные отчёты и соответствие по топливному налогу во всех юрисдикциях.</p>
-                <a href="{% url 'main:contacts' %}" class="service-card-link" data-i18n="service.learnMore">Подробнее</a>
+                <h3 data-i18n="service.iftaTitle">IFTA &amp; Fuel Tax</h3>
+                <p data-i18n="service.iftaDesc">Registration, quarterly filings, and fuel tax compliance across all jurisdictions.</p>
+                <a href="{% url 'main:contacts' %}" class="service-card-link" data-i18n="service.learnMore">Learn more</a>
             </article>
             <article class="service-card">
                 <div class="service-card-icon"><span class="service-card-icon-placeholder" aria-hidden="true"></span></div>
-                <h3 data-i18n="service.irpTitle">IRP и регистрация</h3>
-                <p data-i18n="service.irpDesc">Пропорциональная регистрация, продления и оформление прицепов для межштатных перевозок.</p>
-                <a href="{% url 'main:contacts' %}" class="service-card-link" data-i18n="service.learnMore">Подробнее</a>
+                <h3 data-i18n="service.irpTitle">IRP &amp; Registration</h3>
+                <p data-i18n="service.irpDesc">Apportioned registration, renewals, and trailer titling for interstate operations.</p>
+                <a href="{% url 'main:contacts' %}" class="service-card-link" data-i18n="service.learnMore">Learn more</a>
             </article>
             <article class="service-card">
                 <div class="service-card-icon"><span class="service-card-icon-placeholder" aria-hidden="true"></span></div>
-                <h3 data-i18n="service.ucrTitle">UCR и разрешения</h3>
-                <p data-i18n="service.ucrDesc">Единая регистрация перевозчиков и разрешения штатов — всегда в срок.</p>
-                <a href="{% url 'main:contacts' %}" class="service-card-link" data-i18n="service.learnMore">Подробнее</a>
+                <h3 data-i18n="service.ucrTitle">UCR &amp; Permits</h3>
+                <p data-i18n="service.ucrDesc">Unified Carrier Registration and state permit filings, on time every time.</p>
+                <a href="{% url 'main:contacts' %}" class="service-card-link" data-i18n="service.learnMore">Learn more</a>
             </article>
             <article class="service-card">
                 <div class="service-card-icon"><span class="service-card-icon-placeholder" aria-hidden="true"></span></div>
-                <h3 data-i18n="service.fmcsaTitle">FMCSA и безопасность</h3>
-                <p data-i18n="service.fmcsaDesc">Соответствие по безопасности, поддержка CSA и готовность к проверкам DOT.</p>
-                <a href="{% url 'main:contacts' %}" class="service-card-link" data-i18n="service.learnMore">Подробнее</a>
+                <h3 data-i18n="service.fmcsaTitle">FMCSA &amp; Safety</h3>
+                <p data-i18n="service.fmcsaDesc">Safety compliance, CSA support, and audit readiness for DOT requirements.</p>
+                <a href="{% url 'main:contacts' %}" class="service-card-link" data-i18n="service.learnMore">Learn more</a>
             </article>
             {% endfor %}
         </div>
@@ -87,44 +87,44 @@
 <!-- How We Work Section -->
 <section id="how-we-work" class="how-we-work-section">
     <div class="container">
-        <h2 data-i18n="howWeWork.heading">Как мы работаем</h2>
-        <p class="section-subtitle" data-i18n="howWeWork.subtitle">Наша 5-шаговая схема обеспечивает прозрачное управление соответствием</p>
+        <h2 data-i18n="howWeWork.heading">How We Work</h2>
+        <p class="section-subtitle" data-i18n="howWeWork.subtitle">Our proven 5-step process ensures seamless compliance management</p>
         <div class="steps-grid">
             <div class="step-card">
                 <div class="step-number">01</div>
                 <div class="step-icon">📞</div>
-                <h3 data-i18n="step1.title">Первичная консультация</h3>
-                <p data-i18n="step1.desc">Оцениваем размер парка, операции и потребности по соответствию в ходе консультации.</p>
+                <h3 data-i18n="step1.title">Initial Consultation</h3>
+                <p data-i18n="step1.desc">We assess your fleet size, operations, and compliance needs through a comprehensive consultation.</p>
             </div>
             <div class="step-card">
                 <div class="step-number">02</div>
                 <div class="step-icon">📋</div>
-                <h3 data-i18n="step2.title">Индивидуальный план</h3>
-                <p data-i18n="step2.desc">Составляем план соответствия под ваши задачи и бюджет.</p>
+                <h3 data-i18n="step2.title">Custom Plan</h3>
+                <p data-i18n="step2.desc">We create a tailored compliance plan that fits your specific requirements and budget.</p>
             </div>
             <div class="step-card">
                 <div class="step-number">03</div>
                 <div class="step-icon">⚙️</div>
-                <h3 data-i18n="step3.title">Настройка и интеграция</h3>
-                <p data-i18n="step3.desc">Настраиваем учётную запись, подключаем ваши системы и переносим данные.</p>
+                <h3 data-i18n="step3.title">Setup &amp; Integration</h3>
+                <p data-i18n="step3.desc">Our team sets up your account, integrates with your systems, and migrates existing data.</p>
             </div>
             <div class="step-card">
                 <div class="step-number">04</div>
                 <div class="step-icon">📊</div>
-                <h3 data-i18n="step4.title">Текущее ведение</h3>
-                <p data-i18n="step4.desc">Ведём отчётность, продления и задачи по соответствию с регулярными отчётами.</p>
+                <h3 data-i18n="step4.title">Ongoing Management</h3>
+                <p data-i18n="step4.desc">We handle all filings, renewals, and compliance tasks on your behalf with regular updates.</p>
             </div>
             <div class="step-card">
                 <div class="step-number">05</div>
                 <div class="step-icon">✓</div>
-                <h3 data-i18n="step5.title">Мониторинг и поддержка</h3>
-                <p data-i18n="step5.desc">Круглосуточный мониторинг соблюдения сроков и постоянная поддержка.</p>
+                <h3 data-i18n="step5.title">Monitoring &amp; Support</h3>
+                <p data-i18n="step5.desc">24/7 monitoring ensures deadlines are met, and our support team is always available.</p>
             </div>
             <div class="step-card">
                 <div class="step-number">06</div>
                 <div class="step-icon">📈</div>
-                <h3 data-i18n="step6.title">Развитие</h3>
-                <p data-i18n="step6.desc">Регулярный анализ и оптимизация для повышения эффективности.</p>
+                <h3 data-i18n="step6.title">Continuous Improvement</h3>
+                <p data-i18n="step6.desc">Regular reviews and optimizations help improve your compliance efficiency over time.</p>
             </div>
         </div>
     </div>
@@ -133,32 +133,32 @@
 <!-- Testimonials Section -->
 <section class="testimonials-section">
     <div class="container">
-        <h2 data-i18n="testimonials.heading">Что говорят клиенты</h2>
+        <h2 data-i18n="testimonials.heading">What Our Clients Say</h2>
         <div class="underline"></div>
-        <p class="section-subtitle" data-i18n="testimonials.subtitle">Нам доверяют сотни автопредприятий по стране</p>
+        <p class="section-subtitle" data-i18n="testimonials.subtitle">Trusted by hundreds of trucking companies nationwide</p>
         <div class="testimonials-grid">
             <div class="testimonial-card">
                 <div class="stars">★★★★★</div>
-                <p data-i18n="test1.quote">"Safety-Lab изменил подход к отчётности IFTA и IRP. Команда профессиональная, отзывчивая и всегда укладывается в сроки. Рекомендуем!"</p>
+                <p data-i18n="test1.quote">Safety-Lab has transformed how we handle our IFTA and IRP filings. Their team is professional, responsive, and always ahead of deadlines. Highly recommended!</p>
                 <div class="testimonial-author">
-                    <strong data-i18n="test1.name">Джон Смит</strong>
+                    <strong data-i18n="test1.name">John Smith</strong>
                     <span data-i18n="test1.role">CEO, Smith Transport LLC</span>
                 </div>
             </div>
             <div class="testimonial-card">
                 <div class="stars">★★★★★</div>
-                <p data-i18n="test2.quote">"Пользуемся услугами 5 лет и ни разу не сорвали сроки. Спокойствие того стоит. Поддержка на высоте."</p>
+                <p data-i18n="test2.quote">We've been using their services for 5 years and never missed a deadline. The peace of mind is worth every penny. Their support team is exceptional.</p>
                 <div class="testimonial-author">
-                    <strong data-i18n="test2.name">Мария Родригес</strong>
-                    <span data-i18n="test2.role">Операционный директор, Rodriguez Fleet</span>
+                    <strong data-i18n="test2.name">Maria Rodriguez</strong>
+                    <span data-i18n="test2.role">Operations Manager, Rodriguez Fleet</span>
                 </div>
             </div>
             <div class="testimonial-card">
                 <div class="stars">★★★★★</div>
-                <p data-i18n="test3.quote">"Лучшие вложения в соответствие. Сэкономили тысячи на штрафах и уйму времени на админработе. Отличный сервис!"</p>
+                <p data-i18n="test3.quote">The best investment we made for our compliance needs. They saved us thousands in penalties and countless hours of administrative work. Outstanding service!</p>
                 <div class="testimonial-author">
-                    <strong data-i18n="test3.name">Дэвид Чен</strong>
-                    <span data-i18n="test3.role">Владелец, Chen Logistics</span>
+                    <strong data-i18n="test3.name">David Chen</strong>
+                    <span data-i18n="test3.role">Owner, Chen Logistics</span>
                 </div>
             </div>
         </div>
@@ -168,7 +168,7 @@
 <!-- Logo strip -->
 <section class="logo-strip" aria-label="Trusted by">
     <div class="container">
-        <p class="logo-strip-label" data-i18n="logoStrip.label">Нам доверяют парки по всей стране</p>
+        <p class="logo-strip-label" data-i18n="logoStrip.label">Trusted by fleets nationwide</p>
         <div class="logo-strip-inner">
             <span class="logo-strip-item" data-i18n="logoStrip.ifta">IFTA</span>
             <span class="logo-strip-item" data-i18n="logoStrip.irp">IRP</span>
@@ -185,34 +185,34 @@
         <div class="trust-grid">
             <div class="trust-card">
                 <span class="trust-number">500+</span>
-                <p class="trust-label" data-i18n="trust.activeClients">Активных клиентов</p>
+                <p class="trust-label" data-i18n="trust.activeClients">Active clients</p>
             </div>
             <div class="trust-card">
                 <span class="trust-number">15+</span>
-                <p class="trust-label" data-i18n="trust.yearsExp">Лет опыта</p>
+                <p class="trust-label" data-i18n="trust.yearsExp">Years experience</p>
             </div>
             <div class="trust-card">
                 <span class="trust-number">99.8%</span>
-                <p class="trust-label" data-i18n="trust.ontimeFiling">Сдано в срок</p>
+                <p class="trust-label" data-i18n="trust.ontimeFiling">On-time filing</p>
             </div>
             <div class="trust-card">
                 <span class="trust-number">50</span>
-                <p class="trust-label" data-i18n="trust.statesCovered">Штатов</p>
+                <p class="trust-label" data-i18n="trust.statesCovered">States covered</p>
             </div>
         </div>
-        <p class="trust-footer" data-i18n="trust.footer">Сертифицировано • Лицензии во всех 50 штатах • BBB A+</p>
+        <p class="trust-footer" data-i18n="trust.footer">Certified • Licensed in all 50 states • BBB A+ Rating</p>
     </div>
 </section>
 
 <!-- FAQ Section -->
 <section id="faq" class="faq-section" aria-labelledby="faq-heading">
     <div class="container">
-        <h2 id="faq-heading" data-i18n="faq.heading">Частые вопросы</h2>
+        <h2 id="faq-heading" data-i18n="faq.heading">Frequently asked questions</h2>
         <div class="underline"></div>
         <dl class="faq-list">
             <div class="faq-item">
-                <dt><button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-1" id="faq-q1" data-faq-toggle data-i18n="faq.q1">Чем занимается Safety Lab?</button></dt>
-                <dd id="faq-1" class="faq-answer" aria-labelledby="faq-q1" hidden data-i18n="faq.a1">Ведём соответствие IFTA, IRP, UCR и FMCSA для автопредприятий: регистрации, квартальные отчёты, разрешения и поддержка по безопасности — вы готовы к проверкам и остаётесь на маршруте.</dd>
+                <dt><button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-1" id="faq-q1" data-faq-toggle data-i18n="faq.q1">What does Safety Lab do?</button></dt>
+                <dd id="faq-1" class="faq-answer" aria-labelledby="faq-q1" hidden data-i18n="faq.a1">We handle IFTA, IRP, UCR, and FMCSA compliance for trucking companies—registrations, quarterly filings, permits, and safety support so you stay audit-ready and on the road.</dd>
             </div>
             <div class="faq-item">
                 <dt><button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-2" id="faq-q2" data-faq-toggle data-i18n="faq.q2">How quickly can you get started?</button></dt>
@@ -233,9 +233,9 @@
 <!-- CTA Section -->
 <section class="cta-section" aria-labelledby="cta-heading">
     <div class="container">
-        <h2 id="cta-heading" data-i18n="cta.heading">Готовы упростить соответствие?</h2>
-        <p data-i18n="cta.subtitle">Присоединяйтесь к сотням парков, которые доверяют Safety Lab IFTA, IRP, UCR и FMCSA.</p>
-        <a href="{% url 'main:contacts' %}" class="btn btn-white" data-i18n="cta.button">Начать сегодня</a>
+        <h2 id="cta-heading" data-i18n="cta.heading">Ready to simplify your compliance?</h2>
+        <p data-i18n="cta.subtitle">Join hundreds of fleets who trust Safety Lab with IFTA, IRP, UCR, and FMCSA.</p>
+        <a href="{% url 'main:contacts' %}" class="btn btn-white" data-i18n="cta.button">Get started today</a>
     </div>
 </section>
 {% endblock %}
