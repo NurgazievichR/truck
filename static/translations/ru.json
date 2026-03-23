@@ -68,7 +68,7 @@
   },
   "trust": {
     "activeClients": "Активных клиентов",
-    "yearsExp": "Лет опыта",
+    "missedDeadlines": "Пропущенных сроков",
     "ontimeFiling": "Сдано в срок",
     "statesCovered": "Штатов",
     "footer": "Сертифицировано • Лицензии во всех 50 штатах • BBB A+"

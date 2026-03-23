@@ -4,9 +4,15 @@
 {% block body_class %}page-index{% endblock %}
 
 {% block content %}
-<!-- Hero Section: natural gradient overlay, brighter image -->
+<!-- Hero Slideshow -->
 <section class="hero-section hero-with-photo" aria-labelledby="hero-heading">
-    <div class="hero-bg" style="background-image: url('{% static 'images/truck.jpg' %}');" aria-hidden="true"></div>
+    <div class="hero-slideshow" aria-hidden="true">
+        <div class="hero-slide is-active" style="background-image: url('{% static 'images/slide-truck.png' %}');"></div>
+        <div class="hero-slide" style="background-image: url('{% static 'images/truck.jpg' %}');"></div>
+        <div class="hero-slide" style="background-image: url('{% static 'images/slide-office.png' %}');"></div>
+        <div class="hero-slide" style="background-image: url('{% static 'images/slide-redtruck.png' %}');"></div>
+        <div class="hero-slide" style="background-image: url('{% static 'images/slide-paperwork.png' %}');"></div>
+    </div>
     <div class="hero-overlay" aria-hidden="true"></div>
     <div class="container hero-container">
         <div class="hero-content">
@@ -32,6 +38,7 @@
             </div>
         </div>
     </div>
+    <div class="hero-dots" aria-label="Slideshow navigation"></div>
 </section>
 
 <!-- Services Section (4 cards) — сразу после hero -->
@@ -188,8 +195,8 @@
                 <p class="trust-label" data-i18n="trust.activeClients">Active clients</p>
             </div>
             <div class="trust-card">
-                <span class="trust-number">15+</span>
-                <p class="trust-label" data-i18n="trust.yearsExp">Years experience</p>
+                <span class="trust-number">0</span>
+                <p class="trust-label" data-i18n="trust.missedDeadlines">Missed deadlines</p>
             </div>
             <div class="trust-card">
                 <span class="trust-number">99.8%</span>

@@ -68,7 +68,7 @@
   },
   "trust": {
     "activeClients": "Active clients",
-    "yearsExp": "Years experience",
+    "missedDeadlines": "Missed deadlines",
     "ontimeFiling": "On-time filing",
     "statesCovered": "States covered",
     "footer": "Certified • Licensed in all 50 states • BBB A+ Rating"
