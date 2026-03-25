@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.conf import settings
 import logging
+import re
 
 try:
     import requests
@@ -54,6 +55,71 @@ def get_telegram_chat_id_from_username(username):
                                 return str(chat_id)
     except Exception as e:
         logger.error(f'Error getting chat_id from updates: {str(e)}')
+    return None
+
+
+def _strip_t_me_prefix(value: str) -> str:
+    s = value.strip()
+    for pref in ('https://t.me/', 'http://t.me/', 't.me/'):
+        if s.startswith(pref):
+            s = s[len(pref) :]
+            break
+    return s.strip()
+
+
+def resolve_notification_chat_id():
+    """
+    Куда слать уведомления бота: числовой chat_id (или @username как запасной вариант).
+
+    Важно: ссылка вида t.me/+1XXXXXXXXXX — это не chat_id для Bot API. Нужен числовой id
+    (после того как получатель написал боту /start — см. @userinfobot) или TELEGRAM_CHAT_ID в .env.
+    """
+    cfg = getattr(settings, 'TELEGRAM_CHAT_ID', None)
+    if cfg is not None:
+        cfg = str(cfg).strip()
+        if cfg:
+            if re.fullmatch(r'-?\d+', cfg):
+                return cfg
+            logger.warning('TELEGRAM_CHAT_ID must be a numeric chat_id; ignoring value and using Contact if set.')
+
+    contact = Contact.objects.filter(type='telegram').first()
+    if not contact or not (contact.value or '').strip():
+        return None
+
+    raw = contact.value.strip()
+
+    if re.fullmatch(r'-?\d+', raw):
+        return raw
+
+    inner = _strip_t_me_prefix(raw)
+
+    # Deep link по номеру телефона — Bot API не принимает это как chat_id
+    if re.fullmatch(r'\+\d{8,}', inner):
+        logger.warning(
+            'Telegram Contact value is a phone deep link (%s…). '
+            'Set TELEGRAM_CHAT_ID in .env to your numeric chat_id after /start with the bot.',
+            inner[:6],
+        )
+        return None
+
+    digits_only = inner.lstrip('+')
+    if re.fullmatch(r'\d+', digits_only) and len(digits_only) >= 6:
+        # Частая ошибка: положить номер телефона без + — это не Telegram user id
+        if len(digits_only) == 11 and digits_only.startswith('1'):
+            logger.warning(
+                'Telegram Contact value looks like a US phone number, not a chat_id. '
+                'Use TELEGRAM_CHAT_ID (numeric id from @userinfobot after /start).'
+            )
+            return None
+        return digits_only
+
+    username = inner.lstrip('@')
+    if re.fullmatch(r'[a-zA-Z][a-zA-Z0-9_]{3,31}', username):
+        numeric = get_telegram_chat_id_from_username(username)
+        if numeric:
+            return numeric
+        return '@' + username
+
     return None
 
 
@@ -224,29 +290,19 @@ def contacts(request):
         if selected_services:
             service_objects = Service.objects.filter(id__in=selected_services)
             services_list = [service.title for service in service_objects]
-        
-        # Отправляем сообщение в Telegram
-        telegram_contact = Contact.objects.filter(type='telegram').first()
-        if telegram_contact and telegram_contact.value:
-            print("Attempting to send Telegram message...")
-            print(f"Telegram value from DB: {telegram_contact.value}")
-            
-            # Проверяем, это username или числовой ID
-            chat_id_value = str(telegram_contact.value).strip()
-            is_username = not chat_id_value.replace('@', '').replace('t.me/', '').replace('https://t.me/', '').replace('http://t.me/', '').isdigit()
-            
-            # Если это username, пытаемся получить числовой chat_id
-            if is_username:
-                print(f"Detected username format, trying to get chat_id...")
-                numeric_chat_id = get_telegram_chat_id_from_username(telegram_contact.value)
-                if numeric_chat_id:
-                    chat_id_to_use = numeric_chat_id
-                else:
-                    chat_id_to_use = telegram_contact.value
-            else:
-                chat_id_to_use = telegram_contact.value
-            
-            telegram_message = f"""
+
+        services_line = ', '.join(services_list) if services_list else '—'
+        lead_message = f'Услуги: {services_line}\nОписание: {description or "—"}'
+        lead = Lead.objects.create(
+            name=name,
+            email=email,
+            phone=phone,
+            message=lead_message,
+            source=Lead.SOURCE_FORM,
+        )
+        logger.info('Contact form lead saved id=%s', lead.id)
+
+        telegram_message = f"""
 <b>Новая заявка с формы Contact Us</b>
 
 <b>Имя:</b> {name}
@@ -255,7 +311,7 @@ def contacts(request):
 <b>Компания:</b> {company if company else 'Не указана'}
 
 <b>Выбранные услуги:</b>
-{', '.join(services_list) if services_list else 'Не выбраны'}
+{services_line}
 
 <b>Описание:</b>
 {description if description else 'Не указано'}
@@ -263,22 +319,45 @@ def contacts(request):
 ---
 Сообщение отправлено с формы запроса на сайте.
 """
+
+        bot_token = (getattr(settings, 'TELEGRAM_BOT_TOKEN', None) or '').strip()
+        chat_id_to_use = resolve_notification_chat_id()
+
+        if not bot_token:
+            logger.warning('TELEGRAM_BOT_TOKEN not set; lead id=%s saved without Telegram', lead.id)
+            messages.success(
+                request,
+                'Thank you! Your request was received. We will get back to you within 24 hours.',
+            )
+        elif not chat_id_to_use:
+            logger.warning(
+                'No Telegram chat_id (set TELEGRAM_CHAT_ID in .env or valid Contact telegram); lead id=%s',
+                lead.id,
+            )
+            messages.success(
+                request,
+                'Thank you! Your request was received. We will get back to you within 24 hours.',
+            )
+        else:
             try:
                 telegram_sent = send_telegram_message(chat_id_to_use, telegram_message)
                 if telegram_sent:
-                    print("SUCCESS: Telegram message sent successfully!")
-                    messages.success(request, 'Thank you! Your quote request has been sent successfully. We will get back to you within 24 hours.')
+                    messages.success(
+                        request,
+                        'Thank you! Your quote request has been sent successfully. We will get back to you within 24 hours.',
+                    )
                 else:
-                    print("ERROR: Failed to send Telegram message")
-                    messages.error(request, 'Sorry, there was an error sending your request. Please try again later or contact us directly.')
+                    logger.error('Telegram send failed for contact form lead id=%s', lead.id)
+                    messages.warning(
+                        request,
+                        'Your request was saved. We could not send an instant notification — we will still contact you shortly.',
+                    )
             except Exception as e:
-                print(f"ERROR: Failed to send Telegram message - {str(e)}")
-                print(f"Error type: {type(e).__name__}")
-                logger.error(f'Telegram send error: {str(e)}', exc_info=True)
-                messages.error(request, 'Sorry, there was an error sending your request. Please try again later or contact us directly.')
-        else:
-            print("ERROR: Telegram contact not configured")
-            messages.error(request, 'Telegram contact not configured. Please contact administrator.')
+                logger.error('Telegram send error: %s', str(e), exc_info=True)
+                messages.warning(
+                    request,
+                    'Your request was saved. We could not send an instant notification — we will still contact you shortly.',
+                )
         
         print("=" * 50)
         return redirect('main:contacts')
@@ -302,24 +381,26 @@ def chatbot_lead(request):
     # Save lead to DB
     lead = Lead.objects.create(name=name, email=email, phone=phone, message=message, source=Lead.SOURCE_CHATBOT)
 
-    # Send Telegram notification
-    telegram_contact = Contact.objects.filter(type='telegram').first()
-    if telegram_contact and telegram_contact.value:
-        chat_id_value = str(telegram_contact.value).strip()
-        is_username = not chat_id_value.replace('@', '').replace('t.me/', '').replace('https://t.me/', '').replace('http://t.me/', '').isdigit()
-        if is_username:
-            numeric_chat_id = get_telegram_chat_id_from_username(telegram_contact.value)
-            chat_id_to_use = numeric_chat_id if numeric_chat_id else telegram_contact.value
-        else:
-            chat_id_to_use = telegram_contact.value
-
-        tg_message = (
-            f"<b>Новая заявка с чат-бота</b>\n\n"
-            f"<b>Имя:</b> {name}\n"
-            f"<b>Email:</b> {email}\n"
-            f"<b>Телефон:</b> {phone if phone else 'не указан'}\n"
-            f"<b>Сообщение:</b> {message if message else '—'}"
+    bot_token = (getattr(settings, 'TELEGRAM_BOT_TOKEN', None) or '').strip()
+    chat_id_to_use = resolve_notification_chat_id()
+    tg_message = (
+        f"<b>Новая заявка с чат-бота</b>\n\n"
+        f"<b>Имя:</b> {name}\n"
+        f"<b>Email:</b> {email}\n"
+        f"<b>Телефон:</b> {phone if phone else 'не указан'}\n"
+        f"<b>Сообщение:</b> {message if message else '—'}"
+    )
+    telegram_ok = False
+    if bot_token and chat_id_to_use:
+        telegram_ok = bool(send_telegram_message(chat_id_to_use, tg_message))
+        if not telegram_ok:
+            logger.error('Telegram send failed for chatbot lead id=%s', lead.id)
+    elif not bot_token:
+        logger.warning('TELEGRAM_BOT_TOKEN not set; chatbot lead id=%s saved only to DB', lead.id)
+    else:
+        logger.warning(
+            'No Telegram chat_id; chatbot lead id=%s saved only to DB (set TELEGRAM_CHAT_ID or fix Contact)',
+            lead.id,
         )
-        send_telegram_message(chat_id_to_use, tg_message)
 
-    return JsonResponse({'ok': True, 'id': lead.id})
+    return JsonResponse({'ok': True, 'id': lead.id, 'telegram_delivered': telegram_ok})
