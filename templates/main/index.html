@@ -4,91 +4,118 @@
 {% block body_class %}page-index{% endblock %}
 
 {% block content %}
-<!-- Hero Slideshow -->
-<section class="hero-section hero-with-photo" aria-labelledby="hero-heading">
-    <div class="hero-slideshow" aria-hidden="true">
-        <div class="hero-slide is-active" style="background-image: url('{% static 'images/slide-truck.png' %}');"></div>
-        <div class="hero-slide" style="background-image: url('{% static 'images/truck.jpg' %}');"></div>
-        <div class="hero-slide" style="background-image: url('{% static 'images/slide-office.png' %}');"></div>
-        <div class="hero-slide" style="background-image: url('{% static 'images/slide-redtruck.png' %}');"></div>
-        <div class="hero-slide" style="background-image: url('{% static 'images/slide-paperwork.png' %}');"></div>
-    </div>
-    <div class="hero-overlay" aria-hidden="true"></div>
-    <div class="container hero-container">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 id="hero-heading" data-i18n="hero.title">You drive. We comply.</h1>
-                <p class="hero-subtitle" data-i18n="hero.subtitle">IFTA, IRP, UCR &amp; FMCSA compliance management for trucking companies. Reduce risk and hit every deadline.</p>
-                <a href="{% url 'main:contacts' %}" class="btn btn-hero-primary" data-i18n="hero.cta">Get a free consultation</a>
-                <div class="hero-trust">
-                    <span class="hero-trust-item" data-i18n="hero.trust1">500+ fleets</span>
-                    <span class="hero-trust-dot" aria-hidden="true"></span>
-                    <span class="hero-trust-item" data-i18n="hero.trust2">All 50 states</span>
-                    <span class="hero-trust-dot" aria-hidden="true"></span>
-                    <span class="hero-trust-item" data-i18n="hero.trust3">99.8% on-time</span>
-                </div>
-                <div class="hero-secondary-buttons">
-                    <a href="{% url 'main:index' %}#services" class="btn btn-hero-outline" data-i18n="hero.viewServices">View services</a>
-                    {% if phone_contact and phone_contact.value %}
-                        <a href="tel:{{ phone_contact.get_phone_for_tel }}" class="btn btn-hero-outline" data-i18n="hero.callUs">Call us</a>
-                    {% else %}
-                        <a href="tel:+13058508306" class="btn btn-hero-outline" data-i18n="hero.callUs">Call us</a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="hero-dots" aria-label="Slideshow navigation"></div>
+<!-- Hero Section -->
+<section class="hero-section hero-with-photo relative h-[630px] w-full overflow-hidden bg-slate-900">
+<div class="hero-slideshow" aria-hidden="true">
+    <div class="hero-slide is-active absolute inset-0 bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('{% static 'images/slide-truck.png' %}');"></div>
+    <div class="hero-slide absolute inset-0 bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('{% static 'images/truck.jpg' %}');"></div>
+    <div class="hero-slide absolute inset-0 bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('{% static 'images/slide-office.png' %}');"></div>
+    <div class="hero-slide absolute inset-0 bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('{% static 'images/slide-redtruck.png' %}');"></div>
+    <div class="hero-slide absolute inset-0 bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('{% static 'images/slide-paperwork.png' %}');"></div>
+</div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col items-center justify-center text-center relative z-10">
+<h1 class="text-white text-5xl md:text-7xl font-black mb-6 tracking-tight" data-i18n="hero.title">You drive. We comply.</h1>
+<p class="text-white/90 text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
+                <span data-i18n="hero.subtitle">Comprehensive IFTA, IRP, UCR &amp; FMCSA compliance management. We handle the paperwork so you can stay on the road.</span>
+            </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<a href="{% url 'main:contacts' %}" class="bg-primary text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-secondary hover:shadow-xl transition-all" data-i18n="hero.cta">Get a free consultation</a>
+<a href="#services" class="bg-white text-slate-900 px-8 py-4 rounded-lg font-bold text-lg hover:bg-slate-50 transition-all" data-i18n="hero.viewServices">View services</a>
+</div>
+</div>
+<!-- Dot Navigation -->
+<div class="hero-dots absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10"></div>
 </section>
-
-<!-- Services Section (4 cards) — сразу после hero -->
-<section id="services" class="services-section" aria-labelledby="services-heading">
-    <div class="container">
-        <h2 id="services-heading" data-i18n="services.heading">Our Core Services</h2>
-        <div class="underline"></div>
-        <p class="section-subtitle" data-i18n="services.subtitle">Comprehensive compliance solutions for every aspect of your operation</p>
-        <div class="services-grid services-grid-4">
-            {% for service in services|slice:":4" %}
-            <article class="service-card">
-                <div class="service-card-icon">
-                    {% if service.image %}
-                        <img src="{{ service.image.url }}" alt="" width="56" height="56">
-                    {% else %}
-                        <span class="service-card-icon-placeholder" aria-hidden="true"></span>
-                    {% endif %}
-                </div>
-                <h3>{{ service.title }}</h3>
-                <p>{{ service.description|truncatewords:18 }}</p>
-                <a href="{% url 'main:contacts' %}?service={{ service.id }}" class="service-card-link" data-i18n="service.learnMore">Learn more</a>
-            </article>
-            {% empty %}
-            <article class="service-card">
-                <div class="service-card-icon"><span class="service-card-icon-placeholder" aria-hidden="true"></span></div>
-                <h3 data-i18n="service.iftaTitle">IFTA &amp; Fuel Tax</h3>
-                <p data-i18n="service.iftaDesc">Registration, quarterly filings, and fuel tax compliance across all jurisdictions.</p>
-                <a href="{% url 'main:contacts' %}" class="service-card-link" data-i18n="service.learnMore">Learn more</a>
-            </article>
-            <article class="service-card">
-                <div class="service-card-icon"><span class="service-card-icon-placeholder" aria-hidden="true"></span></div>
-                <h3 data-i18n="service.irpTitle">IRP &amp; Registration</h3>
-                <p data-i18n="service.irpDesc">Apportioned registration, renewals, and trailer titling for interstate operations.</p>
-                <a href="{% url 'main:contacts' %}" class="service-card-link" data-i18n="service.learnMore">Learn more</a>
-            </article>
-            <article class="service-card">
-                <div class="service-card-icon"><span class="service-card-icon-placeholder" aria-hidden="true"></span></div>
-                <h3 data-i18n="service.ucrTitle">UCR &amp; Permits</h3>
-                <p data-i18n="service.ucrDesc">Unified Carrier Registration and state permit filings, on time every time.</p>
-                <a href="{% url 'main:contacts' %}" class="service-card-link" data-i18n="service.learnMore">Learn more</a>
-            </article>
-            <article class="service-card">
-                <div class="service-card-icon"><span class="service-card-icon-placeholder" aria-hidden="true"></span></div>
-                <h3 data-i18n="service.fmcsaTitle">FMCSA &amp; Safety</h3>
-                <p data-i18n="service.fmcsaDesc">Safety compliance, CSA support, and audit readiness for DOT requirements.</p>
-                <a href="{% url 'main:contacts' %}" class="service-card-link" data-i18n="service.learnMore">Learn more</a>
-            </article>
-            {% endfor %}
+<!-- Trust Row -->
+<section class="bg-white dark:bg-background-dark py-12 border-b border-primary/5">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+<div class="flex flex-col items-center p-4">
+<span class="text-4xl font-black text-primary mb-2">500+</span>
+<span class="text-slate-500 dark:text-slate-400 font-medium uppercase tracking-widest text-sm">Fleets Managed</span>
+</div>
+<div class="flex flex-col items-center p-4 border-x border-primary/10">
+<span class="text-4xl font-black text-primary mb-2">All 50</span>
+<span class="text-slate-500 dark:text-slate-400 font-medium uppercase tracking-widest text-sm">States Covered</span>
+</div>
+<div class="flex flex-col items-center p-4">
+<span class="text-4xl font-black text-primary mb-2">99.8%</span>
+<span class="text-slate-500 dark:text-slate-400 font-medium uppercase tracking-widest text-sm">On-Time Compliance</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Section -->
+<section id="services" class="py-24 bg-background-light dark:bg-background-dark">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-black text-primary dark:text-white mb-4" data-i18n="services.heading">Our Core Services</h2>
+<div class="w-20 h-1.5 bg-accent mx-auto rounded-full"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    {% for service in services|slice:":4" %}
+    <!-- Service Card -->
+    <div class="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group">
+        <div class="w-14 h-14 bg-accent/10 dark:bg-accent/20 rounded-lg flex items-center justify-center text-accent mb-6 group-hover:bg-accent group-hover:text-white transition-colors">
+            {% if service.image %}
+                <img src="{{ service.image.url }}" alt="" class="w-8 h-8 object-contain">
+            {% else %}
+                <span class="material-symbols-outlined text-3xl">analytics</span>
+            {% endif %}
         </div>
+        <h3 class="text-xl font-bold mb-3 text-primary">{{ service.title }}</h3>
+        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">
+            {{ service.description|truncatewords:18 }}
+        </p>
+        <a href="{% url 'main:contacts' %}?service={{ service.id }}" class="text-accent font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
+            Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </a>
     </div>
+    {% empty %}
+    <!-- Fallback Service Cards if DB is empty -->
+    <div class="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group">
+        <div class="w-14 h-14 bg-accent/10 dark:bg-accent/20 rounded-lg flex items-center justify-center text-accent mb-6 group-hover:bg-accent group-hover:text-white transition-colors">
+            <span class="material-symbols-outlined text-3xl">analytics</span>
+        </div>
+        <h3 class="text-xl font-bold mb-3 text-primary">IFTA Reporting</h3>
+        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">Accurate quarterly fuel tax reporting to ensure you stay compliant across all jurisdictions.</p>
+        <a href="{% url 'main:contacts' %}" class="text-accent font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
+            Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </a>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group">
+        <div class="w-14 h-14 bg-accent/10 dark:bg-accent/20 rounded-lg flex items-center justify-center text-accent mb-6 group-hover:bg-accent group-hover:text-white transition-colors">
+            <span class="material-symbols-outlined text-3xl">app_registration</span>
+        </div>
+        <h3 class="text-xl font-bold mb-3 text-primary">IRP Registration</h3>
+        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">Seamless apportioned plate registrations and renewals for multi-state operations.</p>
+        <a href="{% url 'main:contacts' %}" class="text-accent font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
+            Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </a>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group">
+        <div class="w-14 h-14 bg-accent/10 dark:bg-accent/20 rounded-lg flex items-center justify-center text-accent mb-6 group-hover:bg-accent group-hover:text-white transition-colors">
+            <span class="material-symbols-outlined text-3xl">assignment_turned_in</span>
+        </div>
+        <h3 class="text-xl font-bold mb-3 text-primary">UCR Filing</h3>
+        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">Handling your Unified Carrier Registration efficiently to avoid hefty fines and delays.</p>
+        <a href="{% url 'main:contacts' %}" class="text-accent font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
+            Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </a>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group">
+        <div class="w-14 h-14 bg-accent/10 dark:bg-accent/20 rounded-lg flex items-center justify-center text-accent mb-6 group-hover:bg-accent group-hover:text-white transition-colors">
+            <span class="material-symbols-outlined text-3xl">verified_user</span>
+        </div>
+        <h3 class="text-xl font-bold mb-3 text-primary">FMCSA Support</h3>
+        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">Safety audits, MCS-150 updates, and authority maintenance for total peace of mind.</p>
+        <a href="{% url 'main:contacts' %}" class="text-accent font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
+            Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+</div>
 </section>
 
 <!-- How We Work Section -->
@@ -237,12 +264,4 @@
     </div>
 </section>
 
-<!-- CTA Section -->
-<section class="cta-section" aria-labelledby="cta-heading">
-    <div class="container">
-        <h2 id="cta-heading" data-i18n="cta.heading">Ready to simplify your compliance?</h2>
-        <p data-i18n="cta.subtitle">Join hundreds of fleets who trust Safety Lab with IFTA, IRP, UCR, and FMCSA.</p>
-        <a href="{% url 'main:contacts' %}" class="btn btn-white" data-i18n="cta.button">Get started today</a>
-    </div>
-</section>
 {% endblock %}

@@ -1,139 +1,158 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Contact Us - Safety-Lab{% endblock %}
+{% block title %}Contact Us - Safety Lab{% endblock %}
 
 {% block content %}
-<section class="quote-page">
-    <div class="container">
-        <div class="quote-header">
-            <h1><span data-i18n="quote.title">Contact </span><span class="quote-underline" data-i18n="quote.titleHighlight">Us</span></h1>
-            <p class="quote-intro" data-i18n="quote.intro">Fill out the form below and we'll get back to you with a customized quote for your compliance needs.</p>
-        </div>
+<!-- Hero Section -->
+<section class="py-12 md:py-20 bg-white dark:bg-background-dark">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="mb-12">
+<h1 class="text-4xl md:text-5xl font-black tracking-tight text-primary dark:text-white mb-4">Contact Our Experts</h1>
+<p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl">Have questions about safety protocols or trucking compliance? Our specialized team is here to provide technical support and guidance.</p>
+</div>
 
-        {% if messages %}
-            <div class="messages">
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
+{% if messages %}
+    <div class="mb-8">
+        {% for message in messages %}
+            <div class="bg-primary/10 border border-primary/20 text-primary px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline">{{ message }}</span>
             </div>
-        {% endif %}
-
-        <div class="quote-content">
-            <!-- Left Column: Quote Form -->
-            <div class="quote-form-wrapper">
-                <form class="quote-form" method="post">
-                    {% csrf_token %}
-
-                    <div class="form-group">
-                        <label class="form-label" data-i18n="quote.nameLabel">NAME*</label>
-                        <input type="text" name="name" data-i18n-placeholder="quote.namePlaceholder" placeholder="Your full name" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" data-i18n="quote.emailLabel">EMAIL*</label>
-                        <input type="email" name="email" data-i18n-placeholder="quote.emailPlaceholder" placeholder="your.email@example.com" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" data-i18n="quote.phoneLabel">PHONE</label>
-                        <input type="tel" name="phone" data-i18n-placeholder="quote.phonePlaceholder" placeholder="+1 (555) 123-4567">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" data-i18n="quote.companyLabel">COMPANY</label>
-                        <input type="text" name="company" data-i18n-placeholder="quote.companyPlaceholder" placeholder="Your company name">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" data-i18n="quote.servicesLabel">SELECT SERVICES (SELECT ALL THAT APPLY)</label>
-                        <div class="services-checkboxes">
-                            {% for service in services %}
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="services" value="{{ service.id }}">
-                                    <span>{{ service.title }}</span>
-                                </label>
-                            {% empty %}
-                                <p class="no-services" data-i18n="quote.noServices">No services available</p>
-                            {% endfor %}
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" data-i18n="quote.descriptionLabel">DESCRIPTION</label>
-                        <textarea name="description" rows="6" data-i18n-placeholder="quote.descriptionPlaceholder" placeholder="Tell us about your fleet size, specific needs, or any questions you have..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary" data-i18n="quote.submitButton">SEND REQUEST</button>
-                </form>
-            </div>
-
-            <!-- Right Column: Contact Info -->
-            <div class="quote-benefits">
-                <h2 data-i18n="quote.contactInfoTitle">Get in Touch</h2>
-
-                <div class="contact-info-list">
-                    <div class="contact-info-item">
-                        <span class="contact-info-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
-                        </span>
-                        <div>
-                            <h3 data-i18n="quote.addressLabel">Office Address</h3>
-                            <p>250 McHenry Rd,<br>Buffalo Grove, IL 60089</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-info-item">
-                        <span class="contact-info-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
-                        </span>
-                        <div>
-                            <h3 data-i18n="quote.phonesLabel">Phone</h3>
-                            <p><a href="tel:+13058508306">+1 (305) 850-8306</a></p>
-                            <p><a href="tel:+13125155713">+1 (312) 515-5713</a></p>
-                        </div>
-                    </div>
-
-                    <div class="contact-info-item">
-                        <span class="contact-info-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                        </span>
-                        <div>
-                            <h3 data-i18n="quote.emailInfoLabel">Email</h3>
-                            <p><a href="mailto:info@safetylabinc.com">info@safetylabinc.com</a></p>
-                        </div>
-                    </div>
-
-                    <div class="contact-info-item">
-                        <span class="contact-info-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 14.868l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.691z"/></svg>
-                        </span>
-                        <div>
-                            <h3>Telegram</h3>
-                            <p><a href="https://t.me/+13058508306" target="_blank" rel="noopener noreferrer" data-i18n="quote.telegramLink">Message us on Telegram</a></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="contact-hours">
-                    <h3 data-i18n="quote.hoursTitle">Business Hours</h3>
-                    <p data-i18n="quote.hoursWeekday">Monday – Friday: 9:00 AM – 5:00 PM CST</p>
-                    <p data-i18n="quote.hoursWeekend">Saturday – Sunday: Closed</p>
-                    <p class="contact-hours-note" data-i18n="quote.hoursNote">Support available for active clients</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Google Maps -->
-        <div class="contact-map">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2956.8!2d-87.9631!3d42.1661!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880faf2e7dcd9c9b%3A0x0!2s250+McHenry+Rd%2C+Buffalo+Grove%2C+IL+60089!5e0!3m2!1sen!2sus!4v1"
-                width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                title="Safety Lab Office Location"></iframe>
-        </div>
+        {% endfor %}
     </div>
+{% endif %}
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+<!-- Left Column: Form -->
+<div class="bg-background-light dark:bg-slate-900 p-8 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800">
+<h2 class="text-2xl font-bold mb-6 text-primary dark:text-white">Send us a Message</h2>
+<form method="post" class="space-y-5">
+{% csrf_token %}
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Full Name</label>
+<input name="name" class="rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-background-dark focus:ring-2 focus:ring-primary/20 focus:border-primary px-3 py-2 text-sm" placeholder="John Doe" type="text" required/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Company</label>
+<input name="company" class="rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-background-dark focus:ring-2 focus:ring-primary/20 focus:border-primary px-3 py-2 text-sm" placeholder="Company Ltd" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Phone Number</label>
+<input name="phone" class="rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-background-dark focus:ring-2 focus:ring-primary/20 focus:border-primary px-3 py-2 text-sm" placeholder="+1 (000) 000-0000" type="tel"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Email Address</label>
+<input name="email" class="rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-background-dark focus:ring-2 focus:ring-primary/20 focus:border-primary px-3 py-2 text-sm" placeholder="john@example.com" type="email" required/>
+</div>
+</div>
+<!-- Services Injection for BE Logic -->
+<div class="flex flex-col gap-2">
+    <label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Select Services (Select all that apply)</label>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
+        {% for service in services %}
+            <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" name="services" value="{{ service.id }}" class="rounded border-slate-300 text-primary focus:ring-primary bg-white dark:bg-slate-800">
+                <span class="text-sm text-slate-600 dark:text-slate-400">{{ service.title }}</span>
+            </label>
+        {% empty %}
+            <p class="text-sm text-slate-500">No services available</p>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Message / Description</label>
+<textarea name="description" class="rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-background-dark focus:ring-2 focus:ring-primary/20 focus:border-primary px-3 py-2 text-sm" placeholder="How can we help you?" rows="4"></textarea>
+</div>
+<button class="w-full bg-primary text-white py-4 rounded-lg font-bold hover:bg-secondary transition-colors" type="submit">
+                                Submit Inquiry
+                            </button>
+</form>
+</div>
+<!-- Right Column: Info -->
+<div class="flex flex-col gap-10">
+<div>
+<h2 class="text-2xl font-bold mb-8 text-primary dark:text-white">Contact Information</h2>
+<div class="space-y-6">
+<div class="flex items-start gap-4">
+<div class="bg-accent/10 p-3 rounded-lg text-accent">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div>
+<h3 class="font-bold text-primary dark:text-white">Our Address</h3>
+<p class="text-slate-600 dark:text-slate-400">250 McHenry Rd, Buffalo Grove, IL 60089</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="bg-accent/10 p-3 rounded-lg text-accent">
+<span class="material-symbols-outlined">call</span>
+</div>
+<div>
+<h3 class="font-bold text-primary dark:text-white">Phone Numbers</h3>
+<p class="text-slate-600 dark:text-slate-400"><a href="tel:+13058508306" class="hover:text-primary transition-colors">+1 (305) 850-8306</a></p>
+<p class="text-slate-600 dark:text-slate-400"><a href="tel:+13125155713" class="hover:text-primary transition-colors">+1 (312) 515-5713</a></p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="bg-accent/10 p-3 rounded-lg text-accent">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<div>
+<h3 class="font-bold text-primary dark:text-white">Email</h3>
+<p class="text-slate-600 dark:text-slate-400 underline decoration-accent/30 mt-1"><a href="mailto:info@safetylabinc.com">info@safetylabinc.com</a></p>
+<h3 class="font-bold text-primary dark:text-white mt-4">Social (Telegram)</h3>
+<p class="text-slate-600 dark:text-slate-400 mt-1">
+<a href="https://t.me/+13058508306" class="hover:underline inline-flex items-center gap-1 text-[#229ED9]">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+<path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 14.868l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.691z"/>
+</svg>
+Message Us
+</a>
+</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="bg-accent/10 p-3 rounded-lg text-accent">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<div>
+<h3 class="font-bold text-primary dark:text-white">Business Hours</h3>
+<p class="text-slate-600 dark:text-slate-400">Monday - Friday: 9AM - 5PM</p>
+<p class="text-slate-600 dark:text-slate-400">Saturday - Sunday: Closed</p>
+</div>
+</div>
+</div>
+</div>
+<div class="p-6 rounded-xl bg-primary text-white">
+<h3 class="text-xl font-bold mb-2 flex items-center gap-2">
+                                Emergency Support?
+                                <span class="size-2 rounded-full bg-[#e53935] animate-pulse"></span>
+</h3>
+<p class="text-slate-200 mb-4 opacity-90">Our 24/7 hotline is available for verified corporate accounts during urgent incidents.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Map Section -->
+<section class="w-full h-[450px] relative border-t border-primary/10">
+<div class="absolute inset-0 bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2956.8!2d-87.9631!3d42.1661!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880faf2e7dcd9c9b%3A0x0!2s250+McHenry+Rd%2C+Buffalo+Grove%2C+IL+60089!5e0!3m2!1sen!2sus!4v1"
+        class="w-full h-full object-cover grayscale opacity-50 dark:opacity-30 border-0" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Safety Lab Office Location"></iframe>
+<div class="absolute inset-0 bg-gradient-to-t from-background-light dark:from-background-dark via-transparent to-transparent pointer-events-none"></div>
+<div class="absolute z-10 flex flex-col items-center pointer-events-none">
+<div class="bg-primary text-white p-4 rounded-full shadow-2xl animate-bounce">
+<span class="material-symbols-outlined text-3xl">location_on</span>
+</div>
+<div class="mt-4 bg-white dark:bg-slate-900 px-6 py-2 rounded-lg shadow-xl border border-slate-200 dark:border-slate-800">
+<span class="font-bold text-primary">Safety Lab HQ</span>
+</div>
+</div>
+</div>
 </section>
 {% endblock %}

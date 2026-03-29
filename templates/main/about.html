@@ -1,133 +1,121 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}About Us - Safety-Lab{% endblock %}
+{% block title %}About Us - Safety Lab{% endblock %}
+{% block body_class %}page-about{% endblock %}
 
 {% block content %}
-<section class="about-page">
-    <div class="container">
-        <!-- Hero Section -->
-        <div class="about-hero">
-            <h1 data-i18n="about.title">About Safety-Lab</h1>
-            <p class="about-subtitle" data-i18n="about.subtitle">Your trusted partner in transportation compliance management</p>
-        </div>
-
-        <!-- Main Content -->
-        <div class="about-main-content">
-            <div class="about-section-block">
-                <div class="about-image-block">
-                    <div class="about-image-placeholder">
-                        <svg width="500" height="350" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="500" height="350" fill="#f3f4f6" rx="10"/>
-                            <rect x="50" y="50" width="400" height="250" fill="#e5e7eb" rx="5"/>
-                            <circle cx="150" cy="150" r="40" fill="#3b82f6" opacity="0.3"/>
-                            <circle cx="250" cy="150" r="40" fill="#10b981" opacity="0.3"/>
-                            <circle cx="350" cy="150" r="40" fill="#f59e0b" opacity="0.3"/>
-                            <text x="250" y="200" text-anchor="middle" fill="#9ca3af" font-size="16" font-family="Arial">Company Image</text>
-                        </svg>
-                    </div>
-                    <!-- Замените SVG выше на реальное изображение: <img src="{% static 'images/about-company.jpg' %}" alt="About Us"> -->
-                </div>
-                <div class="about-text-block">
-                    <h2 data-i18n="about.whoWeAre">Who We Are</h2>
-                    <div class="underline"></div>
-                    <p data-i18n="about.whoP1">Founded with a vision to revolutionize compliance management in the trucking industry, we've grown from a small team of passionate experts to a trusted partner for fleets nationwide.</p>
-                    <p data-i18n="about.whoP2">Our journey began when we recognized the challenges trucking companies face navigating ever-changing regulations. We saw the stress, the risk of penalties, and the time-consuming administrative burden that compliance management placed on business owners.</p>
-                    <p data-i18n="about.whoP3">Today, we're proud to be a team of dedicated professionals who combine deep regulatory knowledge with cutting-edge technology to deliver solutions that truly make a difference for our clients.</p>
-                </div>
-            </div>
-
-            <!-- Mission Section -->
-            <div class="about-section-block reverse">
-                <div class="about-text-block">
-                    <h2 data-i18n="about.missionTitle">Our Mission</h2>
-                    <div class="underline"></div>
-                    <p data-i18n="about.missionP1">Our mission is to simplify compliance management for trucking companies, allowing you to focus on what you do best—running your business.</p>
-                    <p data-i18n="about.missionP2">We believe that every trucking company, regardless of size, deserves access to professional compliance services. Our goal is to make compliance management affordable, accessible, and stress-free.</p>
-                    <ul class="features-list">
-                        <li data-i18n="about.missionL1">✓ Reduce compliance-related stress and workload</li>
-                        <li data-i18n="about.missionL2">✓ Minimize risk of penalties and fines</li>
-                        <li data-i18n="about.missionL3">✓ Improve operational efficiency</li>
-                        <li data-i18n="about.missionL4">✓ Ensure continuous compliance monitoring</li>
-                    </ul>
-                </div>
-                <div class="about-image-block">
-                    <div class="about-image-placeholder">
-                        <svg width="500" height="350" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="500" height="350" fill="#f3f4f6" rx="10"/>
-                            <path d="M 100 100 L 200 150 L 300 100 L 400 150 L 400 250 L 100 250 Z" fill="#3b82f6" opacity="0.2"/>
-                            <circle cx="250" cy="175" r="60" fill="#1e40af" opacity="0.3"/>
-                            <text x="250" y="200" text-anchor="middle" fill="#9ca3af" font-size="16" font-family="Arial">Mission Image</text>
-                        </svg>
-                    </div>
-                    <!-- Замените SVG выше на реальное изображение: <img src="{% static 'images/about-mission.jpg' %}" alt="Our Mission"> -->
-                </div>
-            </div>
-
-            <!-- Values Section -->
-            <div class="about-values">
-                <h2 data-i18n="about.valuesTitle">Our Core Values</h2>
-                <div class="underline"></div>
-                <div class="values-grid">
-                    <div class="value-card">
-                        <div class="value-icon">🎯</div>
-                        <h3 data-i18n="about.value1Title">Excellence</h3>
-                        <p data-i18n="about.value1Desc">We strive for excellence in every aspect of our service, ensuring accuracy and reliability in all compliance matters.</p>
-                    </div>
-                    <div class="value-card">
-                        <div class="value-icon">🤝</div>
-                        <h3 data-i18n="about.value2Title">Partnership</h3>
-                        <p data-i18n="about.value2Desc">We build long-term relationships with our clients, understanding their unique needs and providing personalized solutions.</p>
-                    </div>
-                    <div class="value-card">
-                        <div class="value-icon">🔒</div>
-                        <h3 data-i18n="about.value3Title">Integrity</h3>
-                        <p data-i18n="about.value3Desc">We operate with the highest standards of integrity, transparency, and ethical business practices.</p>
-                    </div>
-                    <div class="value-card">
-                        <div class="value-icon">⚡</div>
-                        <h3 data-i18n="about.value4Title">Innovation</h3>
-                        <p data-i18n="about.value4Desc">We continuously improve our processes and technology to provide the best possible service to our clients.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Team Section -->
-            <div class="about-team">
-                <h2 data-i18n="about.whyTitle">Why Choose Us</h2>
-                <div class="underline"></div>
-                <div class="team-features">
-                    <div class="team-feature">
-                        <div class="team-feature-icon">👥</div>
-                        <h3 data-i18n="about.why1Title">Expert Team</h3>
-                        <p data-i18n="about.why1Desc">Our team consists of certified compliance specialists with decades of combined experience in transportation regulations.</p>
-                    </div>
-                    <div class="team-feature">
-                        <div class="team-feature-icon">🛡️</div>
-                        <h3 data-i18n="about.why2Title">Proven Results</h3>
-                        <p data-i18n="about.why2Desc">We have a proven track record of helping companies avoid penalties and maintain compliance across all jurisdictions.</p>
-                    </div>
-                    <div class="team-feature">
-                        <div class="team-feature-icon">📱</div>
-                        <h3 data-i18n="about.why3Title">Modern Technology</h3>
-                        <p data-i18n="about.why3Desc">Our platform uses the latest technology to streamline compliance processes and provide real-time updates.</p>
-                    </div>
-                    <div class="team-feature">
-                        <div class="team-feature-icon">💼</div>
-                        <h3 data-i18n="about.why4Title">Comprehensive Service</h3>
-                        <p data-i18n="about.why4Desc">From IFTA to FMCSA, we handle all aspects of compliance management under one roof.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CTA Section -->
-            <div class="about-cta">
-                <h2 data-i18n="about.ctaTitle">Ready to Work With Us?</h2>
-                <p data-i18n="about.ctaSubtitle">Join hundreds of satisfied clients who trust us with their compliance needs.</p>
-                <a href="{% url 'main:contacts' %}" class="btn btn-primary" data-i18n="about.ctaButton">GET IN TOUCH</a>
-            </div>
-        </div>
-    </div>
+<!-- Hero Section -->
+<section class="relative h-[400px] w-full overflow-hidden">
+<div class="absolute inset-0 bg-primary/40 mix-blend-multiply border-b border-primary/10"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-light dark:from-background-dark to-transparent"></div>
+<div class="absolute inset-0 flex items-end">
+<div class="mx-auto w-full max-w-[1200px] px-6 pb-12">
+<h2 class="text-4xl font-black tracking-tight md:text-6xl text-primary dark:text-white">Our Story</h2>
+<p class="mt-4 max-w-2xl text-lg font-medium text-body-text dark:text-slate-300">
+                        Pioneering safety and compliance excellence for modern enterprises across the globe.
+                    </p>
+</div>
+</div>
 </section>
-{% endblock %}
+<!-- Company Narrative -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+<div class="grid grid-cols-1 gap-16 lg:grid-cols-2">
+<div>
+<h3 class="text-2xl font-bold text-primary dark:text-white">A Legacy of Precision</h3>
+<div class="mt-6 space-y-4 text-base leading-relaxed text-slate-600 dark:text-slate-400">
+<p>
+                            Founded with a vision to simplify complex regulatory landscapes, Safety Lab helps organizations navigate <span class="font-semibold text-accent">compliance deadlines</span> with precision and ease. We started as a small team of experts dedicated to <span class="font-semibold text-accent">risk reduction</span> and have grown into a leading partner for businesses nationwide.
+                        </p>
+<p>
+                            Today, we offer <span class="font-semibold text-accent">multi-state coverage</span>, ensuring that no matter where your operations expand, your safety protocols remain robust, compliant, and integrated. Our approach combines deep legal expertise with cutting-edge technology to provide a seamless safety management experience.
+                        </p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="rounded-xl bg-accent/5 p-6 flex flex-col justify-center border border-accent/10">
+<span class="text-4xl font-black text-primary dark:text-white">99.8%</span>
+<span class="mt-2 text-sm font-medium uppercase tracking-wider text-slate-500">ON TIME</span>
+</div>
+<div class="rounded-xl bg-primary p-6 flex flex-col justify-center text-white border border-primary">
+<span class="text-4xl font-black">500+</span>
+<span class="mt-2 text-sm font-medium uppercase tracking-wider opacity-80">Clients Served</span>
+</div>
+<div class="rounded-xl bg-secondary p-6 flex flex-col justify-center text-white border border-secondary">
+<span class="text-4xl font-black">50</span>
+<span class="mt-2 text-sm font-medium uppercase tracking-wider opacity-80">States Covered</span>
+</div>
+<div class="rounded-xl bg-accent/5 p-6 flex flex-col justify-center border border-accent/10">
+<span class="text-4xl font-black text-primary dark:text-white">24/7</span>
+<span class="mt-2 text-sm font-medium uppercase tracking-wider text-slate-500">Support</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Mission & Values -->
+<section class="bg-accent/5 py-24 dark:bg-white/5 border-y border-primary/5">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center">
+<h2 class="text-3xl font-bold tracking-tight text-primary dark:text-white">Mission &amp; Values</h2>
+<p class="mx-auto mt-4 max-w-2xl text-body-text dark:text-slate-400">
+                        Our core principles guide every audit, every recommendation, and every partnership we build.
+                    </p>
+</div>
+<div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
+<div class="rounded-2xl bg-white dark:bg-slate-800 p-8 shadow-sm border border-accent/5">
+<div class="inline-flex size-12 items-center justify-center rounded-lg bg-accent/10 text-accent mb-6">
+<span class="material-symbols-outlined text-2xl">track_changes</span>
+</div>
+<h4 class="text-xl font-bold text-primary dark:text-white">Unwavering Compliance</h4>
+<p class="mt-3 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                            We don't just meet standards; we set them. Our focus is ensuring your organization never falls behind on critical compliance deadlines.
+                        </p>
+</div>
+<div class="rounded-2xl bg-white dark:bg-slate-800 p-8 shadow-sm border border-accent/5">
+<div class="inline-flex size-12 items-center justify-center rounded-lg bg-accent/10 text-accent mb-6">
+<span class="material-symbols-outlined text-2xl">shield_with_heart</span>
+</div>
+<h4 class="text-xl font-bold text-primary dark:text-white">Safety First</h4>
+<p class="mt-3 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                            Our primary objective is effective risk reduction. We protect your most valuable asset: your people.
+                        </p>
+</div>
+<div class="rounded-2xl bg-white dark:bg-slate-800 p-8 shadow-sm border border-accent/5">
+<div class="inline-flex size-12 items-center justify-center rounded-lg bg-accent/10 text-accent mb-6">
+<span class="material-symbols-outlined text-2xl">public</span>
+</div>
+<h4 class="text-xl font-bold text-primary dark:text-white">Total Coverage</h4>
+<p class="mt-3 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                            With our multi-state coverage models, we provide consistent, high-quality safety oversight regardless of geographic location.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+<div class="relative overflow-hidden rounded-3xl bg-primary px-8 py-16 text-center text-white">
+<div class="relative z-10">
+<h2 class="text-3xl font-bold md:text-4xl">Ready to secure your workplace?</h2>
+<p class="mx-auto mt-4 max-w-xl text-lg opacity-90">
+                        Join hundreds of enterprises that trust Safety Lab for their regulatory compliance and safety auditing needs.
+                    </p>
+<div class="mt-10 flex flex-wrap justify-center gap-4">
+<a href="{% url 'main:contacts' %}" class="rounded-lg bg-white px-8 py-3 font-bold text-primary shadow-lg transition-transform hover:scale-105">
+                            Speak to an Expert
+                        </a>
+<a href="{% url 'main:index' %}#services" class="rounded-lg border border-white/30 bg-white/10 px-8 py-3 font-bold backdrop-blur-sm transition-colors hover:bg-white/20">
+                            View Our Services
+                        </a>
+</div>
+</div>
+<!-- Abstract Background Pattern -->
+<div class="absolute inset-0 opacity-10">
+<svg class="h-full w-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M0 0 L100 0 L100 100 L0 100 Z" fill="currentColor"></path>
+</svg>
+</div>
+</div>
+</section>
 
+{% endblock %}
