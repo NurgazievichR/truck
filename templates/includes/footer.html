@@ -1,26 +1,77 @@
 {% load static %}
-<footer>
-    <div class="container">
-        <div class="footer-column">
-            <h3>Safety-Lab</h3>
-            <p data-i18n="footer.tagline">Leading provider of safety and compliance management solutions for trucking companies nationwide.</p>
+<footer class="bg-primary text-slate-300 pt-20 pb-10">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+<!-- Brand -->
+<div class="space-y-6">
+<a href="{% url 'main:index' %}" class="flex items-center gap-3">
+<div class="text-accent size-8">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<span class="text-xl font-black tracking-tight text-white uppercase">Safety Lab</span>
+</a>
+<p class="text-sm leading-relaxed opacity-70">
+                    Professional logistics and trucking compliance services. Keeping you road-ready and legally secure nationwide.
+                </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent transition-colors" href="#">
+<span class="material-symbols-outlined text-xl text-white">social_leaderboard</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-[#229ED9] flex items-center justify-center hover:opacity-90 transition-opacity" href="https://t.me/+13058508306">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-white" aria-hidden="true">
+<path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 14.868l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.691z"/>
+</svg>
+</a>
+</div>
+</div>
+<!-- Contact Details -->
+<div class="space-y-6">
+<h4 class="text-white font-bold text-lg">Contact Us</h4>
+<ul class="space-y-4 text-sm">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-accent">location_on</span>
+<span>250 McHenry Rd, Buffalo Grove,<br/>IL 60089</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-accent">call</span>
+<a href="tel:+13058508306">+1 (305) 850-8306</a>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-accent">mail</span>
+<a href="mailto:info@safetylabinc.com">info@safetylabinc.com</a>
+</li>
+</ul>
+</div>
+<!-- Quick Links -->
+<div class="space-y-6">
+<h4 class="text-white font-bold text-lg">Quick Links</h4>
+<ul class="space-y-3 text-sm">
+<li><a class="hover:text-accent transition-colors" href="{% url 'main:index' %}#services">Services</a></li>
+<li><a class="hover:text-accent transition-colors" href="{% url 'main:index' %}#how-we-work">How We Work</a></li>
+<li><a class="hover:text-accent transition-colors" href="{% url 'main:contacts' %}">Contact</a></li>
+<li><a class="hover:text-accent transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-accent transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<!-- Business Hours -->
+<div class="space-y-6">
+<h4 class="text-white font-bold text-lg">Business Hours</h4>
+<ul class="space-y-3 text-sm">
+<li class="flex justify-between border-b border-white/10 pb-2">
+<span>Mon - Fri:</span>
+<span class="text-white">9AM - 5PM</span>
+</li>
+<li class="flex justify-between">
+<span>Saturday - Sunday:</span>
+<span class="text-accent font-bold italic">Closed</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="pt-8 border-t border-white/10 text-center text-xs opacity-50">
+            © 2026 Safety-Lab. All rights reserved.
         </div>
-        <div class="footer-column">
-            <h3 data-i18n="footer.quickLinks">QUICK LINKS</h3>
-            <a href="{% url 'main:index' %}#services" data-i18n="footer.services">Services</a>
-            <a href="{% url 'main:index' %}#how-we-work" data-i18n="footer.howWeWork">How We Work</a>
-            <a href="{% url 'main:contacts' %}" data-i18n="footer.contact">Contact</a>
-        </div>
-        <div class="footer-column">
-            <h3 data-i18n="footer.contactHeading">Contact</h3>
-            <p><span data-i18n="footer.addressLabel">Address:</span> 250 McHenry Rd, Buffalo Grove, IL 60089</p>
-            <p><span data-i18n="footer.phoneLabel">Phone:</span> <a href="tel:+13058508306">+1 (305) 850-8306</a></p>
-            <p><span data-i18n="footer.phoneLabel">Phone:</span> <a href="tel:+13125155713">+1 (312) 515-5713</a></p>
-            <p><span data-i18n="footer.emailLabel">Email:</span> <a href="mailto:info@safetylabinc.com">info@safetylabinc.com</a></p>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <p><span data-i18n="footer.copyright">© 2026 Safety-Lab. All rights reserved.</span> | <a href="#" data-i18n="footer.privacy">Privacy Policy</a> | <a href="#" data-i18n="footer.terms">Terms of Service</a></p>
-    </div>
+</div>
 </footer>
-

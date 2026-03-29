@@ -31,7 +31,7 @@
 
     function loadTranslations(lang) {
         var base = getTranslationsBase();
-        var url = base + lang + '.json';
+        var url = base + lang + '.json?v=5';
         return fetch(url).then(function(r) {
             if (!r.ok) throw new Error('Translations failed: ' + lang);
             return r.json();

@@ -1,6 +1,21 @@
 // Minimal JavaScript for basic interactions
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Sticky header animation on scroll
+    var header = document.querySelector('header');
+    if (header) {
+        var scrollThreshold = 24;
+        function updateHeaderState() {
+            if (window.scrollY > scrollThreshold) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        }
+        window.addEventListener('scroll', updateHeaderState, { passive: true });
+        updateHeaderState();
+    }
+
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -12,28 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Mobile menu toggle
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    const mainNav = document.querySelector('.main-nav');
-    const body = document.body;
-
-    if (mobileMenuToggle && mainNav) {
-        mobileMenuToggle.addEventListener('click', function() {
-            const isOpen = mainNav.classList.toggle('active');
-            mobileMenuToggle.classList.toggle('active', isOpen);
-            mobileMenuToggle.setAttribute('aria-expanded', isOpen);
-            body.classList.toggle('menu-open', isOpen);
-        });
-
-        mainNav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', function() {
-                mainNav.classList.remove('active');
-                mobileMenuToggle.classList.remove('active');
-                mobileMenuToggle.setAttribute('aria-expanded', 'false');
-                body.classList.remove('menu-open');
-            });
-        });
-    }
 
     // FAQ accordion
     document.querySelectorAll('[data-faq-toggle]').forEach(button => {
@@ -46,20 +39,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // На главной: при прокрутке вниз хедер плавно становится белым
-    const header = document.querySelector('header');
-    if (header && body.classList.contains('page-index')) {
-        const scrollThreshold = 50;
-        function updateHeaderScroll() {
-            if (window.scrollY > scrollThreshold) {
-                header.classList.add('header-scrolled');
-            } else {
-                header.classList.remove('header-scrolled');
-            }
-        }
-        window.addEventListener('scroll', updateHeaderScroll, { passive: true });
-        updateHeaderScroll();
-    }
 
     // Hero slideshow
     var slides = document.querySelectorAll('.hero-slide');

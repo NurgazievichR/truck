@@ -84,7 +84,13 @@ class Contact(models.Model):
         choices=TYPE_CHOICES, 
         verbose_name='Contact Type'
     )
-    value = models.CharField(max_length=255, verbose_name='Value', blank=True, null=True)
+    value = models.CharField(
+        max_length=255,
+        verbose_name='Value',
+        blank=True,
+        null=True,
+        help_text='Telegram: числовой chat_id (после /start бота). Ссылка t.me/+телефон для уведомлений не подходит.',
+    )
     
     # Dates
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created at')

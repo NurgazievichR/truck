@@ -13,11 +13,39 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Allura&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=5">
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#253d38",
+                        "secondary": "#314d47",
+                        "accent": "#398573",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#13181f",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=6">
     <link rel="stylesheet" href="{% static 'css/chatbot.css' %}?v=1">
+    {% block extra_head %}{% endblock %}
 </head>
-<body class="{% block body_class %}{% endblock %}" data-static-url="{% static '' %}" data-tg-handle="{{ tg_handle }}">
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+<body class="font-display bg-background-light dark:bg-background-dark text-[#333] dark:text-slate-100 {% block body_class %}{% endblock %}" data-static-url="{% static '' %}" data-tg-handle="{{ tg_handle }}">
     {% include 'includes/header.html' %}
 
     <main id="main-content" role="main">
@@ -30,26 +58,7 @@
     <script src="{% static 'js/main.js' %}?v=4"></script>
     <script src="{% static 'js/chatbot.js' %}?v=1"></script>
 
-    <!--  Tawk.to — live chat (left side)  -->
-    <script>
-        var Tawk_API = Tawk_API || {};
-        Tawk_API.customStyle = {
-            visibility: {
-                desktop: { position: 'br' },
-                mobile:  { position: 'br' }
-            }
-        };
-        var Tawk_LoadStart = new Date();
-        (function () {
-            var s1 = document.createElement('script'),
-                s0 = document.getElementsByTagName('script')[0];
-            s1.async = true;
-            s1.src = 'https://embed.tawk.to/69aeedf0121cf01c355b93a8/1jj9l2t43';
-            s1.charset = 'UTF-8';
-            s1.setAttribute('crossorigin', '*');
-            s0.parentNode.insertBefore(s1, s0);
-        })();
-    </script>
+    {# Tawk.to temporarily disabled #}
 </body>
 </html>
 
