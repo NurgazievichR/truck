@@ -29,6 +29,16 @@ def about(request):
     return render(request, 'main/about.html')
 
 
+def privacy_policy(request):
+    """Privacy Policy page"""
+    return render(request, 'main/privacy_policy.html')
+
+
+def terms_of_service(request):
+    """Terms of Service page"""
+    return render(request, 'main/terms_of_service.html')
+
+
 def contacts(request):
     """Страница Request a Quote"""
     services = Service.objects.all()
