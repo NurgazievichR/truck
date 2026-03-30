@@ -119,7 +119,7 @@
 
     /* ── Build DOM ───────────────────────────────────────── */
 
-    var toggleBtn, window_, messagesEl, quickRepliesEl, formEl;
+    var toggleBtn, window_, messagesEl, quickRepliesEl, formEl, closeBtn, backdropEl;
 
     function buildWidget() {
         // Toggle button
@@ -143,17 +143,24 @@
             '    <div class="chatbot-header-name">' + t('headerTitle') + '</div>' +
             '    <div class="chatbot-header-status">' + t('headerSubtitle') + '</div>' +
             '  </div>' +
+            '  <button class="chatbot-header-close" type="button" aria-label="' + t('minimize') + '" title="' + t('minimize') + '">&times;</button>' +
             '</div>' +
             '<div class="chatbot-messages"></div>' +
             '<div class="chatbot-quick-replies"></div>';
 
         messagesEl = window_.querySelector('.chatbot-messages');
         quickRepliesEl = window_.querySelector('.chatbot-quick-replies');
+        closeBtn = window_.querySelector('.chatbot-header-close');
+        backdropEl = document.createElement('div');
+        backdropEl.className = 'chatbot-backdrop';
 
+        document.body.appendChild(backdropEl);
         document.body.appendChild(toggleBtn);
         document.body.appendChild(window_);
 
         toggleBtn.addEventListener('click', toggleWidget);
+        closeBtn.addEventListener('click', closeWidget);
+        backdropEl.addEventListener('click', closeWidget);
     }
 
     /* ── Open / Close ────────────────────────────────────── */
@@ -166,17 +173,21 @@
 
     function openWidget() {
         isOpen = true;
+        document.body.classList.add('chatbot-open');
         toggleBtn.classList.add('is-open');
         toggleBtn.classList.remove('has-notification');
         window_.classList.add('is-open');
+        backdropEl.classList.add('is-open');
         if (messagesEl.children.length === 0) startConversation();
         messagesEl.scrollTop = messagesEl.scrollHeight;
     }
 
     function closeWidget() {
         isOpen = false;
+        document.body.classList.remove('chatbot-open');
         toggleBtn.classList.remove('is-open');
         window_.classList.remove('is-open');
+        backdropEl.classList.remove('is-open');
     }
 
     /* ── Messaging ───────────────────────────────────────── */
@@ -224,7 +235,9 @@
                 el = document.createElement('button');
                 el.className = 'chatbot-qr-btn';
                 el.textContent = btn.label;
-                el.addEventListener('click', function () {
+                el.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
                     addMsg(btn.label, 'user');
                     clearReplies();
                     showTyping(btn.action);
