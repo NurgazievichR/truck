@@ -12,7 +12,7 @@
 </div>
 <span class="text-xl font-black tracking-tight text-white uppercase">Safety Lab</span>
 </a>
-<p class="text-sm leading-relaxed opacity-70">
+<p class="text-sm leading-relaxed opacity-70" data-i18n="footer.tagline">
                     Professional logistics and trucking compliance services. Keeping you road-ready and legally secure nationwide.
                 </p>
 <div class="flex gap-4">
@@ -30,7 +30,7 @@
 </div>
 <!-- Contact Details -->
 <div class="space-y-6">
-<h4 class="text-white font-bold text-lg">Contact Us</h4>
+<h4 class="text-white font-bold text-lg" data-i18n="footer.contactHeading">Contact Us</h4>
 <ul class="space-y-4 text-sm">
 <li class="flex items-start gap-3">
 <span class="material-symbols-outlined text-accent">location_on</span>
@@ -48,31 +48,31 @@
 </div>
 <!-- Quick Links -->
 <div class="space-y-6">
-<h4 class="text-white font-bold text-lg">Quick Links</h4>
+<h4 class="text-white font-bold text-lg" data-i18n="footer.quickLinks">Quick Links</h4>
 <ul class="space-y-3 text-sm">
-<li><a class="hover:text-accent transition-colors" href="{% url 'main:index' %}#services">Services</a></li>
-<li><a class="hover:text-accent transition-colors" href="{% url 'main:index' %}#how-we-work">How We Work</a></li>
-<li><a class="hover:text-accent transition-colors" href="{% url 'main:contacts' %}">Contact</a></li>
-<li><a class="hover:text-accent transition-colors" href="#">Privacy Policy</a></li>
-<li><a class="hover:text-accent transition-colors" href="#">Terms of Service</a></li>
+<li><a class="hover:text-accent transition-colors" data-i18n="footer.services" href="{% url 'main:index' %}#services">Services</a></li>
+<li><a class="hover:text-accent transition-colors" data-i18n="footer.howWeWork" href="{% url 'main:index' %}#how-we-work">How We Work</a></li>
+<li><a class="hover:text-accent transition-colors" data-i18n="footer.contact" href="{% url 'main:contacts' %}">Contact</a></li>
+<li><a class="hover:text-accent transition-colors" data-i18n="footer.privacy" href="{% url 'main:privacy_policy' %}">Privacy Policy</a></li>
+<li><a class="hover:text-accent transition-colors" data-i18n="footer.terms" href="{% url 'main:terms_of_service' %}">Terms of Service</a></li>
 </ul>
 </div>
 <!-- Business Hours -->
 <div class="space-y-6">
-<h4 class="text-white font-bold text-lg">Business Hours</h4>
+<h4 class="text-white font-bold text-lg" data-i18n="contact.hoursTitle">Business Hours</h4>
 <ul class="space-y-3 text-sm">
 <li class="flex justify-between border-b border-white/10 pb-2">
-<span>Mon - Fri:</span>
-<span class="text-white">9AM - 5PM</span>
+<span data-i18n-en="Mon - Fri:" data-i18n-ru="Пн - Пт:">Mon - Fri:</span>
+<span class="text-white" data-i18n-en="9AM - 5PM" data-i18n-ru="9:00 - 17:00">9AM - 5PM</span>
 </li>
 <li class="flex justify-between">
-<span>Saturday - Sunday:</span>
-<span class="text-accent font-bold italic">Closed</span>
+<span data-i18n-en="Saturday - Sunday:" data-i18n-ru="Суббота - Воскресенье:">Saturday - Sunday:</span>
+<span class="text-accent font-bold italic" data-i18n-en="Closed" data-i18n-ru="Выходной">Closed</span>
 </li>
 </ul>
 </div>
 </div>
-<div class="pt-8 border-t border-white/10 text-center text-xs opacity-50">
+<div class="pt-8 border-t border-white/10 text-center text-xs opacity-50" data-i18n="footer.copyright">
             © 2026 Safety-Lab. All rights reserved.
         </div>
 </div>
