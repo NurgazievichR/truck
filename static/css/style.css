@@ -153,57 +153,6 @@ section {
     background: #45a08a;
     margin: 0 auto;
 }
-
-.page-content {
-    padding: 80px 0;
-}
-
-.page-content h1 {
-    font-size: 36px;
-    margin-bottom: 30px;
-    color: #2d4a44;
-}
-
-.page-content .content {
-    font-size: 16px;
-    line-height: 1.8;
-    color: #555;
-}
-
-.contacts {
-    padding: 80px 0;
-}
-
-.contacts h1 {
-    font-size: 36px;
-    margin-bottom: 40px;
-    color: #2d4a44;
-    text-align: center;
-}
-
-.contacts-list {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.contact-item {
-    padding: 20px;
-    margin-bottom: 15px;
-    background: #f5f5f5;
-    border-radius: 4px;
-}
-
-.contact-item strong {
-    color: #2d4a44;
-    margin-right: 10px;
-}
-
-.contact-item span {
-    color: #333;
-}
-
-
-
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 32px;
@@ -212,49 +161,6 @@ section {
     .hero p {
         font-size: 16px;
     }
-
-    .page-content h1 {
-        font-size: 28px;
-    }
-
-    .contacts h1 {
-        font-size: 28px;
-    }
-}
-
-/* Стили для выравнивания изображений в контенте */
-.page-content .content img.align-left,
-.page-content .content img[class*="align-left"] {
-    float: left !important;
-    margin: 0 20px 20px 0 !important;
-    max-width: 50% !important;
-}
-
-.page-content .content img.align-right,
-.page-content .content img[class*="align-right"] {
-    float: right !important;
-    margin: 0 0 20px 20px !important;
-    max-width: 50% !important;
-}
-
-.page-content .content img {
-    max-width: 100%;
-    height: auto;
-}
-
-/* Обтекание текста вокруг изображений */
-.page-content .content p {
-    overflow: hidden;
-}
-
-.page-content .content p:has(img.align-left),
-.page-content .content p:has(img[class*="align-left"]) {
-    overflow: visible;
-}
-
-.page-content .content p:has(img.align-right),
-.page-content .content p:has(img[class*="align-right"]) {
-    overflow: visible;
 }
 
 /* Стили для страницы услуг */

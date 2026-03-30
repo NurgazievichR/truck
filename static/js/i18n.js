@@ -31,7 +31,7 @@
 
     function loadTranslations(lang) {
         var base = getTranslationsBase();
-        var url = base + lang + '.json?v=5';
+        var url = base + lang + '.json';
         return fetch(url).then(function(r) {
             if (!r.ok) throw new Error('Translations failed: ' + lang);
             return r.json();
@@ -50,6 +50,7 @@
             var value = getNested(t, key);
             if (value != null && typeof value === 'string') el.placeholder = value;
         });
+        document.documentElement.classList.remove('i18n-pending');
     }
 
     function updateLangButtons(lang) {
@@ -66,6 +67,7 @@
             applyTranslations(t);
             updateLangButtons(lang);
         }).catch(function() {
+            document.documentElement.classList.remove('i18n-pending');
             updateLangButtons(lang);
         });
     }
@@ -76,6 +78,7 @@
             applyTranslations(t);
             updateLangButtons(lang);
         }).catch(function() {
+            document.documentElement.classList.remove('i18n-pending');
             updateLangButtons(lang);
         });
 

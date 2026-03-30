@@ -5,7 +5,7 @@
 
 {% block content %}
 <!-- Hero Section -->
-<section class="hero-section hero-with-photo relative h-[630px] w-full overflow-hidden bg-slate-900">
+<section class="hero-section hero-with-photo relative aspect-[4/5] md:aspect-auto md:h-[630px] w-full overflow-hidden bg-slate-900">
 <div class="hero-slideshow" aria-hidden="true">
     <div class="hero-slide is-active absolute inset-0 bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('{% static 'images/slide-truck.png' %}');"></div>
     <div class="hero-slide absolute inset-0 bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('{% static 'images/truck.jpg' %}');"></div>
@@ -13,14 +13,14 @@
     <div class="hero-slide absolute inset-0 bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('{% static 'images/slide-redtruck.png' %}');"></div>
     <div class="hero-slide absolute inset-0 bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('{% static 'images/slide-paperwork.png' %}');"></div>
 </div>
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col items-center justify-center text-center relative z-10">
-<h1 class="text-white text-5xl md:text-7xl font-black mb-6 tracking-tight" data-i18n="hero.title">You drive. We comply.</h1>
-<p class="text-white/90 text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col items-start md:items-center justify-end md:justify-center pb-20 md:pb-0 text-left md:text-center relative z-10 mt-safe md:mt-0">
+<h1 class="text-white text-3xl md:text-7xl font-extrabold md:font-black mb-2 md:mb-6 tracking-tight max-w-sm md:max-w-none" data-i18n="hero.title">You drive. We comply.</h1>
+<p class="text-white/90 text-sm md:text-xl max-w-xs md:max-w-2xl mb-6 md:mb-10 leading-relaxed block md:inline">
                 <span data-i18n="hero.subtitle">Comprehensive IFTA, IRP, UCR &amp; FMCSA compliance management. We handle the paperwork so you can stay on the road.</span>
             </p>
-<div class="flex flex-col sm:flex-row gap-4">
-<a href="{% url 'main:contacts' %}" class="bg-primary text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-secondary hover:shadow-xl transition-all" data-i18n="hero.cta">Get a free consultation</a>
-<a href="#services" class="bg-white text-slate-900 px-8 py-4 rounded-lg font-bold text-lg hover:bg-slate-50 transition-all" data-i18n="hero.viewServices">View services</a>
+<div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+<a href="{% url 'main:contacts' %}" class="bg-primary hover:bg-secondary text-white px-6 md:px-8 py-3 w-full md:py-4 rounded-lg font-bold text-base md:text-lg text-center hover:shadow-xl transition-all shadow-lg" data-i18n="hero.cta">Get a free consultation</a>
+<a href="#services" class="hidden md:inline-flex justify-center bg-white text-slate-900 px-8 py-4 rounded-lg font-bold text-lg hover:bg-slate-50 transition-all" data-i18n="hero.viewServices">View services</a>
 </div>
 </div>
 <!-- Dot Navigation -->
@@ -55,63 +55,83 @@
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
     {% for service in services|slice:":4" %}
     <!-- Service Card -->
-    <div class="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group">
-        <div class="w-14 h-14 bg-accent/10 dark:bg-accent/20 rounded-lg flex items-center justify-center text-accent mb-6 group-hover:bg-accent group-hover:text-white transition-colors">
+    <div class="flex md:flex-col items-center md:items-start gap-4 md:gap-0 bg-white dark:bg-slate-800 p-4 md:p-8 rounded-xl shadow-sm hover:shadow-xl md:hover:-translate-y-1 transition-all group border border-primary/5 md:border-transparent">
+        <div class="w-12 h-12 md:w-14 md:h-14 bg-accent/10 dark:bg-accent/20 rounded-lg flex-shrink-0 flex items-center justify-center text-accent md:mb-6 group-hover:bg-accent group-hover:text-white transition-colors">
             {% if service.image %}
-                <img src="{{ service.image.url }}" alt="" class="w-8 h-8 object-contain">
+                <img src="{{ service.image.url }}" alt="" class="w-6 h-6 md:w-8 md:h-8 object-contain">
             {% else %}
-                <span class="material-symbols-outlined text-3xl">analytics</span>
+                <span class="material-symbols-outlined text-2xl md:text-3xl">analytics</span>
             {% endif %}
         </div>
-        <h3 class="text-xl font-bold mb-3 text-primary">{{ service.title }}</h3>
-        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">
-            {{ service.description|truncatewords:18 }}
-        </p>
-        <a href="{% url 'main:contacts' %}?service={{ service.id }}" class="text-accent font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
-            Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
-        </a>
+        <div class="flex-1">
+            <h3 class="font-bold md:text-xl text-sm md:mb-3 text-primary">{{ service.title }}</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs md:text-sm leading-relaxed mb-0 md:mb-6 mt-1 md:mt-0">
+                {{ service.description|truncatewords:18 }}
+            </p>
+            <a href="{% url 'main:contacts' %}?service={{ service.id }}" class="hidden md:flex text-accent font-bold text-sm items-center gap-2 group-hover:gap-3 transition-all">
+                Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+        </div>
+        <span class="material-symbols-outlined text-slate-400 md:hidden flex-shrink-0">chevron_right</span>
+        <a href="{% url 'main:contacts' %}?service={{ service.id }}" class="absolute inset-0 z-10 md:hidden"><span class="sr-only">View Service</span></a>
     </div>
     {% empty %}
     <!-- Fallback Service Cards if DB is empty -->
-    <div class="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group">
-        <div class="w-14 h-14 bg-accent/10 dark:bg-accent/20 rounded-lg flex items-center justify-center text-accent mb-6 group-hover:bg-accent group-hover:text-white transition-colors">
-            <span class="material-symbols-outlined text-3xl">analytics</span>
+    <div class="flex md:flex-col items-center md:items-start gap-4 md:gap-0 bg-white dark:bg-slate-800 p-4 md:p-8 rounded-xl shadow-sm hover:shadow-xl md:hover:-translate-y-1 transition-all group border border-primary/5 md:border-transparent">
+        <div class="w-12 h-12 md:w-14 md:h-14 bg-accent/10 dark:bg-accent/20 rounded-lg flex-shrink-0 flex items-center justify-center text-accent md:mb-6 group-hover:bg-accent group-hover:text-white transition-colors">
+            <span class="material-symbols-outlined text-2xl md:text-3xl">analytics</span>
         </div>
-        <h3 class="text-xl font-bold mb-3 text-primary">IFTA Reporting</h3>
-        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">Accurate quarterly fuel tax reporting to ensure you stay compliant across all jurisdictions.</p>
-        <a href="{% url 'main:contacts' %}" class="text-accent font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
-            Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
-        </a>
+        <div class="flex-1">
+            <h3 class="font-bold md:text-xl text-sm md:mb-3 text-primary">IFTA Reporting</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs md:text-sm leading-relaxed mb-0 md:mb-6 mt-1 md:mt-0">Accurate quarterly fuel tax reporting to ensure you stay compliant across all jurisdictions.</p>
+            <a href="{% url 'main:contacts' %}" class="hidden md:flex text-accent font-bold text-sm items-center gap-2 group-hover:gap-3 transition-all">
+                Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+        </div>
+        <span class="material-symbols-outlined text-slate-400 md:hidden flex-shrink-0">chevron_right</span>
+        <a href="{% url 'main:contacts' %}" class="absolute inset-0 z-10 md:hidden"><span class="sr-only">View Service</span></a>
     </div>
-    <div class="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group">
-        <div class="w-14 h-14 bg-accent/10 dark:bg-accent/20 rounded-lg flex items-center justify-center text-accent mb-6 group-hover:bg-accent group-hover:text-white transition-colors">
-            <span class="material-symbols-outlined text-3xl">app_registration</span>
+    <div class="flex md:flex-col items-center md:items-start gap-4 md:gap-0 bg-white dark:bg-slate-800 p-4 md:p-8 rounded-xl shadow-sm hover:shadow-xl md:hover:-translate-y-1 transition-all group border border-primary/5 md:border-transparent">
+        <div class="w-12 h-12 md:w-14 md:h-14 bg-accent/10 dark:bg-accent/20 rounded-lg flex-shrink-0 flex items-center justify-center text-accent md:mb-6 group-hover:bg-accent group-hover:text-white transition-colors">
+            <span class="material-symbols-outlined text-2xl md:text-3xl">app_registration</span>
         </div>
-        <h3 class="text-xl font-bold mb-3 text-primary">IRP Registration</h3>
-        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">Seamless apportioned plate registrations and renewals for multi-state operations.</p>
-        <a href="{% url 'main:contacts' %}" class="text-accent font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
-            Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
-        </a>
+        <div class="flex-1">
+            <h3 class="font-bold md:text-xl text-sm md:mb-3 text-primary">IRP Registration</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs md:text-sm leading-relaxed mb-0 md:mb-6 mt-1 md:mt-0">Seamless apportioned plate registrations and renewals for multi-state operations.</p>
+            <a href="{% url 'main:contacts' %}" class="hidden md:flex text-accent font-bold text-sm items-center gap-2 group-hover:gap-3 transition-all">
+                Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+        </div>
+        <span class="material-symbols-outlined text-slate-400 md:hidden flex-shrink-0">chevron_right</span>
+        <a href="{% url 'main:contacts' %}" class="absolute inset-0 z-10 md:hidden"><span class="sr-only">View Service</span></a>
     </div>
-    <div class="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group">
-        <div class="w-14 h-14 bg-accent/10 dark:bg-accent/20 rounded-lg flex items-center justify-center text-accent mb-6 group-hover:bg-accent group-hover:text-white transition-colors">
-            <span class="material-symbols-outlined text-3xl">assignment_turned_in</span>
+    <div class="flex md:flex-col items-center md:items-start gap-4 md:gap-0 bg-white dark:bg-slate-800 p-4 md:p-8 rounded-xl shadow-sm hover:shadow-xl md:hover:-translate-y-1 transition-all group border border-primary/5 md:border-transparent">
+        <div class="w-12 h-12 md:w-14 md:h-14 bg-accent/10 dark:bg-accent/20 rounded-lg flex-shrink-0 flex items-center justify-center text-accent md:mb-6 group-hover:bg-accent group-hover:text-white transition-colors">
+            <span class="material-symbols-outlined text-2xl md:text-3xl">assignment_turned_in</span>
         </div>
-        <h3 class="text-xl font-bold mb-3 text-primary">UCR Filing</h3>
-        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">Handling your Unified Carrier Registration efficiently to avoid hefty fines and delays.</p>
-        <a href="{% url 'main:contacts' %}" class="text-accent font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
-            Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
-        </a>
+        <div class="flex-1">
+            <h3 class="font-bold md:text-xl text-sm md:mb-3 text-primary">UCR Filing</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs md:text-sm leading-relaxed mb-0 md:mb-6 mt-1 md:mt-0">Handling your Unified Carrier Registration efficiently to avoid hefty fines and delays.</p>
+            <a href="{% url 'main:contacts' %}" class="hidden md:flex text-accent font-bold text-sm items-center gap-2 group-hover:gap-3 transition-all">
+                Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+        </div>
+        <span class="material-symbols-outlined text-slate-400 md:hidden flex-shrink-0">chevron_right</span>
+        <a href="{% url 'main:contacts' %}" class="absolute inset-0 z-10 md:hidden"><span class="sr-only">View Service</span></a>
     </div>
-    <div class="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group">
-        <div class="w-14 h-14 bg-accent/10 dark:bg-accent/20 rounded-lg flex items-center justify-center text-accent mb-6 group-hover:bg-accent group-hover:text-white transition-colors">
-            <span class="material-symbols-outlined text-3xl">verified_user</span>
+    <div class="flex md:flex-col items-center md:items-start gap-4 md:gap-0 bg-white dark:bg-slate-800 p-4 md:p-8 rounded-xl shadow-sm hover:shadow-xl md:hover:-translate-y-1 transition-all group border border-primary/5 md:border-transparent">
+        <div class="w-12 h-12 md:w-14 md:h-14 bg-accent/10 dark:bg-accent/20 rounded-lg flex-shrink-0 flex items-center justify-center text-accent md:mb-6 group-hover:bg-accent group-hover:text-white transition-colors">
+            <span class="material-symbols-outlined text-2xl md:text-3xl">verified_user</span>
         </div>
-        <h3 class="text-xl font-bold mb-3 text-primary">FMCSA Support</h3>
-        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">Safety audits, MCS-150 updates, and authority maintenance for total peace of mind.</p>
-        <a href="{% url 'main:contacts' %}" class="text-accent font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
-            Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
-        </a>
+        <div class="flex-1">
+            <h3 class="font-bold md:text-xl text-sm md:mb-3 text-primary">FMCSA Support</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs md:text-sm leading-relaxed mb-0 md:mb-6 mt-1 md:mt-0">Safety audits, MCS-150 updates, and authority maintenance for total peace of mind.</p>
+            <a href="{% url 'main:contacts' %}" class="hidden md:flex text-accent font-bold text-sm items-center gap-2 group-hover:gap-3 transition-all">
+                Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+        </div>
+        <span class="material-symbols-outlined text-slate-400 md:hidden flex-shrink-0">chevron_right</span>
+        <a href="{% url 'main:contacts' %}" class="absolute inset-0 z-10 md:hidden"><span class="sr-only">View Service</span></a>
     </div>
     {% endfor %}
 </div>

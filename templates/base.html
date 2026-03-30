@@ -10,6 +10,20 @@
     <meta property="og:description" content="{% block og_description %}Stay audit-ready. Reduce risk. Trusted compliance management for trucking companies.{% endblock %}">
     <meta property="og:type" content="website">
     {% load static %}
+    <script>
+        (function() {
+            // Prevent FOUC (Tailwind CDN loads async) + prevent i18n flash
+            document.documentElement.classList.add('boot-pending');
+            var stored = localStorage.getItem('safety-lab-lang');
+            if (stored && stored !== 'en') {
+                document.documentElement.classList.add('i18n-pending');
+            }
+        })();
+    </script>
+    <style>
+        .boot-pending body,
+        .i18n-pending body { visibility: hidden; }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Allura&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
@@ -41,22 +55,55 @@
             },
         }
     </script>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=6">
-    <link rel="stylesheet" href="{% static 'css/chatbot.css' %}?v=1">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/chatbot.css' %}">
     {% block extra_head %}{% endblock %}
 </head>
 <body class="font-display bg-background-light dark:bg-background-dark text-[#333] dark:text-slate-100 {% block body_class %}{% endblock %}" data-static-url="{% static '' %}" data-tg-url="{{ tg_url }}">
     {% include 'includes/header.html' %}
 
-    <main id="main-content" role="main">
+    <main id="main-content" role="main" class="pb-24 md:pb-0">
         {% block content %}{% endblock %}
     </main>
 
     {% include 'includes/footer.html' %}
 
-    <script src="{% static 'js/i18n.js' %}?v=4"></script>
-    <script src="{% static 'js/main.js' %}?v=4"></script>
-    <script src="{% static 'js/chatbot.js' %}?v=1"></script>
+    <!-- Mobile Bottom Navigation -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 dark:bg-background-dark/95 backdrop-blur-md border-t border-primary/10 px-2 pb-6 pt-3 flex items-center justify-around shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
+    <a class="flex flex-col items-center gap-1 text-primary dark:text-white" href="{% url 'main:index' %}">
+    <span class="material-symbols-outlined">home</span>
+    <span class="text-[10px] font-medium" data-i18n="nav.home">Home</span>
+    </a>
+    <a class="flex flex-col items-center gap-1 text-[#555] dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors" href="{% url 'main:index' %}#services">
+    <span class="material-symbols-outlined">analytics</span>
+    <span class="text-[10px] font-medium" data-i18n="nav.services">Services</span>
+    </a>
+    <a class="flex flex-col items-center gap-1 text-[#555] dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors" href="{% url 'main:about' %}">
+    <span class="material-symbols-outlined">info</span>
+    <span class="text-[10px] font-medium" data-i18n="nav.aboutUs">About</span>
+    </a>
+    <a class="flex flex-col items-center gap-1 text-[#555] dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors" href="{% url 'main:contacts' %}">
+    <span class="material-symbols-outlined">mail</span>
+    <span class="text-[10px] font-medium" data-i18n="nav.contactUs">Contact</span>
+    </a>
+    </nav>
+
+    <script src="{% static 'js/i18n.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/chatbot.js' %}"></script>
+    <script>
+        (function () {
+            function reveal() {
+                document.documentElement.classList.remove('boot-pending');
+            }
+            // Give Tailwind a tick to inject styles
+            requestAnimationFrame(function () {
+                requestAnimationFrame(reveal);
+            });
+            // Safety: never stay hidden if JS/CSS hiccups
+            setTimeout(reveal, 1500);
+        })();
+    </script>
 
     {# Tawk.to temporarily disabled #}
 </body>
