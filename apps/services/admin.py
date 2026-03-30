@@ -6,7 +6,7 @@ from .models import Service
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ['title', 'created_at']
+    list_display = ['title', 'title_ru', 'created_at']
     readonly_fields = ['created_at', 'updated_at']
     actions = None  # Remove actions
     change_list_template = 'admin/services/service/change_list.html'
@@ -17,8 +17,14 @@ class ServiceAdmin(admin.ModelAdmin):
         return {}
     
     fieldsets = (
-        ('Main Information', {
-            'fields': ('title', 'description', 'image')
+        ('Main Information (EN)', {
+            'fields': ('title', 'description')
+        }),
+        ('Main Information (RU)', {
+            'fields': ('title_ru', 'description_ru')
+        }),
+        ('Media', {
+            'fields': ('image',)
         }),
         ('Dates', {
             'fields': ('created_at', 'updated_at'),

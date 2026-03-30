@@ -8,8 +8,8 @@
 <section class="py-12 md:py-20 bg-white dark:bg-background-dark">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <div class="mb-12">
-<h1 class="text-4xl md:text-5xl font-black tracking-tight text-primary dark:text-white mb-4">Contact Our Experts</h1>
-<p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl">Have questions about safety protocols or trucking compliance? Our specialized team is here to provide technical support and guidance.</p>
+<h1 class="text-4xl md:text-5xl font-black tracking-tight text-primary dark:text-white mb-4" data-i18n="contact.heroTitle">Contact Our Experts</h1>
+<p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl" data-i18n="contact.heroSubtitle">Have questions about safety protocols or trucking compliance? Our specialized team is here to provide technical support and guidance.</p>
 </div>
 
 {% if messages %}
@@ -25,64 +25,66 @@
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
 <!-- Left Column: Form -->
 <div class="bg-background-light dark:bg-slate-900 p-8 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800">
-<h2 class="text-2xl font-bold mb-6 text-primary dark:text-white">Send us a Message</h2>
+<h2 class="text-2xl font-bold mb-6 text-primary dark:text-white" data-i18n="contact.formTitle">Send us a Message</h2>
 <form method="post" class="space-y-5">
 {% csrf_token %}
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
 <div class="flex flex-col gap-2">
-<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Full Name</label>
-<input name="name" class="rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-background-dark focus:ring-2 focus:ring-primary/20 focus:border-primary px-3 py-2 text-sm" placeholder="John Doe" type="text" required/>
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300" data-i18n="contact.nameLabel">Full Name</label>
+<input name="name" class="rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-background-dark focus:ring-2 focus:ring-primary/20 focus:border-primary px-3 py-2 text-sm" placeholder="John Doe" data-i18n-placeholder="contact.namePlaceholder" type="text" required/>
 </div>
 <div class="flex flex-col gap-2">
-<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Company</label>
-<input name="company" class="rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-background-dark focus:ring-2 focus:ring-primary/20 focus:border-primary px-3 py-2 text-sm" placeholder="Company Ltd" type="text"/>
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300" data-i18n="contact.companyLabel">Company</label>
+<input name="company" class="rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-background-dark focus:ring-2 focus:ring-primary/20 focus:border-primary px-3 py-2 text-sm" placeholder="Company Ltd" data-i18n-placeholder="contact.companyPlaceholder" type="text"/>
 </div>
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
 <div class="flex flex-col gap-2">
-<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Phone Number</label>
-<input name="phone" class="rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-background-dark focus:ring-2 focus:ring-primary/20 focus:border-primary px-3 py-2 text-sm" placeholder="+1 (000) 000-0000" type="tel"/>
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300" data-i18n="contact.phoneLabel">Phone Number</label>
+<input name="phone" class="rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-background-dark focus:ring-2 focus:ring-primary/20 focus:border-primary px-3 py-2 text-sm" placeholder="+1 (000) 000-0000" data-i18n-placeholder="contact.phonePlaceholder" type="tel"/>
 </div>
 <div class="flex flex-col gap-2">
-<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Email Address</label>
-<input name="email" class="rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-background-dark focus:ring-2 focus:ring-primary/20 focus:border-primary px-3 py-2 text-sm" placeholder="john@example.com" type="email" required/>
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300" data-i18n="contact.emailLabel">Email Address</label>
+<input name="email" class="rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-background-dark focus:ring-2 focus:ring-primary/20 focus:border-primary px-3 py-2 text-sm" placeholder="john@example.com" data-i18n-placeholder="contact.emailPlaceholder" type="email" required/>
 </div>
 </div>
 <!-- Services Injection for BE Logic -->
 <div class="flex flex-col gap-2">
-    <label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Select Services (Select all that apply)</label>
+    <label class="text-sm font-semibold text-slate-700 dark:text-slate-300" data-i18n="contact.servicesLabel">Select Services (Select all that apply)</label>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
         {% for service in services %}
             <label class="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" name="services" value="{{ service.id }}" class="rounded border-slate-300 text-primary focus:ring-primary bg-white dark:bg-slate-800">
-                <span class="text-sm text-slate-600 dark:text-slate-400">{{ service.title }}</span>
+                <span class="text-sm text-slate-600 dark:text-slate-400"
+                      data-i18n-en="{{ service.title }}"
+                      data-i18n-ru="{{ service.title_ru|default:service.title }}">{{ service.title }}</span>
             </label>
         {% empty %}
-            <p class="text-sm text-slate-500">No services available</p>
+            <p class="text-sm text-slate-500" data-i18n="contact.noServices">No services available</p>
         {% endfor %}
     </div>
 </div>
 
 <div class="flex flex-col gap-2">
-<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Message / Description</label>
-<textarea name="description" class="rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-background-dark focus:ring-2 focus:ring-primary/20 focus:border-primary px-3 py-2 text-sm" placeholder="How can we help you?" rows="4"></textarea>
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300" data-i18n="contact.messageLabel">Message / Description</label>
+<textarea name="description" class="rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-background-dark focus:ring-2 focus:ring-primary/20 focus:border-primary px-3 py-2 text-sm" placeholder="How can we help you?" data-i18n-placeholder="contact.messagePlaceholder" rows="4"></textarea>
 </div>
 <button class="w-full bg-primary text-white py-4 rounded-lg font-bold hover:bg-secondary transition-colors" type="submit">
-                                Submit Inquiry
+                                <span data-i18n="contact.submit">Submit Inquiry</span>
                             </button>
 </form>
 </div>
 <!-- Right Column: Info -->
 <div class="flex flex-col gap-10">
 <div>
-<h2 class="text-2xl font-bold mb-8 text-primary dark:text-white">Contact Information</h2>
+<h2 class="text-2xl font-bold mb-8 text-primary dark:text-white" data-i18n="contact.infoTitle">Contact Information</h2>
 <div class="space-y-6">
 <div class="flex items-start gap-4">
 <div class="bg-accent/10 p-3 rounded-lg text-accent">
 <span class="material-symbols-outlined">location_on</span>
 </div>
 <div>
-<h3 class="font-bold text-primary dark:text-white">Our Address</h3>
+<h3 class="font-bold text-primary dark:text-white" data-i18n="contact.addressTitle">Our Address</h3>
 <p class="text-slate-600 dark:text-slate-400">250 McHenry Rd, Buffalo Grove, IL 60089</p>
 </div>
 </div>
@@ -91,7 +93,7 @@
 <span class="material-symbols-outlined">call</span>
 </div>
 <div>
-<h3 class="font-bold text-primary dark:text-white">Phone Numbers</h3>
+<h3 class="font-bold text-primary dark:text-white" data-i18n="contact.phonesTitle">Phone Numbers</h3>
 <p class="text-slate-600 dark:text-slate-400"><a href="tel:+13058508306" class="hover:text-primary transition-colors">+1 (305) 850-8306</a></p>
 <p class="text-slate-600 dark:text-slate-400"><a href="tel:+13125155713" class="hover:text-primary transition-colors">+1 (312) 515-5713</a></p>
 </div>
@@ -101,9 +103,9 @@
 <span class="material-symbols-outlined">mail</span>
 </div>
 <div>
-<h3 class="font-bold text-primary dark:text-white">Email-Social</h3>
+<h3 class="font-bold text-primary dark:text-white" data-i18n="contact.emailSocialTitle">Email-Social</h3>
 <p class="text-slate-600 dark:text-slate-400 mt-1">
-    Telegram:
+    <span data-i18n="contact.telegramLabel">Telegram:</span>
     {% if tg_url %}
         <a href="{{ tg_url }}" class="text-[#229ED9] hover:underline" target="_blank" rel="noopener noreferrer">@Safety_lab</a>
     {% else %}
@@ -111,7 +113,7 @@
     {% endif %}
 </p>
 <p class="text-slate-600 dark:text-slate-400 mt-1">
-    Email:
+    <span data-i18n="contact.emailInlineLabel">Email:</span>
     <a href="mailto:info@safetylabinc.com" class="hover:text-primary transition-colors">info@safetylabinc.com</a>
 </p>
 </div>
@@ -121,19 +123,19 @@
 <span class="material-symbols-outlined">schedule</span>
 </div>
 <div>
-<h3 class="font-bold text-primary dark:text-white">Business Hours</h3>
-<p class="text-slate-600 dark:text-slate-400">Monday - Friday: 9AM - 5PM</p>
-<p class="text-slate-600 dark:text-slate-400">Saturday - Sunday: Closed</p>
+<h3 class="font-bold text-primary dark:text-white" data-i18n="contact.hoursTitle">Business Hours</h3>
+<p class="text-slate-600 dark:text-slate-400" data-i18n="contact.hoursWeekday">Monday - Friday: 9AM - 5PM</p>
+<p class="text-slate-600 dark:text-slate-400" data-i18n="contact.hoursWeekend">Saturday - Sunday: Closed</p>
 </div>
 </div>
 </div>
 </div>
 <div class="p-6 rounded-xl bg-primary text-white">
 <h3 class="text-xl font-bold mb-2 flex items-center gap-2">
-                                Emergency Support?
+                                <span data-i18n="contact.emergencyTitle">Emergency Support?</span>
                                 <span class="size-2 rounded-full bg-[#e53935] animate-pulse"></span>
 </h3>
-<p class="text-slate-200 mb-4 opacity-90">Our 24/7 hotline is available for verified corporate accounts during urgent incidents.</p>
+<p class="text-slate-200 mb-4 opacity-90" data-i18n="contact.emergencyBody">Our 24/7 hotline is available for verified corporate accounts during urgent incidents.</p>
 </div>
 </div>
 </div>
