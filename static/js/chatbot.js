@@ -82,15 +82,8 @@
     }
 
     function getTgUrl() {
-        var handle = (document.body || document.documentElement).getAttribute('data-tg-handle') || '';
-        if (!handle) return 'https://t.me/+13058508306';
-        handle = handle.trim();
-        // Phone number format: starts with + or digits only
-        if (/^\+?\d+$/.test(handle)) {
-            return 'https://t.me/' + (handle.startsWith('+') ? handle : '+' + handle);
-        }
-        // Username format
-        return 'https://t.me/' + handle.replace(/^@/, '');
+        var url = (document.body || document.documentElement).getAttribute('data-tg-url') || '';
+        return url.trim();
     }
 
     function getCsrfToken() {
@@ -253,12 +246,16 @@
     function showMainMenu() {
         showTyping(function () {
             addMsg(t('menuPrompt'), 'bot');
-            showReplies([
+            var buttons = [
                 { label: t('btnServices'), action: showServicesMenu },
                 { label: t('btnConsult'),  action: showConsultForm  },
-                { label: t('btnFaq'),      action: showFaqMenu      },
-                { label: t('btnTelegram'), href: getTgUrl()         },
-            ]);
+                { label: t('btnFaq'),      action: showFaqMenu      }
+            ];
+            var tgUrl = getTgUrl();
+            if (tgUrl) {
+                buttons.push({ label: t('btnTelegram'), href: tgUrl });
+            }
+            showReplies(buttons);
         });
     }
 

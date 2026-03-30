@@ -19,11 +19,13 @@
 <a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent transition-colors" href="#">
 <span class="material-symbols-outlined text-xl text-white">social_leaderboard</span>
 </a>
-<a class="w-10 h-10 rounded-full bg-[#229ED9] flex items-center justify-center hover:opacity-90 transition-opacity" href="https://t.me/+13058508306">
+{% if tg_url %}
+<a class="w-10 h-10 rounded-full bg-[#229ED9] flex items-center justify-center hover:opacity-90 transition-opacity" href="{{ tg_url }}" target="_blank" rel="noopener noreferrer">
 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-white" aria-hidden="true">
 <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 14.868l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.691z"/>
 </svg>
 </a>
+{% endif %}
 </div>
 </div>
 <!-- Contact Details -->
