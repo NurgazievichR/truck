@@ -155,8 +155,11 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # Telegram configuration
 TELEGRAM_BOT_TOKEN = config('TELEGRAM_BOT_TOKEN', default='')
 # Числовой chat_id получателя (после /start вашего бота — см. @userinfobot / @getidsbot).
-# Надёжнее, чем хранить t.me/+телефон в Contact: Bot API не шлёт по номеру телефона.
+# Используется только для уведомлений бота.
 TELEGRAM_CHAT_ID = config('TELEGRAM_CHAT_ID', default='').strip()
+# Публичная ссылка для кнопок/иконок Telegram на сайте.
+# Примеры: https://t.me/username, @username, username, +13058508306
+TELEGRAM_PUBLIC_URL = config('TELEGRAM_PUBLIC_URL', default='').strip()
 
 # Jazzmin configuration
 from .jazzmin import JAZZMIN_SETTINGS, JAZZMIN_UI_TWEAKS

@@ -45,7 +45,7 @@
     <link rel="stylesheet" href="{% static 'css/chatbot.css' %}?v=1">
     {% block extra_head %}{% endblock %}
 </head>
-<body class="font-display bg-background-light dark:bg-background-dark text-[#333] dark:text-slate-100 {% block body_class %}{% endblock %}" data-static-url="{% static '' %}" data-tg-handle="{{ tg_handle }}">
+<body class="font-display bg-background-light dark:bg-background-dark text-[#333] dark:text-slate-100 {% block body_class %}{% endblock %}" data-static-url="{% static '' %}" data-tg-url="{{ tg_url }}">
     {% include 'includes/header.html' %}
 
     <main id="main-content" role="main">
