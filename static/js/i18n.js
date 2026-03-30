@@ -50,6 +50,14 @@
             var value = getNested(t, key);
             if (value != null && typeof value === 'string') el.placeholder = value;
         });
+        // Supports DB-driven bilingual content rendered into data attributes.
+        var currentLang = getLang();
+        document.querySelectorAll('[data-i18n-en][data-i18n-ru]').forEach(function(el) {
+            var enText = el.getAttribute('data-i18n-en');
+            var ruText = el.getAttribute('data-i18n-ru');
+            var value = currentLang === 'ru' ? ruText : enText;
+            if (value != null && value !== '') el.textContent = value;
+        });
         document.documentElement.classList.remove('i18n-pending');
     }
 

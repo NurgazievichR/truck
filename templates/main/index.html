@@ -64,16 +64,20 @@
             {% endif %}
         </div>
         <div class="flex-1">
-            <h3 class="font-bold md:text-xl text-sm md:mb-3 text-primary">{{ service.title }}</h3>
-            <p class="text-slate-500 dark:text-slate-400 text-xs md:text-sm leading-relaxed mb-0 md:mb-6 mt-1 md:mt-0">
+            <h3 class="font-bold md:text-xl text-sm md:mb-3 text-primary"
+                data-i18n-en="{{ service.title }}"
+                data-i18n-ru="{{ service.title_ru|default:service.title }}">{{ service.title }}</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs md:text-sm leading-relaxed mb-0 md:mb-6 mt-1 md:mt-0"
+               data-i18n-en="{{ service.description|truncatewords:18 }}"
+               data-i18n-ru="{{ service.description_ru|default:service.description|truncatewords:18 }}">
                 {{ service.description|truncatewords:18 }}
             </p>
             <a href="{% url 'main:contacts' %}?service={{ service.id }}" class="hidden md:flex text-accent font-bold text-sm items-center gap-2 group-hover:gap-3 transition-all">
-                Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                <span data-i18n="service.learnMore">Learn More</span> <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </a>
         </div>
         <span class="material-symbols-outlined text-slate-400 md:hidden flex-shrink-0">chevron_right</span>
-        <a href="{% url 'main:contacts' %}?service={{ service.id }}" class="absolute inset-0 z-10 md:hidden"><span class="sr-only">View Service</span></a>
+        <a href="{% url 'main:contacts' %}?service={{ service.id }}" class="absolute inset-0 z-10 md:hidden"><span class="sr-only" data-i18n="service.learnMore">View Service</span></a>
     </div>
     {% empty %}
     <!-- Fallback Service Cards if DB is empty -->
@@ -82,10 +86,10 @@
             <span class="material-symbols-outlined text-2xl md:text-3xl">analytics</span>
         </div>
         <div class="flex-1">
-            <h3 class="font-bold md:text-xl text-sm md:mb-3 text-primary">IFTA Reporting</h3>
-            <p class="text-slate-500 dark:text-slate-400 text-xs md:text-sm leading-relaxed mb-0 md:mb-6 mt-1 md:mt-0">Accurate quarterly fuel tax reporting to ensure you stay compliant across all jurisdictions.</p>
+            <h3 class="font-bold md:text-xl text-sm md:mb-3 text-primary" data-i18n="service.iftaTitle">IFTA Reporting</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs md:text-sm leading-relaxed mb-0 md:mb-6 mt-1 md:mt-0" data-i18n="service.iftaDesc">Accurate quarterly fuel tax reporting to ensure you stay compliant across all jurisdictions.</p>
             <a href="{% url 'main:contacts' %}" class="hidden md:flex text-accent font-bold text-sm items-center gap-2 group-hover:gap-3 transition-all">
-                Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                <span data-i18n="service.learnMore">Learn More</span> <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </a>
         </div>
         <span class="material-symbols-outlined text-slate-400 md:hidden flex-shrink-0">chevron_right</span>
@@ -96,10 +100,10 @@
             <span class="material-symbols-outlined text-2xl md:text-3xl">app_registration</span>
         </div>
         <div class="flex-1">
-            <h3 class="font-bold md:text-xl text-sm md:mb-3 text-primary">IRP Registration</h3>
-            <p class="text-slate-500 dark:text-slate-400 text-xs md:text-sm leading-relaxed mb-0 md:mb-6 mt-1 md:mt-0">Seamless apportioned plate registrations and renewals for multi-state operations.</p>
+            <h3 class="font-bold md:text-xl text-sm md:mb-3 text-primary" data-i18n="service.irpTitle">IRP Registration</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs md:text-sm leading-relaxed mb-0 md:mb-6 mt-1 md:mt-0" data-i18n="service.irpDesc">Seamless apportioned plate registrations and renewals for multi-state operations.</p>
             <a href="{% url 'main:contacts' %}" class="hidden md:flex text-accent font-bold text-sm items-center gap-2 group-hover:gap-3 transition-all">
-                Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                <span data-i18n="service.learnMore">Learn More</span> <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </a>
         </div>
         <span class="material-symbols-outlined text-slate-400 md:hidden flex-shrink-0">chevron_right</span>
@@ -110,10 +114,10 @@
             <span class="material-symbols-outlined text-2xl md:text-3xl">assignment_turned_in</span>
         </div>
         <div class="flex-1">
-            <h3 class="font-bold md:text-xl text-sm md:mb-3 text-primary">UCR Filing</h3>
-            <p class="text-slate-500 dark:text-slate-400 text-xs md:text-sm leading-relaxed mb-0 md:mb-6 mt-1 md:mt-0">Handling your Unified Carrier Registration efficiently to avoid hefty fines and delays.</p>
+            <h3 class="font-bold md:text-xl text-sm md:mb-3 text-primary" data-i18n="service.ucrTitle">UCR Filing</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs md:text-sm leading-relaxed mb-0 md:mb-6 mt-1 md:mt-0" data-i18n="service.ucrDesc">Handling your Unified Carrier Registration efficiently to avoid hefty fines and delays.</p>
             <a href="{% url 'main:contacts' %}" class="hidden md:flex text-accent font-bold text-sm items-center gap-2 group-hover:gap-3 transition-all">
-                Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                <span data-i18n="service.learnMore">Learn More</span> <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </a>
         </div>
         <span class="material-symbols-outlined text-slate-400 md:hidden flex-shrink-0">chevron_right</span>
@@ -124,10 +128,10 @@
             <span class="material-symbols-outlined text-2xl md:text-3xl">verified_user</span>
         </div>
         <div class="flex-1">
-            <h3 class="font-bold md:text-xl text-sm md:mb-3 text-primary">FMCSA Support</h3>
-            <p class="text-slate-500 dark:text-slate-400 text-xs md:text-sm leading-relaxed mb-0 md:mb-6 mt-1 md:mt-0">Safety audits, MCS-150 updates, and authority maintenance for total peace of mind.</p>
+            <h3 class="font-bold md:text-xl text-sm md:mb-3 text-primary" data-i18n="service.fmcsaTitle">FMCSA Support</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs md:text-sm leading-relaxed mb-0 md:mb-6 mt-1 md:mt-0" data-i18n="service.fmcsaDesc">Safety audits, MCS-150 updates, and authority maintenance for total peace of mind.</p>
             <a href="{% url 'main:contacts' %}" class="hidden md:flex text-accent font-bold text-sm items-center gap-2 group-hover:gap-3 transition-all">
-                Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                <span data-i18n="service.learnMore">Learn More</span> <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </a>
         </div>
         <span class="material-symbols-outlined text-slate-400 md:hidden flex-shrink-0">chevron_right</span>
