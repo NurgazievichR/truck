@@ -119,7 +119,7 @@
         {% if service.image %}
             <img src="{{ service.image.url }}" alt="{{ service.title }}" class="service-card-image">
         {% else %}
-            <img src="{% static 'images/image.png' %}" alt="{{ service.title }}" class="service-card-image">
+            <img src="{% static 'images/logo.png' %}" alt="{{ service.title }}" class="service-card-image">
         {% endif %}
         
         <div class="service-card-title">{{ service.title }}</div>

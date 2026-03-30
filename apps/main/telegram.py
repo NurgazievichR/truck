@@ -13,6 +13,8 @@ except ImportError:  # pragma: no cover - depends on environment
 
 logger = logging.getLogger(__name__)
 
+DEFAULT_PUBLIC_TG_URL = 'https://t.me/Safety_lab'
+
 
 def _strip_t_me_prefix(value: str) -> str:
     s = str(value or '').strip()
@@ -46,13 +48,13 @@ def _build_public_telegram_url(raw_value: str) -> str:
 def resolve_public_telegram_url() -> str:
     public_url = str(getattr(settings, 'TELEGRAM_PUBLIC_URL', '') or '').strip()
     if public_url:
-        return _build_public_telegram_url(public_url)
+        return _build_public_telegram_url(public_url) or DEFAULT_PUBLIC_TG_URL
 
     contact = Contact.objects.filter(type='telegram').first()
     if not contact:
-        return ''
+        return DEFAULT_PUBLIC_TG_URL
 
-    return _build_public_telegram_url(contact.value)
+    return _build_public_telegram_url(contact.value) or DEFAULT_PUBLIC_TG_URL
 
 
 def resolve_notification_chat_id() -> str | None:

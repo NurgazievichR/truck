@@ -99,7 +99,7 @@
 
     function loadTranslations(lang, cb) {
         applyFallback(lang);  // always set fallback first so t() never returns a key
-        var url = getStaticBase() + 'translations/' + lang + '.json?v=6';
+        var url = getStaticBase() + 'translations/' + lang + '.json';
         fetch(url)
             .then(function (r) { return r.json(); })
             .then(function (data) {

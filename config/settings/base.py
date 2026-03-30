@@ -51,8 +51,6 @@ INSTALLED_APPS = [
     # Local apps
     'apps.main',
     'apps.services',
-    'apps.contacts',
-    'apps.accounts',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -145,8 +143,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']  # Где находятся исходные статические файлы (для разработки)
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Куда collectstatic собирает все файлы (для production)
+STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STORAGES = {
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+    },
+    'staticfiles': {
+        'BACKEND': 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage',
+    },
+}
 
 # Media files
 MEDIA_URL = '/media/'
