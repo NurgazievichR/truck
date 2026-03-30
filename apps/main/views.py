@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.conf import settings
 import logging
 
@@ -12,6 +13,7 @@ from apps.services.models import Service
 logger = logging.getLogger(__name__)
 
 
+@ensure_csrf_cookie
 def index(request):
     """Главная страница"""
     services = Service.objects.all()[:6]  # Первые 6 услуг для главной
@@ -24,21 +26,25 @@ def index(request):
     })
 
 
+@ensure_csrf_cookie
 def about(request):
     """Страница О компании"""
     return render(request, 'main/about.html')
 
 
+@ensure_csrf_cookie
 def privacy_policy(request):
     """Privacy Policy page"""
     return render(request, 'main/privacy_policy.html')
 
 
+@ensure_csrf_cookie
 def terms_of_service(request):
     """Terms of Service page"""
     return render(request, 'main/terms_of_service.html')
 
 
+@ensure_csrf_cookie
 def contacts(request):
     """Страница Request a Quote"""
     services = Service.objects.all()
