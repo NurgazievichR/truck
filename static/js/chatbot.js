@@ -399,6 +399,7 @@
 
         fetch(leadUrl, {
             method: 'POST',
+            credentials: 'same-origin',
             headers: { 'X-CSRFToken': getCsrfToken() },
             body: formData
         })
