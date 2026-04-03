@@ -168,6 +168,11 @@ TELEGRAM_CHAT_ID = config('TELEGRAM_CHAT_ID', default='').strip()
 # Примеры: https://t.me/username, @username, username, +13058508306
 TELEGRAM_PUBLIC_URL = config('TELEGRAM_PUBLIC_URL', default='').strip()
 
+# Optional content auto-translation (DeepL)
+# If DEEPL_AUTH_KEY is not set, translation actions are disabled gracefully.
+DEEPL_AUTH_KEY = config('DEEPL_AUTH_KEY', default='').strip()
+DEEPL_API_URL = config('DEEPL_API_URL', default='https://api-free.deepl.com/v2/translate').strip()
+
 # Jazzmin configuration
 from .jazzmin import JAZZMIN_SETTINGS, JAZZMIN_UI_TWEAKS
 
