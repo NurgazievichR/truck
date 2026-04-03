@@ -21,7 +21,7 @@ JAZZMIN_SETTINGS = {
     ],
     "show_sidebar": True,
     "navigation_expanded": True,
-    "hide_apps": ["services"],  # Скрываем отдельные приложения
+    "hide_apps": [],  # показываем все приложения (включая Services)
     "hide_models": [],
     "order_with_respect_to": ["main", "services", "contacts", "accounts"],
     "custom_links": {

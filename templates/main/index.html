@@ -60,8 +60,8 @@
 <h2 class="text-3xl md:text-4xl font-black text-primary dark:text-white mb-4" data-i18n="services.heading">Our Core Services</h2>
 <div class="w-20 h-1.5 bg-accent mx-auto rounded-full"></div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-    {% for service in services|slice:":4" %}
+<div class="grid grid-cols-1 md:grid-cols-2 {% if services|length|divisibleby:3 or not services|length|divisibleby:2 %}lg:grid-cols-3{% else %}lg:grid-cols-4{% endif %} gap-8">
+    {% for service in services %}
     <!-- Service Card -->
     <div class="flex md:flex-col items-center md:items-start gap-4 md:gap-0 bg-white dark:bg-slate-800 p-4 md:p-8 rounded-xl shadow-sm hover:shadow-xl md:hover:-translate-y-1 transition-all group border border-primary/5 md:border-transparent">
         <div class="w-12 h-12 md:w-14 md:h-14 bg-accent/10 dark:bg-accent/20 rounded-lg flex-shrink-0 flex items-center justify-center text-accent md:mb-6 group-hover:bg-accent group-hover:text-white transition-colors">
