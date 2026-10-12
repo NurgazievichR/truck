@@ -59,7 +59,7 @@
     <link rel="stylesheet" href="{% static 'css/chatbot.css' %}">
     {% block extra_head %}{% endblock %}
 </head>
-<body class="font-display bg-background-light dark:bg-background-dark text-[#333] dark:text-slate-100 {% block body_class %}{% endblock %}" data-static-url="{% static '' %}" data-tg-url="{{ tg_url }}">
+<body class="font-display bg-background-light dark:bg-background-dark text-[#333] dark:text-slate-100 {% block body_class %}{% endblock %}" data-static-url="{% get_static_prefix %}" data-tg-url="{{ tg_url }}">
     {% include 'includes/header.html' %}
 
     <main id="main-content" role="main" class="pb-24 md:pb-0">
